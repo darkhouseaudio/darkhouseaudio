@@ -46,6 +46,17 @@
   <title>Contact - Dark House Audio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'skyblue': '#00bfff',
+          }
+        }
+      }
+    }
+  </script>
   <style>
     body { font-family: 'Inter', sans-serif; }
     h1, h2 { font-family: 'Bebas Neue', sans-serif; }
@@ -55,12 +66,12 @@
   <!-- Navigation -->
   <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <a href="/darkhouseaudio/index.html" class="text-2xl font-bold text-teal-400">Dark House Audio</a>
+      <a href="/darkhouseaudio/index.html" class="text-2xl font-bold text-skyblue">Dark House Audio</a>
       <div class="space-x-4">
-        <a href="/darkhouseaudio/index.html" class="hover:text-teal-400">Home</a>
-        <a href="/darkhouseaudio/store.html" class="hover:text-teal-400">Store</a>
-        <a href="/darkhouseaudio/product-landing.html" class="hover:text-teal-400">BleedShift 2</a>
-        <a href="/darkhouseaudio/contact.html" class="text-teal-400">Contact</a>
+        <a href="/darkhouseaudio/index.html" class="hover:text-skyblue">Home</a>
+        <a href="/darkhouseaudio/store.html" class="hover:text-skyblue">Store</a>
+        <a href="/darkhouseaudio/product-landing.html" class="hover:text-skyblue">BleedShift 2</a>
+        <a href="/darkhouseaudio/contact.html" class="text-skyblue">Contact</a>
       </div>
     </div>
   </nav>
@@ -78,17 +89,17 @@
           <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
             <div>
               <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
-              <input type="text" id="name" name="name" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <input type="text" id="name" name="name" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-skyblue">
             </div>
             <div>
               <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-              <input type="email" id="email" name="email" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <input type="email" id="email" name="email" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-skyblue">
             </div>
             <div>
               <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
-              <textarea id="message" name="message" rows="5" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+              <textarea id="message" name="message" rows="5" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-skyblue"></textarea>
             </div>
-            <button type="submit" class="w-full bg-teal-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-teal-600 transition">Send Message</button>
+            <button type="submit" class="w-full bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Send Message</button>
           </form>
         </div>
 
@@ -98,13 +109,13 @@
           <div class="space-y-4">
             <p class="text-gray-300">
               <span class="font-semibold">Email:</span>
-              <a href="mailto:darkhouseaudio@gmail.com" class="text-teal-400 hover:text-teal-300">darkhouseaudio@gmail.com</a>
+              <a href="mailto:darkhouseaudio@gmail.com" class="text-skyblue hover:text-blue-300">darkhouseaudio@gmail.com</a>
             </p>
             <p class="text-gray-300">We operate 100% remotely, collaborating with artists and producers worldwide. Expect a response within 24-48 hours.</p>
             <div class="flex space-x-4 mt-6">
-              <a href="https://twitter.com" class="text-teal-400 hover:text-teal-300 text-2xl">𝕏</a>
-              <a href="https://instagram.com" class="text-teal-400 hover:text-teal-300 text-2xl">📷</a>
-              <a href="https://soundcloud.com" class="text-teal-400 hover:text-teal-300 text-2xl">🎵</a>
+              <a href="https://twitter.com" class="text-skyblue hover:text-blue-300 text-2xl">𝕏</a>
+              <a href="https://instagram.com" class="text-skyblue hover:text-blue-300 text-2xl">📷</a>
+              <a href="https://soundcloud.com" class="text-skyblue hover:text-blue-300 text-2xl">🎵</a>
             </div>
           </div>
         </div>

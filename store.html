@@ -7,6 +7,17 @@
   <title>Store - Dark House Audio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'skyblue': '#00bfff',
+          }
+        }
+      }
+    }
+  </script>
   <style>
     body { font-family: 'Inter', sans-serif; }
     h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
@@ -17,12 +28,12 @@
   <!-- Navigation -->
   <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <a href="/darkhouseaudio/index.html" class="text-2xl font-bold text-teal-400">Dark House Audio</a>
+      <a href="/darkhouseaudio/index.html" class="text-2xl font-bold text-skyblue">Dark House Audio</a>
       <div class="space-x-4">
-        <a href="/darkhouseaudio/index.html" class="hover:text-teal-400">Home</a>
-        <a href="/darkhouseaudio/store.html" class="text-teal-400">Store</a>
-        <a href="/darkhouseaudio/product-landing.html" class="hover:text-teal-400">BleedShift 2</a>
-        <a href="/darkhouseaudio/contact.html" class="hover:text-teal-400">Contact</a>
+        <a href="/darkhouseaudio/index.html" class="hover:text-skyblue">Home</a>
+        <a href="/darkhouseaudio/store.html" class="text-skyblue">Store</a>
+        <a href="/darkhouseaudio/product-landing.html" class="hover:text-skyblue">BleedShift 2</a>
+        <a href="/darkhouseaudio/contact.html" class="hover:text-skyblue">Contact</a>
       </div>
     </div>
   </nav>
@@ -46,8 +57,8 @@
             <h3 class="text-2xl font-semibold mb-2">BleedShift 2</h3>
             <p class="text-gray-300 mb-4">Unleash cinematic soundscapes with unrivaled depth. Perfect for film, game and music production.</p>
             <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-teal-400">$99.99</span>
-              <a href="/darkhouseaudio/product-landing.html" class="inline-block bg-teal-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-600 transition">View Details</a>
+              <span class="text-2xl font-bold text-skyblue">$99.99</span>
+              <a href="/darkhouseaudio/product-landing.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">View Details</a>
             </div>
           </div>
         </div>
@@ -59,7 +70,7 @@
             <h3 class="text-2xl font-semibold mb-2">BleedShift (Original)</h3>
             <p class="text-gray-300 mb-4">The classic version of our powerful audio processing tool. Great for beginners and still capable.</p>
             <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-teal-400">$49.99</span>
+              <span class="text-2xl font-bold text-skyblue">$49.99</span>
               <a href="#" class="inline-block bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition">Legacy Product</a>
             </div>
           </div>
@@ -72,8 +83,8 @@
             <h3 class="text-2xl font-semibold mb-2">Mixing Sessions</h3>
             <p class="text-gray-300 mb-4">Professional mixing services to take your tracks to the next level. Includes two revisions.</p>
             <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-teal-400">$149.99</span>
-              <a href="/darkhouseaudio/contact.html" class="inline-block bg-teal-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-600 transition">Book Now</a>
+              <span class="text-2xl font-bold text-skyblue">$149.99</span>
+              <a href="/darkhouseaudio/contact.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Book Now</a>
             </div>
           </div>
         </div>
@@ -85,8 +96,8 @@
             <h3 class="text-2xl font-semibold mb-2">Mastering Service</h3>
             <p class="text-gray-300 mb-4">Get that professional polish with our premium mastering service. Perfect for streaming platforms.</p>
             <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-teal-400">$89.99</span>
-              <a href="/darkhouseaudio/contact.html" class="inline-block bg-teal-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-600 transition">Book Now</a>
+              <span class="text-2xl font-bold text-skyblue">$89.99</span>
+              <a href="/darkhouseaudio/contact.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Book Now</a>
             </div>
           </div>
         </div>
@@ -101,7 +112,7 @@
       <p class="text-xl text-gray-300 mb-8">Subscribe to get notified about new products and special offers.</p>
       <form class="max-w-md mx-auto flex">
         <input type="email" placeholder="Your email address" class="flex-grow px-4 py-2 rounded-l-lg focus:outline-none text-gray-900">
-        <button type="submit" class="bg-teal-500 text-white px-6 py-2 rounded-r-lg font-semibold hover:bg-teal-600 transition">Subscribe</button>
+        <button type="submit" class="bg-skyblue text-white px-6 py-2 rounded-r-lg font-semibold hover:bg-blue-500 transition">Subscribe</button>
       </form>
     </div>
   </section>
