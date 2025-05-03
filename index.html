@@ -76,14 +76,15 @@
 <body class="bg-gray-900 text-white">
   <!-- Navigation -->
   <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
       <!-- Logo area (now empty) -->
       <div></div>
-      <div class="space-x-4">
-        <a href="index.html" class="text-skyblue">Home</a>
-        <a href="store.html" class="hover:text-skyblue">Store</a>
-        <a href="product-landing.html" class="text-purple-500 hover:text-purple-400">BleedShift 2</a>
-        <a href="contact.html" class="hover:text-skyblue">Contact</a>
+      <!-- Links: Stack vertically on small screens, horizontally on larger screens -->
+      <div class="flex flex-col sm:flex-row sm:space-x-4 mt-2 sm:mt-0 space-y-2 sm:space-y-0">
+        <a href="index.html" class="text-skyblue text-center sm:text-left">Home</a>
+        <a href="store.html" class="hover:text-skyblue text-center sm:text-left">Store</a>
+        <a href="product-landing.html" class="text-purple-500 hover:text-purple-400 text-center sm:text-left">BleedShift 2</a>
+        <a href="contact.html" class="hover:text-skyblue text-center sm:text-left">Contact</a>
       </div>
     </div>
   </nav>
@@ -93,13 +94,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style="margin-top: -2rem;">
       <!-- Logo placed prominently and opaque -->
       <div class="w-full flex justify-center mb-1">
-        <img src="darkhouseaudiologo.png" alt="Dark House Audio Logo" class="w-1/1 md:w-1/1 lg:w-1/1 max-w-md">
+        <img src="darkhouseaudiologo.png" alt="Dark House Audio Logo" class="w-full md:w-3/4 lg:w-1/2 max-w-md">
       </div>
       <h1 class="text-4xl md:text-6xl font-bold mb-1 relative z-10">Dark House Audio</h1>
       <p class="text-lg md:text-xl text-gray-300 mb-3 relative z-10">Mixing & Mastering Studio + Innovative Audio Tools</p>
-      <div class="space-x-4 relative z-10">
-        <a href="contact.html" class="inline-block bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Get in Touch</a>
-        <a href="product-landing.html" class="inline-block bg-purple-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-purple-600 transition">Discover BleedShift 2</a>
+      <!-- Buttons: Stack vertically on small screens, horizontally on larger screens -->
+      <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 relative z-10">
+        <a href="contact.html" class="w-full sm:w-auto inline-block bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Get in Touch</a>
+        <a href="product-landing.html" class="w-full sm:w-auto inline-block bg-purple-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-purple-600 transition">Discover BleedShift 2</a>
       </div>
     </div>
   </section>
@@ -117,7 +119,7 @@
         </div>
         
         <!-- Bio Text -->
-        <div class="md:w-2/3">
+        <div class="md:w-2/3 text-center md:text-left">
           <p class="text-lg text-gray-300 mb-4">
             Hi! I'm Erik Monsonis. I am a mixing and mastering engineer with a passion for modern metal. I also play guitar in 
             <a href="https://open.spotify.com/artist/1HzcKPVciRAscPssWBFgGA?si=7bLXn4vdR-qfK4wnzp_5iA" target="_blank" class="text-skyblue hover:text-blue-300 underline">Afterglow</a>.
@@ -254,7 +256,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold mb-2">Ready to Elevate Your Sound?</h2>
       <p class="text-lg text-gray-300 mb-3">Book a mixing session or explore our plugins today.</p>
-      <a href="contact.html" class="inline-block bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Get Started</a>
+      <a href="contact.html" class="w-full sm:w-auto inline-block bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Get Started</a>
     </div>
   </section>
 

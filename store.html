@@ -60,14 +60,15 @@
 <body class="bg-gray-900 text-white">
   <!-- Navigation -->
   <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <!-- Empty div for spacing -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
+      <!-- Logo area (now empty) -->
       <div></div>
-      <div class="space-x-4">
-        <a href="/darkhouseaudio/index.html" class="hover:text-skyblue">Home</a>
-        <a href="/darkhouseaudio/store.html" class="text-skyblue">Store</a>
-        <a href="/darkhouseaudio/product-landing.html" class="hover:text-skyblue">BleedShift 2</a>
-        <a href="/darkhouseaudio/contact.html" class="hover:text-skyblue">Contact</a>
+      <!-- Links: Stack vertically on small screens, horizontally on larger screens -->
+      <div class="flex flex-col sm:flex-row sm:space-x-4 mt-2 sm:mt-0 space-y-2 sm:space-y-0">
+        <a href="index.html" class="hover:text-skyblue text-center sm:text-left">Home</a>
+        <a href="store.html" class="text-skyblue text-center sm:text-left">Store</a>
+        <a href="product-landing.html" class="text-purple-500 hover:text-purple-400 text-center sm:text-left">BleedShift 2</a>
+        <a href="contact.html" class="hover:text-skyblue text-center sm:text-left">Contact</a>
       </div>
     </div>
   </nav>
@@ -120,14 +121,17 @@
   </section>
 
   <!-- Newsletter Section -->
-  <section class="py-16 bg-gray-800 text-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold mb-6">Stay Updated</h2>
-      <p class="text-xl text-gray-300 mb-8">Subscribe to get notified about new products and special offers.</p>
-      <form action="https://formspree.io/f/mblogkvo" method="POST" class="max-w-md mx-auto flex">
-        <input type="email" name="email" placeholder="Your email address" class="flex-grow px-4 py-2 rounded-l-lg focus:outline-none text-gray-900" required>
+  <section class="py-16 bg-gray-800">
+    <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+      <p class="text-gray-300 mb-6">Subscribe to get notified about new products and special offers.</p>
+      <form name="newsletter-subscribe" method="POST" data-netlify="true">
         <input type="hidden" name="form-name" value="newsletter-subscribe">
-        <button type="submit" class="bg-skyblue text-white px-6 py-2 rounded-r-lg font-semibold hover:bg-blue-500 transition">Subscribe</button>
+        <!-- Stack input and button vertically on small screens -->
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2">
+          <input type="email" name="email" placeholder="Your email address" required class="w-full sm:w-auto flex-grow px-4 py-2 text-gray-900 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-skyblue" />
+          <button type="submit" class="w-full sm:w-auto bg-skyblue text-white px-6 py-2 rounded-r-lg font-semibold hover:bg-blue-500 transition">Subscribe</button>
+        </div>
       </form>
     </div>
   </section>
