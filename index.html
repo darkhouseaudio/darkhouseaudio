@@ -64,13 +64,32 @@
             'skyblue': '#00bfff',
           }
         }
-      }
+      },
+      plugins: [
+        require('tailwind-scrollbar-hide')
+      ]
     }
   </script>
   <style>
     body { font-family: 'Inter', sans-serif; }
     h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
     .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x1080?text=Studio+Image'); }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .scrollbar-hide {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Add smooth scrolling behavior to the container */
+    #video-scroll-container {
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -134,105 +153,120 @@
   </section>
 
   <!-- Videos Section -->
-  <section class="py-16 bg-gray-800">
+  <section class="py-16 bg-gray-800 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center mb-6">Past Works</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Video 1 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/vt1Ytjdel2s"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
+      <!-- Container for scrollable area and buttons -->
+      <div class="relative group">
+        <!-- Horizontal scrollable container -->
+        <div id="video-scroll-container" class="flex overflow-x-auto space-x-4 py-4 scrollbar-hide">
+          <!-- Video 1 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/vt1Ytjdel2s"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/xjAHssIl3ds"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/qrkD5AMlTIY"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Video 4 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/ga8xH8otNRE"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Video 5 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/Ubd6wpelZXk"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Video 6 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/iebmJBX8-Z0"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Video 7 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/za1qOILdiOQ"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Video 8 -->
+          <div class="flex-none w-[508px] rounded overflow-hidden shadow-lg video-item">
+            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+              <iframe class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/VPiMcYzENV8"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
           </div>
         </div>
-        
-        <!-- Video 2 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/xjAHssIl3ds"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-        
-        <!-- Video 3 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/qrkD5AMlTIY"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-        
-        <!-- Video 4 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/ga8xH8otNRE"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-        
-        <!-- Video 5 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/Ubd6wpelZXk"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-        
-        <!-- Video 6 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/iebmJBX8-Z0"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-        
-        <!-- Video 7 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/za1qOILdiOQ"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-        
-        <!-- Video 8 -->
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="relative" style="padding-top: 56.25%;">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/VPiMcYzENV8"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
+        <!-- Scroll Buttons (Initially hidden, appear on hover of the container) -->
+        <button id="scroll-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 ml-2 hover:bg-opacity-75">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button id="scroll-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 mr-2 hover:bg-opacity-75">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </div>
   </section>
@@ -266,5 +300,57 @@
       <p>© 2025 Dark House Audio. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    // Video Scroller Logic
+    const container = document.getElementById('video-scroll-container');
+    const scrollLeftBtn = document.getElementById('scroll-left');
+    const scrollRightBtn = document.getElementById('scroll-right');
+
+    if (container && scrollLeftBtn && scrollRightBtn) {
+      const getScrollAmount = () => {
+        const firstItem = container.querySelector('.video-item');
+        if (!firstItem) return 300; // Default fallback
+
+        const style = window.getComputedStyle(firstItem);
+        const marginLeft = parseFloat(style.marginLeft) || 0;
+        const marginRight = parseFloat(style.marginRight) || 0;
+
+        // Get gap from parent container (space-x-4 = 1rem = 16px by default in Tailwind)
+        const containerStyle = window.getComputedStyle(container);
+        // Note: 'gap' might not be directly available if using margins/space-x utilities
+        // Let's estimate based on space-x-4 utility = 1rem
+        const gap = parseFloat(containerStyle.getPropertyValue('--tw-space-x-reverse')) ? 0 : parseFloat(containerStyle.gap || '1rem') * 16; // Convert rem to px, default to 16px if gap not readable
+
+        // Scroll by the width of one item plus the gap between items
+        // offsetWidth includes padding and border, clientWidth is just content+padding
+        // Using offsetWidth is usually safer for layout calculations
+        return firstItem.offsetWidth + (gap || 16); // Use calculated gap or fallback to 16px
+      };
+
+      scrollLeftBtn.addEventListener('click', () => {
+        const amount = getScrollAmount();
+        container.scrollBy({ left: -amount });
+      });
+
+      scrollRightBtn.addEventListener('click', () => {
+        const amount = getScrollAmount();
+        container.scrollBy({ left: amount });
+      });
+
+      // Optional: Hide buttons if no scrolling is needed or at scroll ends
+      const updateButtonVisibility = () => {
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        scrollLeftBtn.style.display = container.scrollLeft <= 0 ? 'none' : 'block';
+        scrollRightBtn.style.display = container.scrollLeft >= maxScrollLeft -1 ? 'none' : 'block'; // -1 for tolerance
+      };
+
+      container.addEventListener('scroll', updateButtonVisibility);
+      // Initial check in case content doesn't overflow
+       // Use setTimeout to ensure layout is calculated
+      setTimeout(updateButtonVisibility, 100);
+      window.addEventListener('resize', () => setTimeout(updateButtonVisibility, 100)); // Re-check on resize
+    }
+  </script>
 </body>
 </html>
