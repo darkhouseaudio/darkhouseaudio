@@ -22,6 +22,29 @@
     body { font-family: 'Inter', sans-serif; }
     h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
     .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x1080?text=Studio+Image'); }
+    
+    /* Ribbon styles */
+    .ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .ribbon-content {
+      position: absolute;
+      top: 30px;
+      right: -35px;
+      transform: rotate(45deg);
+      background: #ff3d00;
+      color: white;
+      font-weight: bold;
+      padding: 8px 50px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -40,10 +63,9 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="bg-gray-800 py-16">
+  <section class="bg-gray-800 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-5xl md:text-7xl font-bold mb-4">Our Products</h1>
-      <p class="text-xl md:text-2xl text-gray-300 mb-6">Professional Audio Tools for Serious Producers</p>
     </div>
   </section>
 
@@ -52,53 +74,34 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Product 1 -->
-        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition relative">
+          <!-- Discount Ribbon -->
+          <div class="ribbon">
+            <div class="ribbon-content">50% OFF</div>
+          </div>
+          
           <img src="/darkhouseaudio/screenshot.png" alt="BleedShift 2" class="w-full">
           <div class="p-6">
             <h3 class="text-2xl font-semibold mb-2">BleedShift 2</h3>
             <p class="text-gray-300 mb-4">Unleash cinematic soundscapes with unrivaled depth. Perfect for film, game and music production.</p>
             <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-skyblue">$99.99</span>
-              <a href="/darkhouseaudio/product-landing.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">View Details</a>
+              <div>
+                <span class="text-lg line-through text-gray-400 mr-2">$99.99</span>
+                <span class="text-2xl font-bold text-skyblue">$49.99</span>
+              </div>
+              <a href="/darkhouseaudio/bleedshift2.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">View Details</a>
             </div>
           </div>
         </div>
         
         <!-- Product 2 -->
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
-          <img src="/darkhouseaudio/screenshot.png" alt="BleedShift" class="w-full">
+          <img src="/darkhouseaudio/solar_th.png" alt="Lunar Baritone" class="w-full">
           <div class="p-6">
-            <h3 class="text-2xl font-semibold mb-2">BleedShift (Original)</h3>
-            <p class="text-gray-300 mb-4">The classic version of our powerful audio processing tool. Great for beginners and still capable.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-skyblue">$49.99</span>
-              <a href="#" class="inline-block bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition">Legacy Product</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 3 -->
-        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
-          <img src="https://via.placeholder.com/600x400?text=Mixing+Sessions" alt="Mixing Sessions" class="w-full">
-          <div class="p-6">
-            <h3 class="text-2xl font-semibold mb-2">Mixing Sessions</h3>
-            <p class="text-gray-300 mb-4">Professional mixing services to take your tracks to the next level. Includes two revisions.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-skyblue">$149.99</span>
-              <a href="/darkhouseaudio/contact.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Book Now</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 4 -->
-        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
-          <img src="https://via.placeholder.com/600x400?text=Mastering+Service" alt="Mastering Service" class="w-full">
-          <div class="p-6">
-            <h3 class="text-2xl font-semibold mb-2">Mastering Service</h3>
-            <p class="text-gray-300 mb-4">Get that professional polish with our premium mastering service. Perfect for streaming platforms.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-skyblue">$89.99</span>
-              <a href="/darkhouseaudio/contact.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Book Now</a>
+            <h3 class="text-2xl font-semibold mb-2">Lunar Baritone (Coming Soon)</h3>
+            <p class="text-gray-300 mb-4">Guitar sample library recorded with an Evertune-equipped Solar 1.6D27 LTD</p>
+            <div class="flex justify-end items-center">
+              <a href="#" class="inline-block bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition">Coming Soon</a>
             </div>
           </div>
         </div>

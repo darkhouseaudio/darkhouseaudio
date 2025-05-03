@@ -95,39 +95,162 @@
         </div>
       </div>
       
-      <a href="#purchase" class="inline-block bg-skyblue text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">ADD TO CART</a>
+      <a href="/darkhouseaudio/bleedshift2.html" class="inline-block bg-skyblue text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">ADD TO CART</a>
     </div>
   </section>
 
   <!-- Features Section -->
   <section class="py-16 bg-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-center mb-12">Why Choose BleedShift 2?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="text-skyblue text-4xl mb-4">🎛️</div>
-          <h3 class="text-2xl font-semibold mb-2">Intuitive Controls</h3>
-          <p class="text-gray-300">Craft your sound with precision using our user-friendly interface.</p>
+      <h2 class="text-4xl font-bold text-center mb-8">Hear the Difference</h2>
+      
+      <div class="mb-12 text-center">
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">Compare processed and unprocessed drum recordings to hear how BleedShift 2 gives you complete control over microphone bleed.</p>
+      </div>
+      
+      <!-- Audio Player Tabs -->
+      <div class="max-w-4xl mx-auto bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-gray-700 bg-gray-800 overflow-x-auto">
+          <button class="px-6 py-3 text-skyblue border-b-2 border-skyblue font-medium" onclick="showTab('kick')">Kick</button>
+          <button class="px-6 py-3 text-gray-400 hover:text-skyblue font-medium" onclick="showTab('snare')">Snare</button>
+          <button class="px-6 py-3 text-gray-400 hover:text-skyblue font-medium" onclick="showTab('toms')">Toms</button>
+          <button class="px-6 py-3 text-gray-400 hover:text-skyblue font-medium" onclick="showTab('overheads')">Overheads</button>
         </div>
-        <div class="text-center">
-          <div class="text-skyblue text-4xl mb-4">🔊</div>
-          <h3 class="text-2xl font-semibold mb-2">Rich Presets</h3>
-          <p class="text-gray-300">Explore hundreds of presets designed for cinematic audio.</p>
-        </div>
-        <div class="text-center">
-          <div class="text-skyblue text-4xl mb-4">⚡</div>
-          <h3 class="text-2xl font-semibold mb-2">Low CPU Usage</h3>
-          <p class="text-gray-300">Optimized for performance, even in complex projects.</p>
+        
+        <!-- Tab Content -->
+        <div class="p-6">
+          <!-- Kick Tab -->
+          <div id="kick-tab" class="tab-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Unprocessed -->
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-3">Unprocessed</h3>
+                <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/kick_unprocessed.mp3"></audio>
+                <p class="text-sm text-gray-400">Original kick drum with bleed from other drums</p>
+              </div>
+              
+              <!-- Processed -->
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-3">Processed</h3>
+                <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/kick_processed.mp3"></audio>
+                <p class="text-sm text-gray-400">Kick with reduced bleed from BleedShift 2</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Snare Tab (Hidden by default) -->
+          <div id="snare-tab" class="tab-content hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Unprocessed -->
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-3">Unprocessed</h3>
+                <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/snare_unprocessed.mp3"></audio>
+                <p class="text-sm text-gray-400">Original snare with bleed from other drums</p>
+              </div>
+              
+              <!-- Processed -->
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-3">Processed</h3>
+                <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/snare_processed.mp3"></audio>
+                <p class="text-sm text-gray-400">Snare with reduced bleed from BleedShift 2</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Toms Tab (Hidden by default) -->
+          <div id="toms-tab" class="tab-content hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Floor Tom -->
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-3">Floor Tom</h3>
+                <div class="mb-3">
+                  <p class="text-sm text-gray-400 mb-1">Unprocessed</p>
+                  <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/ft_unprocessed.mp3"></audio>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-400 mb-1">Processed</p>
+                  <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/ft_processed.mp3"></audio>
+                </div>
+              </div>
+              
+              <!-- Rack Tom -->
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-3">Rack Tom</h3>
+                <div class="mb-3">
+                  <p class="text-sm text-gray-400 mb-1">Unprocessed</p>
+                  <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/rt_unprocessed.mp3"></audio>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-400 mb-1">Processed</p>
+                  <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/rt_processed.mp3"></audio>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Overheads Tab (Hidden by default) -->
+          <div id="overheads-tab" class="tab-content hidden">
+            <div class="mb-4">
+              <h3 class="text-xl font-semibold mb-3">Unprocessed Overheads</h3>
+              <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/oh_unprocessed.mp3"></audio>
+              <p class="text-sm text-gray-400">Original overheads with all elements</p>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">Processed Variations</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h4 class="font-medium mb-2">No Cymbals</h4>
+                <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/oh_processed_nocymbals.mp3"></audio>
+                <p class="text-sm text-gray-400">Overheads with cymbals removed</p>
+              </div>
+              
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h4 class="font-medium mb-2">No Kick</h4>
+                <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/oh_processed_nokick.mp3"></audio>
+                <p class="text-sm text-gray-400">Overheads with kick removed</p>
+              </div>
+              
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <h4 class="font-medium mb-2">Low Snare</h4>
+                <audio controls class="w-full mb-2" src="/darkhouseaudio/audio/oh_processed_lowsnare.mp3"></audio>
+                <p class="text-sm text-gray-400">Overheads with reduced snare</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+  
+  <!-- JavaScript for Tab Switching -->
+  <script>
+    function showTab(tabName) {
+      // Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+      });
+      
+      // Show the selected tab
+      document.getElementById(tabName + '-tab').classList.remove('hidden');
+      
+      // Update active tab button
+      document.querySelectorAll('button').forEach(button => {
+        button.classList.remove('text-skyblue', 'border-b-2', 'border-skyblue');
+        button.classList.add('text-gray-400');
+      });
+      
+      // Set active tab button
+      event.target.classList.remove('text-gray-400');
+      event.target.classList.add('text-skyblue', 'border-b-2', 'border-skyblue');
+    }
+  </script>
 
   <!-- CTA Section -->
   <section id="purchase" class="py-16 bg-gray-900 text-center">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold mb-6">Ready to Elevate Your Audio?</h2>
-      <p class="text-xl text-gray-300 mb-8">Join thousands of producers using BleedShift 2 today.</p>
+      <p class="text-xl text-gray-300 mb-8">Gain the competitive edge that other producers don't know about yet.</p>
       <a href="/darkhouseaudio/store.html" class="inline-block bg-skyblue text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Purchase Now</a>
     </div>
   </section>
