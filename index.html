@@ -1,0 +1,125 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dark House Audio - Professional Mixing, Mastering, and Audio Plugin Development">
+  <title>Dark House Audio - Mixing, Mastering & Plugins</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
+    .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x1080?text=Studio+Image'); }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Navigation -->
+  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-teal-400">Dark House Audio</a>
+      <div class="space-x-4">
+        <a href="/" class="text-teal-400">Home</a>
+        <a href="/store.html" class="hover:text-teal-400">Store</a>
+        <a href="/product-landing.html" class="hover:text-teal-400">DarkPulse Plugin</a>
+        <a href="/contact" class="hover:text-teal-400">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-bg bg-cover bg-center h-screen flex items-center text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-5xl md:text-7xl font-bold mb-4">Dark House Audio</h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-6">Mixing & Mastering Studio + Innovative Audio Plugins</p>
+      <div class="space-x-4">
+        <a href="/contact" class="inline-block bg-teal-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-teal-600 transition">Get in Touch</a>
+        <a href="/product-landing.html" class="inline-block bg-purple-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-600 transition">Discover BleedShift 2</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
+      <div class="grid grid-cols-1 justify-center gap-8">
+        <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition max-w-lg mx-auto">
+          <h3 class="text-2xl font-semibold mb-4">Mixing & Mastering</h3>
+          <p class="text-gray-300">Transform your tracks with our expert mixing and mastering services, delivering polished, professional sound for any genre.</p>
+          <a href="/contact" class="inline-block mt-4 text-teal-400 hover:text-teal-300">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plugin Spotlight -->
+  <section class="py-16 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-8 md:mb-0">
+        <img src="https://via.placeholder.com/600x400?text=DarkPulse+Plugin" alt="DarkPulse Plugin" class="rounded-lg shadow-lg">
+      </div>
+      <div class="md:w-1/2 md:pl-8 text-center md:text-left">
+        <h2 class="text-4xl font-bold mb-4">Introducing DarkPulse Plugin</h2>
+        <p class="text-xl text-gray-300 mb-6">Create cinematic soundscapes with our latest plugin, featuring intuitive controls and rich presets.</p>
+        <a href="/product-landing.html" class="inline-block bg-teal-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-teal-600 transition">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gray-800 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold mb-6">Ready to Elevate Your Sound?</h2>
+      <p class="text-xl text-gray-300 mb-8">Book a mixing session or explore our plugins today.</p>
+      <a href="/contact" class="inline-block bg-teal-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-teal-600 transition">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+      <p>© 2025 Dark House Audio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
