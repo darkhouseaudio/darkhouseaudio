@@ -171,8 +171,8 @@
         <!-- Feature 2 -->
         <div class="bg-gray-800 p-6 rounded-lg">
           <div class="text-skyblue text-4xl mb-4">⚡</div>
-          <h3 class="text-2xl font-semibold mb-2">CUDA Acceleration</h3>
-          <p class="text-gray-300">Leverage your NVIDIA graphics card for dramatically faster processing and real-time performance.</p>
+          <h3 class="text-2xl font-semibold mb-2">GPU Acceleration</h3>
+          <p class="text-gray-300">Leverage your NVIDIA (CUDA on Windows) or Apple Silicon/AMD (MPS on macOS) graphics card for dramatically faster processing.</p>
         </div>
         
         <!-- Feature 3 -->
@@ -184,42 +184,61 @@
       </div>
       
       <!-- System Requirements -->
-      <div class="bg-gray-800 p-8 rounded-lg max-w-4xl mx-auto">
-        <h3 class="text-2xl font-semibold mb-4">System Requirements</h3>
+      <div class="bg-gray-800 p-8 rounded-lg max-w-5xl mx-auto">
+        <h3 class="text-2xl font-semibold mb-6 text-center">System Requirements</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Windows Requirements -->
           <div>
-            <h4 class="font-semibold mb-4 text-skyblue">Minimum Requirements</h4>
-            <ul class="list-disc pl-5 text-gray-300 space-y-3">
-              <li><span class="font-medium">OS:</span> Windows 10 or 11 (64-bit)</li>
-              <li><span class="font-medium">RAM:</span> 8GB</li>
-              <li><span class="font-medium">Storage:</span> 5.2GB free space for installation</li>
-              <li><span class="font-medium">Processor:</span> CPU operation is available but slower</li>
-
-            </ul>
+            <h4 class="text-xl font-semibold mb-4 text-center text-skyblue">Windows</h4>
+            <div class="bg-gray-700 p-4 rounded-lg mb-6">
+                <h5 class="font-semibold mb-3 text-center">Minimum Requirements</h5>
+                <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                    <li><span class="font-medium">OS:</span> Windows 10 or 11 (64-bit)</li>
+                    <li><span class="font-medium">RAM:</span> 8GB</li>
+                    <li><span class="font-medium">Storage:</span> 5.2GB free space for installation</li>
+                    <li><span class="font-medium">Processor:</span> CPU operation is available but slower</li>
+                </ul>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h5 class="font-semibold mb-3 text-center">Recommended for Best Performance</h5>
+                <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                    <li><span class="font-medium">OS:</span> Windows 10 or 11 (64-bit)</li>
+                    <li><span class="font-medium">RAM:</span> 16GB</li>
+                    <li><span class="font-medium">Storage:</span> 5.2GB free space for installation</li>
+                    <li><span class="font-medium">Graphics:</span> NVIDIA GPU with CUDA support</li>
+                </ul>
+            </div>
           </div>
+          
+          <!-- macOS Requirements -->
           <div>
-            <h4 class="font-semibold mb-4 text-skyblue">Recommended for Best Performance</h4>
-            <ul class="list-disc pl-5 text-gray-300 space-y-3">
-              <li><span class="font-medium">OS:</span> Windows 10 or 11 (64-bit)</li>
-              <li><span class="font-medium">RAM:</span> 16GB</li>
-              <li><span class="font-medium">Storage:</span> 5.2GB free space for installation</li>
-              <li><span class="font-medium">Graphics:</span> NVIDIA GPU with CUDA support</li>
-            </ul>
+            <h4 class="text-xl font-semibold mb-4 text-center text-skyblue">macOS</h4>
+            <div class="bg-gray-700 p-4 rounded-lg mb-6">
+                <h5 class="font-semibold mb-3 text-center">Minimum Requirements (CPU Only)</h5>
+                <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                    <li><span class="font-medium">OS:</span> macOS 12.3 or later</li>
+                    <li><span class="font-medium">Processor:</span> Any Apple Silicon or Intel</li>
+                    <li><span class="font-medium">RAM:</span> 8GB</li>
+                    <li><span class="font-medium">Storage:</span> 750MB free space</li>
+                </ul>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h5 class="font-semibold mb-3 text-center">Recommended for Best Performance (GPU)</h5>
+                <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                    <li><span class="font-medium">OS:</span> macOS 14.3 or later</li>
+                    <li><span class="font-medium">Processor/GPU:</span> Apple Silicon (M2+) or Intel + AMD GPU</li>
+                    <li><span class="font-medium">RAM:</span> 16GB+</li>
+                    <li><span class="font-medium">Storage:</span> 750MB free space</li>
+                </ul>
+            </div>
           </div>
         </div>
         
-        <!-- Mac Version Coming Soon -->
-        <div class="mt-8 bg-gray-700 p-6 rounded-lg border border-skyblue">
-          <h4 class="font-semibold text-xl mb-3">Mac Version Coming Soon!</h4>
-          <p class="text-gray-300 mb-4">We're currently putting the finishing touches on BleedShift 2 for macOS. Join our mailing list to be the first to know when it's available and get access to an exclusive launch discount.</p>
-          
-          <!-- Mailing List Signup -->
-          <form action="https://formspree.io/f/mblogkvo" method="POST" class="flex flex-col sm:flex-row gap-2">
-            <input type="email" name="email" placeholder="Your email address" class="flex-grow px-4 py-2 rounded-lg sm:rounded-r-none focus:outline-none text-gray-900" required>
-            <input type="hidden" name="subject" value="BleedShift 2 Mac Version Notification">
-            <input type="hidden" name="form-name" value="mac-notification">
-            <button type="submit" class="bg-skyblue text-white px-6 py-2 rounded-lg sm:rounded-l-none font-semibold hover:bg-blue-500 transition">Notify Me</button>
-          </form>
+        <!-- Mac Version Now Available -->
+        <div class="mt-8 bg-green-800 p-6 rounded-lg border border-green-500 text-center">
+          <h4 class="font-semibold text-xl mb-2 text-white">Now Available for macOS!</h4>
+          <p class="text-green-200">BleedShift 2 is now fully compatible with macOS 12.3+ on both Apple Silicon and Intel Macs.</p> 
         </div>
       </div>
     </div>
@@ -502,14 +521,15 @@
     // Function to send download email via Formspree
     function sendDownloadEmail(email, name, orderId) {
       // Create the download link with Google Drive
-      const downloadLink = 'https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link';
+      const windowsDownloadLink = 'https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link';
+      const macosDownloadLink = 'https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link';
       
       // Prepare form data
       const formData = new FormData();
       formData.append('email', email);
       formData.append('name', name || 'Customer');
       formData.append('_subject', 'Your BleedShift 2 Download Link');
-      formData.append('message', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload link: ${downloadLink}\n\nInstallation Instructions:\n1. Download the installer package using the link above\n2. Run the installer and follow the on-screen instructions\n3. Choose your preferred installation location\n4. After installation, launch the application from your desktop or start menu\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
+      formData.append('message', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
       
       // Send the form to Formspree
       fetch('https://formspree.io/f/mblogkvo', {
