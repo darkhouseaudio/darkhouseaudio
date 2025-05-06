@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EmailJS Test Page">
+  <title>EmailJS Test | Dark House Audio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("darkhouseaudio"); // Public key from EmailJS dashboard
+    })();
+    
+    function sendTestEmail() {
+      const email = document.getElementById('email').value;
+      const name = document.getElementById('name').value || 'Test User';
+      
+      // Generate a test order ID
+      const orderId = 'TEST-' + Date.now().toString(36).toUpperCase();
+      
+      // Prepare email template parameters - same as in bleedshift2.html
+      const templateParams = {
+        to_email: email,
+        to_name: name,
+        order_id: orderId,
+        message: 'This is a test email using the BleedShift 2 purchase template. If you received this, the EmailJS integration is working correctly.'
+      };
+      
+      // Update status message
+      document.getElementById('status').textContent = 'Sending email...';
+      
+      // Send email using EmailJS with the same service and template as the real purchase
+      emailjs.send('service_461omtq', 'bleedshift2_purchase', templateParams)
+        .then(function(response) {
+          console.log('Email successfully sent!', response);
+          document.getElementById('status').textContent = 'Email sent successfully! Check your inbox.';
+          document.getElementById('status').className = 'mt-4 text-green-400';
+        }, function(error) {
+          console.error('Email send failed:', error);
+          document.getElementById('status').textContent = 'Failed to send email: ' + JSON.stringify(error);
+          document.getElementById('status').className = 'mt-4 text-red-400';
+        });
+      
+      return false;
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <div class="max-w-md mx-auto mt-20 p-6 bg-gray-800 rounded-lg shadow-xl">
+    <h1 class="text-3xl font-bold mb-6 text-center">EmailJS Test</h1>
+    <p class="mb-4 text-gray-300">
+      This page will send a test email using the same EmailJS template that's used for BleedShift 2 purchases.
+    </p>
+    
+    <form onsubmit="return sendTestEmail(); return false;">
+      <div class="mb-4">
+        <label for="name" class="block mb-2">Your Name (optional)</label>
+        <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-blue-500">
+      </div>
+      
+      <div class="mb-4">
+        <label for="email" class="block mb-2">Your Email Address</label>
+        <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-blue-500">
+      </div>
+      
+      <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition">
+        Send Test Email
+      </button>
+    </form>
+    
+    <p id="status" class="mt-4 text-gray-400"></p>
+    
+    <div class="mt-8 text-sm text-gray-400">
+      <p>Note: This is a test page and should not be linked from your main website.</p>
+    </div>
+  </div>
+</body>
+</html> 

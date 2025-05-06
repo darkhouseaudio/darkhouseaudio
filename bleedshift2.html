@@ -59,11 +59,46 @@
       const emailInput = form.querySelector('input[type="email"]');
       const email = emailInput.value.toLowerCase();
       
-      if (email.endsWith('@no-reply.me')) {
+      if (email.endsWith('@dont-reply.me')) {
         alert('Submissions from this email domain are not accepted.');
         return false;
       }
       return true;
+    }
+    
+    function processCheckout(event) {
+      event.preventDefault();
+      
+      if (!validateCheckoutEmail('checkout-form')) {
+        return false;
+      }
+      
+      const email = document.getElementById('email').value;
+      const name = document.getElementById('name').value;
+      
+      // Generate an order ID
+      const orderId = 'BS2-' + Date.now().toString(36).toUpperCase();
+      
+      // Prepare email template parameters
+      const templateParams = {
+        to_email: email,
+        to_name: name || 'Customer',
+        order_id: orderId,
+        message: 'Thank you for purchasing BleedShift 2! Below are your download links and installation instructions.'
+      };
+      
+      // Send email using EmailJS
+      emailjs.send('service_461omtq', 'bleedshift2_purchase', templateParams)
+        .then(function(response) {
+          console.log('Email successfully sent!', response);
+          // Redirect to thank you page
+          window.location.href = "thank-you.html";
+        }, function(error) {
+          console.error('Email send failed:', error);
+          alert('There was an error processing your order. Please try again or contact support.');
+        });
+      
+      return false;
     }
   </script>
   <style>
@@ -427,15 +462,7 @@
         </div>
       </div>
       
-      <form id="checkout-form" action="https://formsubmit.co/62a66c08643be735e7cfca6f52069884" method="POST" onsubmit="return validateCheckoutEmail('checkout-form')">
-        <!-- FormSubmit.co configuration -->
-        <input type="hidden" name="_subject" value="BleedShift 2 Purchase">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="product" value="BleedShift 2">
-        <input type="hidden" name="price" value="$49.99">
-        <input type="hidden" name="_next" value="https://darkhouseaudio.com/thank-you.html">
-        
+      <form id="checkout-form" onsubmit="return processCheckout(event)">
         <div class="mb-4">
           <label for="name" class="block mb-2">Full Name</label>
           <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
@@ -446,11 +473,11 @@
           <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
         </div>
         
-        <button type="submit" class="w-full bg-skyblue text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Proceed to Payment</button>
+        <button type="submit" class="w-full bg-skyblue text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Complete Purchase</button>
       </form>
       
       <p class="mt-4 text-sm text-gray-400 text-center">
-        After submitting, you'll be directed to complete payment. Your download link will be emailed to you after payment confirmation.
+        After completing your purchase, download links will be sent to your email immediately. If you don't receive your download links, please use our contact form.
       </p>
     </div>
   </div>
