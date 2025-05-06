@@ -172,5 +172,27 @@
       <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Add this new function after the `sendDownloadEmail` function -->
+  <script>
+    // Function to record purchase via Formspree (for seller's records only)
+    function recordPurchase(email, name, orderId) {
+      // Prepare form data
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('name', name || 'Customer');
+      formData.append('_subject', '[RECORD ONLY] BleedShift 2 Purchase');
+      formData.append('message', `Customer purchased BleedShift 2.\n\nCustomer: ${name} (${email})\nOrder number: ${orderId}\n\nUser was redirected to download page.`);
+      
+      // Send the form to Formspree (just for your records)
+      fetch('https://formspree.io/f/mblogkvo', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).catch(error => console.error('Error recording purchase:', error));
+    }
+  </script>
 </body>
 </html> 
