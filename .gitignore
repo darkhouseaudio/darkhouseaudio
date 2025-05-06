@@ -1,5 +1,6 @@
 # Ignore mailing list file (contains personal information)
 mailinglist.txt
+push-updates.bat
 
 # OS generated files
 .DS_Store
