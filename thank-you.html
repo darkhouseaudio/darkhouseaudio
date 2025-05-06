@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thank you for your purchase from Dark House Audio">
+  <title>Thank You | Dark House Audio</title>
+  <!-- Favicon links -->
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon_16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/icon_64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon_128x128.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="icons/icon_256x256.png">
+  <link rel="icon" href="icons/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
+  <!-- Apple Touch Icon for iOS/macOS -->
+  <link rel="apple-touch-icon" href="icons/icon_128x128.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'skyblue': '#00bfff',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Navigation -->
+  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
+      <!-- Logo area (now empty) -->
+      <div></div>
+      <!-- Links: Keep horizontal layout -->
+      <div class="flex space-x-4 mt-2 sm:mt-0">
+        <a href="index.html" class="hover:text-skyblue">Home</a>
+        <a href="store.html" class="hover:text-skyblue">Store</a>
+        <a href="product-landing.html" class="text-purple-500 hover:text-purple-400">BleedShift 2</a>
+        <a href="contact.html" class="hover:text-skyblue">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Thank You Section -->
+  <section class="py-20 bg-gray-800">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-gray-900 p-8 rounded-lg shadow-xl">
+        <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Thank You for Your Purchase!</h1>
+        <p class="text-xl text-gray-300 mb-6">
+          Your order details have been received.
+        </p>
+        
+        <div class="mb-8 bg-gray-800 p-6 rounded-lg text-left">
+          <h2 class="text-2xl font-semibold mb-4 text-center">What Happens Next?</h2>
+          <p class="mb-4">
+            1. You'll receive an email with payment instructions for your BleedShift 2 purchase.
+          </p>
+          <p class="mb-4">
+            2. Once payment is confirmed, we'll email your download links to the provided email address.
+          </p>
+          <p>
+            3. If you don't receive your download links within 24 hours after payment, please contact us at: 
+            <a href="mailto:support@darkhouseaudio.com" class="text-skyblue hover:underline">support@darkhouseaudio.com</a>
+          </p>
+        </div>
+        
+        <a href="index.html" class="inline-block bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
+          Return to Homepage
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+      <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html> 

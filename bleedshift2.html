@@ -37,6 +37,35 @@
       emailjs.init("darkhouseaudio"); // Public key will be generated in your EmailJS dashboard
     })();
   </script>
+  <script>
+    function openCheckoutModal() {
+      document.getElementById('checkout-modal').style.display = 'block';
+    }
+    
+    function closeModal() {
+      document.getElementById('checkout-modal').style.display = 'none';
+    }
+    
+    // Close modal if clicking outside content
+    window.onclick = function(event) {
+      const modal = document.getElementById('checkout-modal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+    
+    function validateCheckoutEmail(formId) {
+      const form = document.getElementById(formId);
+      const emailInput = form.querySelector('input[type="email"]');
+      const email = emailInput.value.toLowerCase();
+      
+      if (email.endsWith('@no-reply.me')) {
+        alert('Submissions from this email domain are not accepted.');
+        return false;
+      }
+      return true;
+    }
+  </script>
   <style>
     body { font-family: 'Inter', sans-serif; }
     h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
@@ -383,34 +412,45 @@
   </section>
   
   <!-- Checkout Modal -->
-  <div id="checkoutModal" class="modal">
-    <div class="modal-content bg-gray-800 p-8 rounded-lg shadow-2xl">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-2xl font-bold">Complete Your Purchase</h3>
-        <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+  <div id="checkout-modal" class="modal">
+    <div class="modal-content bg-gray-800 p-6 rounded-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Complete Your Purchase</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
       </div>
       
       <div class="mb-6">
-        <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-600">
-          <span>BleedShift 2</span>
-          <span>$49.99</span>
-        </div>
-        <div class="flex justify-between font-bold text-lg pt-2">
-          <span>Total</span>
-          <span>$49.99 USD</span>
+        <h4 class="text-lg font-semibold mb-2">BleedShift 2</h4>
+        <div class="flex justify-between items-center">
+          <span>Price:</span>
+          <span class="text-skyblue font-semibold">$49.99</span>
         </div>
       </div>
       
-      <!-- PayPal Button Container -->
-      <div id="paypal-button-container" class="mb-6"></div>
+      <form id="checkout-form" action="https://formsubmit.co/62a66c08643be735e7cfca6f52069884" method="POST" onsubmit="return validateCheckoutEmail('checkout-form')">
+        <!-- FormSubmit.co configuration -->
+        <input type="hidden" name="_subject" value="BleedShift 2 Purchase">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="product" value="BleedShift 2">
+        <input type="hidden" name="price" value="$49.99">
+        <input type="hidden" name="_next" value="https://darkhouseaudio.com/thank-you.html">
+        
+        <div class="mb-4">
+          <label for="name" class="block mb-2">Full Name</label>
+          <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
+        </div>
+        
+        <div class="mb-4">
+          <label for="email" class="block mb-2">Email Address</label>
+          <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
+        </div>
+        
+        <button type="submit" class="w-full bg-skyblue text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Proceed to Payment</button>
+      </form>
       
-      <p class="text-xs text-gray-500 mb-4">
-        Due to the irrevocable nature of digital goods, refunds cannot be issued once the product has been delivered. Digital products can be easily copied, making it impossible to ensure the original product is returned. Please review product details carefully before purchasing. Refunds may be considered for technical issues, faulty products, or accidental purchases. See our terms for details.
-      </p>
-
-      <p class="text-sm text-gray-400 text-center">
-        By completing this purchase, you agree to our <a href="tos.html" class="text-skyblue hover:underline">Terms of Service</a>.
-        Your download link will be provided immediately after payment.
+      <p class="mt-4 text-sm text-gray-400 text-center">
+        After submitting, you'll be directed to complete payment. Your download link will be emailed to you after payment confirmation.
       </p>
     </div>
   </div>
@@ -435,131 +475,6 @@
       // Set active tab button
       event.target.classList.remove('text-gray-400');
       event.target.classList.add('text-skyblue', 'border-b-2', 'border-skyblue');
-    }
-    
-    // Checkout Modal Functions
-    function openCheckoutModal() {
-      document.getElementById('checkoutModal').style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeCheckoutModal() {
-      document.getElementById('checkoutModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-    
-    // Close modal if clicking outside
-    window.onclick = function(event) {
-      const modal = document.getElementById('checkoutModal');
-      if (event.target == modal) {
-        closeCheckoutModal();
-      }
-    }
-    
-    // PayPal Button Integration
-    paypal.Buttons({
-      // Configure the PayPal button
-      style: {
-        color: 'blue',
-        shape: 'rect',
-        label: 'pay',
-        height: 40
-      },
-      
-      createOrder: function(data, actions) {
-        // Set up the transaction details
-        return actions.order.create({
-          purchase_units: [{
-            description: 'BleedShift 2 - Audio Plugin',
-            amount: {
-              value: '49.99'
-            },
-            payee: {
-              email_address: 'erickazpiroz@gmail.com'
-            }
-          }]
-        });
-      },
-      
-      onApprove: function(data, actions) {
-        // Capture the funds
-        return actions.order.capture().then(function(details) {
-          // Get the customer's email from the transaction
-          const customerEmail = details.payer.email_address;
-          const customerName = details.payer.name.given_name;
-          const orderId = data.orderID;
-          
-          // Send the download email via EmailJS
-          sendDownloadEmail(customerEmail, customerName, orderId);
-        });
-      }
-    }).render('#paypal-button-container');
-    
-    // Function to send download email via EmailJS
-    function sendDownloadEmail(email, name, orderId) {
-      // Create the download link with Google Drive
-      const windowsDownloadLink = 'https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link';
-      const macosDownloadLink = 'https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link';
-      
-      // Prepare email template parameters
-      const templateParams = {
-        to_email: email,
-        to_name: name || 'Customer',
-        order_id: orderId,
-        windows_link: windowsDownloadLink,
-        macos_link: macosDownloadLink,
-        message: 'Thank you for purchasing BleedShift 2! Below are your download links and installation instructions.'
-      };
-      
-      // Send email using EmailJS
-      emailjs.send('service_461omtq', 'bleedshift2_purchase', templateParams)
-        .then(function(response) {
-          console.log('Email successfully sent!', response);
-        }, function(error) {
-          console.error('Email send failed:', error);
-        });
-      
-      // Show download modal regardless of email status
-      showDownloadModal(email, orderId);
-    }
-    
-    // New function to show download links directly in a modal
-    function showDownloadModal(email, orderId) {
-      // Hide checkout modal
-      closeCheckoutModal();
-      
-      // Create download modal content
-      const downloadModal = document.createElement('div');
-      downloadModal.id = 'downloadModal';
-      downloadModal.className = 'modal';
-      downloadModal.innerHTML = `
-        <div class="modal-content bg-gray-800 p-8 rounded-lg shadow-2xl max-w-xl mx-auto">
-          <div class="text-center">
-            <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
-            <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
-            <p class="text-gray-300 mb-2">We've emailed your download links to <span class="text-skyblue font-medium">${email}</span>.</p>
-            <p class="text-gray-300 mb-4">If you don't receive the email, you can download directly using these links:</p>
-            
-            <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
-              <h4 class="font-bold mb-3">Download Links:</h4>
-              <p class="mb-2"><strong>Windows:</strong> <a href="https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link" class="text-skyblue hover:underline" target="_blank">Click here to download</a></p>
-              <p><strong>macOS:</strong> <a href="https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link" class="text-skyblue hover:underline" target="_blank">Click here to download</a></p>
-            </div>
-            
-            <p class="text-gray-400 text-sm mb-6">Order #: ${orderId}</p>
-            <button onclick="document.getElementById('downloadModal').style.display = 'none';" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
-          </div>
-        </div>
-      `;
-      
-      // Add to DOM and display
-      document.body.appendChild(downloadModal);
-      downloadModal.style.display = 'block';
     }
   </script>
 
