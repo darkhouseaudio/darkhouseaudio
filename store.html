@@ -150,8 +150,13 @@
     <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
       <p class="text-gray-300 mb-6">Subscribe to get notified about new products and special offers.</p>
-      <form name="newsletter-subscribe" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="newsletter-subscribe">
+      <form action="https://formsubmit.co/62a66c08643be735e7cfca6f52069884" method="POST">
+        <!-- FormSubmit.co configuration -->
+        <input type="hidden" name="_subject" value="Newsletter Subscription">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_autoresponse" value="Thank you for subscribing to Dark House Audio's newsletter! We'll keep you updated on new products and special offers.">
+        
         <!-- Stack input and button vertically on small screens -->
         <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2">
           <input type="email" name="email" placeholder="Your email address" required class="w-full sm:w-auto flex-grow px-4 py-2 text-gray-900 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-skyblue" />
