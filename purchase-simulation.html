@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Simulation - BleedShift 2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #111827; color: white; }
+    .modal {
+      display: block;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+    }
+    .modal-content {
+      position: relative;
+      margin: 10% auto;
+      max-width: 500px;
+      animation: modalOpen 0.3s;
+      background-color: #1f2937;
+      border-radius: 0.5rem;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    @keyframes modalOpen {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body class="p-8">
+  <h1 class="text-2xl font-bold mb-4">Purchase Simulation for BleedShift 2</h1>
+  <p class="mb-4">This page simulates what a customer sees after completing a purchase.</p>
+  <p class="mb-8">Customer Email: <span class="text-blue-400">dandelium@gmail.com</span></p>
+  
+  <div class="mb-8">
+    <h2 class="text-xl font-bold mb-2">Step 1: Customer completes PayPal payment</h2>
+    <div class="bg-gray-800 p-4 rounded">
+      <p>PayPal transaction completed successfully</p>
+      <p>Order ID: PAYPAL-1234567890</p>
+    </div>
+  </div>
+  
+  <div class="mb-8">
+    <h2 class="text-xl font-bold mb-2">Step 2: Customer sees download modal</h2>
+    <p class="mb-4">The modal appears immediately after purchase:</p>
+  </div>
+  
+  <!-- Simulated Download Modal -->
+  <div id="downloadModal" class="modal">
+    <div class="modal-content bg-gray-800 p-8 rounded-lg shadow-2xl max-w-xl mx-auto">
+      <div class="text-center">
+        <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
+        <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
+        <p class="text-gray-300 mb-2">We've emailed your download links to <span class="text-sky-400 font-medium">dandelium@gmail.com</span>.</p>
+        <p class="text-gray-300 mb-4">If you don't receive the email, you can download directly using these links:</p>
+        
+        <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
+          <h4 class="font-bold mb-3">Download Links:</h4>
+          <p class="mb-2"><strong>Windows:</strong> <a href="https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link" class="text-sky-400 hover:underline" target="_blank">Click here to download</a></p>
+          <p><strong>macOS:</strong> <a href="https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link" class="text-sky-400 hover:underline" target="_blank">Click here to download</a></p>
+        </div>
+        
+        <p class="text-gray-400 text-sm mb-6">Order #: PAYPAL-1234567890</p>
+        <button class="bg-sky-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-8">
+    <h2 class="text-xl font-bold mb-2">Step 3: Customer receives email</h2>
+    <div class="bg-gray-800 p-4 rounded mb-4">
+      <p class="mb-2"><strong>To:</strong> dandelium@gmail.com</p>
+      <p class="mb-2"><strong>From:</strong> Dark House Audio via FormSubmit</p>
+      <p class="mb-2"><strong>Subject:</strong> Your BleedShift 2 Download Link</p>
+      <p class="mb-4"><strong>CC:</strong> darkhouseaudio@gmail.com</p>
+      <div class="bg-gray-700 p-4 rounded">
+        <p class="mb-4">Thank you for purchasing BleedShift 2!</p>
+        <p class="mb-4">Your order number: PAYPAL-1234567890</p>
+        <p class="mb-4">Download Links:</p>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Windows: https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link</li>
+          <li>macOS: https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link</li>
+        </ul>
+        <p class="mb-2">Installation Instructions:</p>
+        <ol class="list-decimal ml-6 mb-4">
+          <li>Download the correct installer package for your OS using the links above.</li>
+          <li>Run the installer and follow the on-screen instructions.</li>
+          <li>Choose your preferred installation location.</li>
+          <li>After installation, launch the application.</li>
+        </ol>
+        <p>If you have any questions or need support, please contact us at darkhouseaudio@gmail.com</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
