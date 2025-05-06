@@ -32,6 +32,50 @@
     body { font-family: 'Inter', sans-serif; }
     h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
   </style>
+  <script>
+    // Security check to prevent direct access
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check for valid token presence
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      const orderId = urlParams.get('order');
+      
+      // Check localStorage for backup token (in case URL parameters were lost)
+      const storedToken = localStorage.getItem('bs2_download_token');
+      const storedOrderId = localStorage.getItem('bs2_order_id');
+      
+      // Use URL parameters if available, otherwise fall back to localStorage
+      const finalToken = token || storedToken;
+      const finalOrderId = orderId || storedOrderId;
+      
+      // If no token or order ID, redirect
+      if (!finalToken || !finalOrderId) {
+        window.location.href = 'bleedshift2.html?unauthorized=true';
+        return;
+      }
+      
+      try {
+        // Decode token
+        const decoded = atob(finalToken);
+        const [timestamp, tokenOrderId] = decoded.split(':');
+        
+        // Validate token components
+        // 1. Order ID in token matches stored order ID 
+        // 2. Token is not expired (1 hour validity)
+        const isValid = (
+          tokenOrderId === finalOrderId && 
+          (Date.now() - parseInt(timestamp)) < (60 * 60 * 1000) // 1 hour
+        );
+        
+        if (!isValid) {
+          window.location.href = 'bleedshift2.html?expired=true';
+        }
+      } catch (e) {
+        // Invalid token format
+        window.location.href = 'bleedshift2.html?invalid=true';
+      }
+    });
+  </script>
 </head>
 <body class="bg-gray-900 text-white">
   <!-- Navigation -->
