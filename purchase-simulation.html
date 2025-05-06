@@ -40,103 +40,41 @@
   <h1 class="text-2xl font-bold mb-4">BleedShift 2 - Email Delivery Test</h1>
   <p class="mb-6">This page allows you to test the actual email delivery system for BleedShift 2 purchases.</p>
   
-  <!-- Test Email Form -->
+  <!-- Important note about accessing form on GitHub Pages -->
+  <div class="bg-yellow-800 p-6 rounded-lg mb-8 max-w-lg">
+    <h2 class="text-xl font-bold mb-2">Important Note</h2>
+    <p class="mb-4">Form testing must be done from the live website, not from a local HTML file.</p>
+    <a href="https://darkhouseaudio.github.io/darkhouseaudio/purchase-simulation.html" class="text-sky-400 hover:underline font-medium">Open this page on GitHub Pages</a>
+  </div>
+
+  <!-- Direct Download Links -->
   <div class="bg-gray-800 p-6 rounded-lg mb-8 max-w-lg">
-    <h2 class="text-xl font-bold mb-4">Test Email Delivery</h2>
-    <p class="mb-4">Enter your email below to send a test email with download links:</p>
-    
-    <form action="https://formsubmit.co/62a66c08643be735e7cfca6f52069884" method="POST" id="testForm" class="mb-4">
-      <!-- FormSubmit.co configuration -->
-      <input type="hidden" name="_subject" value="TEST - BleedShift 2 Download Links">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://darkhouseaudio.github.io/darkhouseaudio/purchase-simulation.html?success=true">
-      <input type="hidden" name="_replyto" id="replyToField">
-      <input type="hidden" name="_cc" value="darkhouseaudio@gmail.com">
-      <input type="hidden" name="name" value="Test Customer">
-      <input type="hidden" name="order_id" value="TEST-123456">
-      <input type="hidden" name="_autoresponse" value="Thank you for testing BleedShift 2! Here are your download links:
+    <h2 class="text-xl font-bold mb-4">Direct Download Links</h2>
+    <p class="mb-4">These are the download links for BleedShift 2:</p>
 
-Windows: https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link
-macOS: https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link
-
-Installation Instructions:
-1. Download the correct installer package for your OS using the links above.
-2. Run the installer and follow the on-screen instructions.
-3. Choose your preferred installation location.
-4. After installation, launch the application.
-
-If you have any questions or need support, please contact us at darkhouseaudio@gmail.com">
-      
-      <div class="flex flex-col mb-4">
-        <label for="email" class="mb-2">Email Address:</label>
-        <input type="email" name="email" id="emailField" required class="px-4 py-2 rounded text-gray-900" placeholder="Enter your email address">
-      </div>
-      
-      <div class="flex flex-col mb-4">
-        <label for="messageField" class="mb-2">Additional Message (optional):</label>
-        <textarea name="message" id="messageField" class="px-4 py-2 rounded text-gray-900" rows="3"></textarea>
-      </div>
-      
-      <button type="submit" class="bg-sky-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition w-full">Send Test Email</button>
-    </form>
-    
-    <div class="bg-gray-700 p-4 rounded text-sm">
-      <p class="mb-2"><strong>Note:</strong> After submitting, you will be redirected back to this page.</p>
-      <p>Check your inbox (and spam folder) to verify the email was received.</p>
-    </div>
-  </div>
-
-  <!-- Success Message (only shown after form submit) -->
-  <div id="successMessage" class="hidden bg-green-800 p-6 rounded-lg mb-8 max-w-lg">
-    <h2 class="text-xl font-bold mb-4">Test Email Sent!</h2>
-    <p class="mb-4">A test email has been sent to your email address.</p>
-    <p class="mb-4">Please check your inbox and spam folder to verify you received it.</p>
-    <p>The email should contain download links for both Windows and macOS versions of BleedShift 2.</p>
-  </div>
-  
-  <!-- Simulated Download Modal -->
-  <div id="downloadModal" class="modal">
-    <div class="modal-content bg-gray-800 p-8 rounded-lg shadow-2xl max-w-xl mx-auto">
-      <div class="text-center">
-        <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
-        <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
-        <p class="text-gray-300 mb-2">We've emailed your download links to <span id="emailDisplay" class="text-sky-400 font-medium">your-email@example.com</span>.</p>
-        <p class="text-gray-300 mb-4">If you don't receive the email, you can download directly using these links:</p>
-        
-        <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
-          <h4 class="font-bold mb-3">Download Links:</h4>
-          <p class="mb-2"><strong>Windows:</strong> <a href="https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link" class="text-sky-400 hover:underline" target="_blank">Click here to download</a></p>
-          <p><strong>macOS:</strong> <a href="https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link" class="text-sky-400 hover:underline" target="_blank">Click here to download</a></p>
-        </div>
-        
-        <p class="text-gray-400 text-sm mb-6">Order #: TEST-123456</p>
-        <button onclick="closeModal()" class="bg-sky-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
-      </div>
+    <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
+      <p class="mb-2"><strong>Windows:</strong> <a href="https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link" class="text-sky-400 hover:underline" target="_blank">Click here to download</a></p>
+      <p><strong>macOS:</strong> <a href="https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link" class="text-sky-400 hover:underline" target="_blank">Click here to download</a></p>
     </div>
   </div>
   
-  <div class="mt-8 max-w-lg">
-    <h2 class="text-xl font-bold mb-4">Testing Instructions</h2>
-    <ol class="list-decimal pl-5 space-y-2">
-      <li>Enter your actual email address in the form above</li>
-      <li>Click "Send Test Email" to submit the form</li>
-      <li>You should be redirected back to this page</li>
-      <li>Check your inbox (and spam folder) for the test email</li>
-      <li>Verify you received the download links</li>
+  <!-- Netlify Forms version (works on GitHub Pages) -->
+  <div class="bg-green-900 p-6 rounded-lg mb-8 max-w-lg">
+    <h2 class="text-xl font-bold mb-4">Use your actual online form</h2>
+    <p class="mb-4">The best approach is to use the actual BleedShift 2 page to test your form:</p>
+    <ol class="list-decimal pl-5 space-y-2 mb-6">
+      <li>Go to your <a href="bleedshift2.html" class="text-sky-400 hover:underline">BleedShift 2 page</a></li>
+      <li>Complete a test purchase via PayPal Sandbox</li>
+      <li>This will trigger the real download system</li>
     </ol>
+    <p>You can also simply share the <a href="https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link" class="text-sky-400 hover:underline">direct download link</a> with customers if needed.</p>
   </div>
 
   <!-- Preview of what the email should look like -->
   <div class="mt-8 bg-gray-800 p-6 rounded-lg max-w-lg">
     <h2 class="text-xl font-bold mb-4">Preview: What the Email Contains</h2>
     <div class="bg-gray-700 p-4 rounded mb-4">
-      <p class="mb-4">Thank you for testing BleedShift 2!</p>
+      <p class="mb-4">Thank you for purchasing BleedShift 2!</p>
       <p class="mb-4">Download Links:</p>
       <ul class="list-disc ml-6 mb-4">
         <li>Windows: https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link</li>
@@ -152,34 +90,5 @@ If you have any questions or need support, please contact us at darkhouseaudio@g
       <p>If you have any questions or need support, please contact us at darkhouseaudio@gmail.com</p>
     </div>
   </div>
-
-  <script>
-    // Show success message if redirected after form submission
-    document.addEventListener('DOMContentLoaded', function() {
-      // Check for success parameter in URL
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('success') === 'true') {
-        document.getElementById('successMessage').classList.remove('hidden');
-      }
-      
-      // Ensure replyto field matches email field
-      document.getElementById('emailField').addEventListener('input', function() {
-        document.getElementById('replyToField').value = this.value;
-        document.getElementById('emailDisplay').textContent = this.value;
-      });
-      
-      // Form submission - show modal preview
-      document.getElementById('testForm').addEventListener('submit', function(e) {
-        // Form will still submit - this just shows what the modal would look like
-        setTimeout(function() {
-          document.getElementById('downloadModal').style.display = 'block';
-        }, 100);
-      });
-    });
-    
-    function closeModal() {
-      document.getElementById('downloadModal').style.display = 'none';
-    }
-  </script>
 </body>
 </html> 
