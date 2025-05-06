@@ -531,6 +531,8 @@
       // Prepare form data
       const formData = new FormData();
       formData.append('email', email);
+      formData.append('_replyto', email);
+      formData.append('_cc', 'darkhouseaudio@gmail.com');
       formData.append('name', name || 'Customer');
       formData.append('_subject', 'Your BleedShift 2 Download Link');
       formData.append('message', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
