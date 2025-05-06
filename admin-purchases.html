@@ -12,6 +12,25 @@
 <body class="bg-gray-100 p-8">
   <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold mb-6">BleedShift 2 Purchase Database Manager</h1>
+    
+    <!-- Notification about automated system -->
+    <div class="mb-6 bg-blue-50 border-l-4 border-blue-500 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-blue-800">Automated Purchase System Available</h3>
+          <div class="mt-2 text-sm text-blue-700">
+            <p>This manual tool is being replaced by an automated webhook system that processes purchases automatically.</p>
+            <p class="mt-1">See the <a href="webhook-handler/README.md" class="underline">webhook handler documentation</a> for setup instructions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <p class="text-gray-600 mb-4">
       <strong>Note:</strong> This is a local tool. Changes you make here need to be manually copied 
       to your purchases.json file and committed to GitHub.
