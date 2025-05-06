@@ -1,5 +1,9 @@
 {
   "purchases": [
-    {"email": "example@customer.com", "orderId": "EXAMPLE123", "date": "2023-05-05"}
+    {
+      "email": "dandelium@gmail.com",
+      "orderId": "PAY-12345678",
+      "date": "2025-05-06"
+    }
   ]
-} 
+}
