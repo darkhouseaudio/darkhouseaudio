@@ -485,7 +485,7 @@
           // Show thank you message with email information
           showThankYouModal(customerEmail, orderId);
           
-          // Send the download email via Formspree
+          // Send the download email via FormSubmit.co
           sendDownloadEmail(customerEmail, customerName, orderId);
         });
       }
@@ -522,28 +522,26 @@
       thankYouModal.style.display = 'block';
     }
     
-    // Function to send download email via Formspree
+    // Function to send download email via FormSubmit.co
     function sendDownloadEmail(email, name, orderId) {
       // Create the download link with Google Drive
       const windowsDownloadLink = 'https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link';
       const macosDownloadLink = 'https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link';
       
-      // Prepare form data
+      // Create form data for submission
       const formData = new FormData();
       formData.append('email', email);
       formData.append('name', name || 'Customer');
       formData.append('_subject', 'Your BleedShift 2 Download Link');
-      formData.append('_replyto', email);
-      formData.append('_to', email);
+      formData.append('_template', 'table');
+      formData.append('_captcha', 'false');
       formData.append('message', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
+      formData.append('_autoresponse', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
       
-      // Send the form to Formspree
-      fetch('https://formspree.io/f/mblogkvo', {
+      // Send form to FormSubmit.co
+      fetch('https://formsubmit.co/darkhouseaudio@gmail.com', {
         method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        body: formData
       }).catch(error => console.error('Error sending download email:', error));
     }
   </script>
