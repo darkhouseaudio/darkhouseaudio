@@ -33,7 +33,7 @@
       document.getElementById('status').textContent = 'Sending email...';
       
       // Send email using EmailJS with the same service and template as the real purchase
-      emailjs.send('service_461omtq', 'bleedshift2_purchase', templateParams)
+      emailjs.send('service_461omtq', 'template_guhyqja', templateParams)
         .then(function(response) {
           console.log('Email successfully sent!', response);
           document.getElementById('status').textContent = 'Email sent successfully! Check your inbox.';
