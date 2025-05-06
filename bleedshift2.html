@@ -539,7 +539,7 @@
       formData.append('_autoresponse', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
       
       // Send form to FormSubmit.co
-      fetch('https://formsubmit.co/darkhouseaudio@gmail.com', {
+      fetch('https://formsubmit.co/62a66c08643be735e7cfca6f52069884', {
         method: 'POST',
         body: formData
       }).catch(error => console.error('Error sending download email:', error));
