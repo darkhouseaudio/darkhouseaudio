@@ -1,0 +1,5 @@
+{
+  "purchases": [
+    {"email": "example@customer.com", "orderId": "EXAMPLE123", "date": "2023-05-05"}
+  ]
+} 

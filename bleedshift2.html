@@ -386,6 +386,23 @@
         <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Drum Recordings?</h2>
         <p class="text-xl text-gray-300 mb-6">Limited time 50% OFF introductory price!</p>
         <a href="#" onclick="openCheckoutModal()" class="inline-block bg-skyblue text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">BUY NOW - $49.99</a>
+      
+        <!-- Purchase Recovery Section -->
+        <div class="mt-16 border-t border-gray-700 pt-12 max-w-2xl mx-auto">
+          <h3 class="text-2xl font-bold mb-4">Already Purchased?</h3>
+          <p class="text-gray-300 mb-6">If you've already purchased BleedShift 2 but need access to your download links, enter your email below.</p>
+          
+          <form id="purchase-recovery-form" action="verify-purchase.html" method="GET" class="max-w-lg mx-auto">
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+              <input type="email" name="email" placeholder="Your purchase email" required 
+                     class="flex-grow px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-skyblue">
+              <button type="submit" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+                Recover Download
+              </button>
+            </div>
+            <p class="text-sm text-gray-400 mt-3">We'll verify your purchase and provide download links.</p>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -572,12 +589,33 @@
     
     // Function to record purchase via Formspree (for seller's records only)
     function recordPurchase(email, name, orderId) {
+      // Current date in YYYY-MM-DD format for the JSON record
+      const today = new Date();
+      const date = today.toISOString().split('T')[0];
+      
+      // JSON entry text for easy copy-paste to purchases.json
+      const jsonEntry = JSON.stringify(
+        {"email": email, "orderId": orderId, "date": date, "name": name || ""}
+      );
+      
       // Prepare form data
       const formData = new FormData();
       formData.append('email', email);
       formData.append('name', name || 'Customer');
+      formData.append('order_id', orderId);
+      formData.append('purchase_date', date);
       formData.append('_subject', '[RECORD ONLY] BleedShift 2 Purchase');
-      formData.append('message', `Customer purchased BleedShift 2.\n\nCustomer: ${name} (${email})\nOrder number: ${orderId}\n\nUser was redirected to download page.`);
+      formData.append('message', 
+        `Customer purchased BleedShift 2.\n\n` +
+        `Customer: ${name} (${email})\n` +
+        `Order number: ${orderId}\n` +
+        `Date: ${date}\n\n` +
+        `User was redirected to download page.\n\n` +
+        `----------------------------------------\n` +
+        `JSON ENTRY FOR PURCHASES DATABASE:\n` +
+        `${jsonEntry}\n` +
+        `----------------------------------------\n`
+      );
       
       // Send the form to Formspree (just for your records)
       fetch('https://formspree.io/f/mblogkvo', {

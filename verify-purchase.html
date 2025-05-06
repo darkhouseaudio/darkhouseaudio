@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Verify BleedShift 2 purchase and access download links">
+  <title>Verify BleedShift 2 Purchase | Dark House Audio</title>
+  <!-- Favicon links -->
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon_16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/icon_64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon_128x128.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="icons/icon_256x256.png">
+  <link rel="icon" href="icons/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
+  <!-- Apple Touch Icon for iOS/macOS -->
+  <link rel="apple-touch-icon" href="icons/icon_128x128.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'skyblue': '#00bfff',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Navigation -->
+  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
+      <!-- Logo area (now empty) -->
+      <div></div>
+      <!-- Links: Keep horizontal layout -->
+      <div class="flex space-x-4 mt-2 sm:mt-0">
+        <a href="index.html" class="hover:text-skyblue">Home</a>
+        <a href="store.html" class="hover:text-skyblue">Store</a>
+        <a href="product-landing.html" class="text-purple-500 hover:text-purple-400">BleedShift 2</a>
+        <a href="contact.html" class="hover:text-skyblue">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Verification Section -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gray-800 rounded-lg shadow-xl p-8 text-center">
+        <h1 class="text-4xl font-bold mb-4">Verify Your Purchase</h1>
+        <p class="text-xl text-gray-300 mb-8">Enter your email to verify your BleedShift 2 purchase and access download links.</p>
+        
+        <div class="bg-gray-700 p-6 rounded-lg mb-8">
+          <form id="verify-form" class="max-w-lg mx-auto">
+            <div class="mb-4">
+              <label for="email" class="block text-left text-lg font-medium mb-2">Your Purchase Email:</label>
+              <input type="email" id="email" class="w-full px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-skyblue" 
+                     placeholder="Enter the email used for purchase" required>
+            </div>
+            <button type="submit" class="w-full bg-skyblue hover:bg-blue-500 text-white py-3 px-6 rounded-lg text-lg font-bold transition-colors duration-300">
+              Verify Purchase
+            </button>
+          </form>
+        </div>
+        
+        <!-- Results will be shown here -->
+        <div id="results" class="hidden">
+          <!-- Success Message -->
+          <div id="success-message" class="hidden mb-8">
+            <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold mb-4 text-green-400">Purchase Verified!</h2>
+            <p class="text-gray-300 mb-8">Your BleedShift 2 purchase has been confirmed.</p>
+            
+            <div class="bg-gray-700 p-6 rounded-lg mb-8 text-left">
+              <h3 class="text-xl font-bold mb-4 text-center">Download Links</h3>
+              <p class="mb-6">Please download the correct version for your operating system:</p>
+              
+              <div class="space-y-4">
+                <a href="https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link" 
+                  class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-4 px-6 rounded-lg text-xl font-bold transition-colors duration-300">
+                  DOWNLOAD WINDOWS VERSION
+                </a>
+                
+                <a href="https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link" 
+                  class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-4 px-6 rounded-lg text-xl font-bold transition-colors duration-300">
+                  DOWNLOAD macOS VERSION
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Error Message -->
+          <div id="error-message" class="hidden mb-8">
+            <div class="inline-block p-4 rounded-full bg-red-100 text-red-500 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold mb-4 text-red-400">Purchase Not Found</h2>
+            <p class="text-gray-300 mb-4">We couldn't find a purchase associated with this email.</p>
+            <p class="text-gray-300 mb-8">If you believe this is an error, please contact us at darkhouseaudio@gmail.com with your purchase details.</p>
+            
+            <a href="bleedshift2.html" class="inline-block bg-gray-600 hover:bg-gray-500 text-white py-3 px-6 rounded-lg transition-colors duration-300">
+              Return to BleedShift 2
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+      <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const verifyForm = document.getElementById('verify-form');
+      const resultsDiv = document.getElementById('results');
+      const successMessage = document.getElementById('success-message');
+      const errorMessage = document.getElementById('error-message');
+      
+      // Check if email was provided in URL (from recovery form)
+      const urlParams = new URLSearchParams(window.location.search);
+      const emailParam = urlParams.get('email');
+      
+      if (emailParam) {
+        // Auto-fill the email field
+        document.getElementById('email').value = emailParam;
+        
+        // Auto-submit the form (optional)
+        setTimeout(() => {
+          verifyForm.dispatchEvent(new Event('submit'));
+        }, 500);
+      }
+      
+      verifyForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value.trim().toLowerCase();
+        
+        // Fetch the purchases database
+        fetch('purchases.json')
+          .then(response => response.json())
+          .then(data => {
+            // Check if the email exists in the database
+            const purchase = data.purchases.find(p => p.email.toLowerCase() === email);
+            
+            // Show results
+            resultsDiv.classList.remove('hidden');
+            
+            if (purchase) {
+              // Success - show download links
+              successMessage.classList.remove('hidden');
+              errorMessage.classList.add('hidden');
+              verifyForm.classList.add('hidden');
+              
+              // Create a secure access token in localStorage
+              const timestamp = Date.now();
+              const token = btoa(`${timestamp}:${purchase.orderId}`);
+              localStorage.setItem('bs2_download_token', token);
+              localStorage.setItem('bs2_order_id', purchase.orderId);
+            } else {
+              // Not found - show error message
+              successMessage.classList.add('hidden');
+              errorMessage.classList.remove('hidden');
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching purchase data:', error);
+            alert('Error verifying purchase. Please try again later or contact support.');
+          });
+      });
+    });
+  </script>
+</body>
+</html> 
