@@ -482,45 +482,11 @@
           const customerName = details.payer.name.given_name;
           const orderId = data.orderID;
           
-          // Show thank you message with email information
-          showThankYouModal(customerEmail, orderId);
-          
           // Send the download email via FormSubmit.co
           sendDownloadEmail(customerEmail, customerName, orderId);
         });
       }
     }).render('#paypal-button-container');
-    
-    // Function to show thank you message after purchase
-    function showThankYouModal(email, orderId) {
-      // Hide checkout modal
-      closeCheckoutModal();
-      
-      // Create thank you modal content
-      const thankYouModal = document.createElement('div');
-      thankYouModal.id = 'thankYouModal';
-      thankYouModal.className = 'modal';
-      thankYouModal.innerHTML = `
-        <div class="modal-content bg-gray-800 p-8 rounded-lg shadow-2xl max-w-xl mx-auto">
-          <div class="text-center">
-            <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
-            <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
-            <p class="text-gray-300 mb-6">We've sent a download link to <span class="text-skyblue font-medium">${email}</span>. Please check your inbox (and spam folder) for instructions.</p>
-            <p class="text-gray-400 text-sm mb-6">Order #: ${orderId}</p>
-            <button onclick="document.getElementById('thankYouModal').style.display = 'none';" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
-          </div>
-        </div>
-      `;
-      
-      // Add to DOM and display
-      document.body.appendChild(thankYouModal);
-      thankYouModal.style.display = 'block';
-    }
     
     // Function to send download email via FormSubmit.co
     function sendDownloadEmail(email, name, orderId) {
@@ -535,6 +501,10 @@
       formData.append('_subject', 'Your BleedShift 2 Download Link');
       formData.append('_template', 'table');
       formData.append('_captcha', 'false');
+      formData.append('_replyto', email);
+      formData.append('_cc', 'darkhouseaudio@gmail.com');
+      
+      // Add message with download links
       formData.append('message', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
       formData.append('_autoresponse', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
       
@@ -543,6 +513,48 @@
         method: 'POST',
         body: formData
       }).catch(error => console.error('Error sending download email:', error));
+      
+      // Backup approach: Show download links directly in the thank you modal
+      showDownloadModal(email, orderId);
+    }
+    
+    // New function to show download links directly in a modal
+    function showDownloadModal(email, orderId) {
+      // Hide checkout modal
+      closeCheckoutModal();
+      
+      // Create download modal content
+      const downloadModal = document.createElement('div');
+      downloadModal.id = 'downloadModal';
+      downloadModal.className = 'modal';
+      downloadModal.innerHTML = `
+        <div class="modal-content bg-gray-800 p-8 rounded-lg shadow-2xl max-w-xl mx-auto">
+          <div class="text-center">
+            <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
+            <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
+            <p class="text-gray-300 mb-2">We've emailed your download links to <span class="text-skyblue font-medium">${email}</span>.</p>
+            <p class="text-gray-300 mb-4">If you don't receive the email, you can download directly using these links:</p>
+            
+            <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
+              <h4 class="font-bold mb-3">Download Links:</h4>
+              <p class="mb-2"><strong>Windows:</strong> <a href="https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link" class="text-skyblue hover:underline" target="_blank">Click here to download</a></p>
+              <p><strong>macOS:</strong> <a href="https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link" class="text-skyblue hover:underline" target="_blank">Click here to download</a></p>
+            </div>
+            
+            <p class="text-gray-400 text-sm mb-6">Order #: ${orderId}</p>
+            <button onclick="document.getElementById('downloadModal').style.display = 'none';" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
+          </div>
+        </div>
+      `;
+      
+      // Add to DOM and display
+      document.body.appendChild(downloadModal);
+      downloadModal.style.display = 'block';
     }
   </script>
 
