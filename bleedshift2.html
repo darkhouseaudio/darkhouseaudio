@@ -30,13 +30,6 @@
   </script>
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      emailjs.init("XP1EYPZ8iB01i2XmQ"); // Replace with your actual EmailJS user ID
-    })();
-  </script>
   <style>
     body { font-family: 'Inter', sans-serif; }
     h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
@@ -495,31 +488,9 @@
       }
     }).render('#paypal-button-container');
     
-    // Function to send download email via EmailJS
+    // Function to show download links directly to the customer
     function sendDownloadEmail(email, name, orderId) {
-      // Create the download link with Google Drive
-      const windowsDownloadLink = 'https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link';
-      const macosDownloadLink = 'https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link';
-      
-      // Prepare email template parameters
-      const templateParams = {
-        to_email: email,
-        to_name: name || 'Customer',
-        order_id: orderId,
-        windows_link: windowsDownloadLink,
-        macos_link: macosDownloadLink,
-        message: 'Thank you for purchasing BleedShift 2! Below are your download links and installation instructions.'
-      };
-      
-      // Send email using EmailJS
-      emailjs.send('default_service', 'bleedshift2_purchase', templateParams)
-        .then(function(response) {
-          console.log('Email successfully sent!', response);
-        }, function(error) {
-          console.error('Email send failed:', error);
-        });
-      
-      // Show download modal regardless of email status
+      // Simply show the download modal with links
       showDownloadModal(email, orderId);
     }
     
@@ -542,8 +513,12 @@
             </div>
             <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
             <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
-            <p class="text-gray-300 mb-2">We've emailed your download links to <span class="text-skyblue font-medium">${email}</span>.</p>
-            <p class="text-gray-300 mb-4">If you don't receive the email, you can download directly using these links:</p>
+            
+            <div class="bg-yellow-800 p-4 rounded-lg mb-6 text-left">
+              <p class="text-yellow-200 font-bold mb-2">⚠️ IMPORTANT</p>
+              <p class="text-gray-300 mb-2">Please bookmark or save the download links below.</p>
+              <p class="text-gray-300">These are your permanent download links for BleedShift 2.</p>
+            </div>
             
             <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
               <h4 class="font-bold mb-3">Download Links:</h4>
@@ -551,8 +526,21 @@
               <p><strong>macOS:</strong> <a href="https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link" class="text-skyblue hover:underline" target="_blank">Click here to download</a></p>
             </div>
             
+            <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
+              <h4 class="font-bold mb-3">Installation Instructions:</h4>
+              <ol class="list-decimal ml-5 space-y-1">
+                <li>Download the correct installer package for your OS using the links above</li>
+                <li>Run the installer and follow the on-screen instructions</li>
+                <li>Choose your preferred installation location</li>
+                <li>After installation, launch the application</li>
+              </ol>
+            </div>
+            
             <p class="text-gray-400 text-sm mb-6">Order #: ${orderId}</p>
-            <button onclick="document.getElementById('downloadModal').style.display = 'none';" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
+            <div class="flex space-x-4 justify-center">
+              <button onclick="saveLinks()" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-500 transition">Email Me These Links</button>
+              <button onclick="closeModal()" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
+            </div>
           </div>
         </div>
       `;
@@ -560,6 +548,19 @@
       // Add to DOM and display
       document.body.appendChild(downloadModal);
       downloadModal.style.display = 'block';
+    }
+    
+    function closeModal() {
+      document.getElementById('downloadModal').style.display = 'none';
+    }
+    
+    function saveLinks() {
+      // Get the customer's email
+      const email = prompt("Enter your email to receive the download links:", "");
+      
+      if (email && email.includes('@')) {
+        alert("We've noted your request. Please also bookmark this page or save the links directly to ensure you have access to your purchase.");
+      }
     }
   </script>
 
