@@ -123,15 +123,20 @@
           <img src="freeirpack.png" alt="Free Heavy Guitar Cabinet IR Pack" class="w-full"> <!-- Removed object-cover and h-48 for natural scaling -->
           <div class="p-6">
             <h3 class="text-2xl font-semibold mb-2">Free IR Pack</h3>
-            <p class="text-gray-300 mb-4">Get our essential heavy guitar cabinet impulse response pack for free!</p>
-            
-            <a href="https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link" 
-               target="_blank" 
-               class="block w-full bg-skyblue hover:bg-blue-500 text-white text-center py-3 px-4 rounded-lg font-semibold transition-colors duration-300">
-              DOWNLOAD IR PACK
-            </a>
-            
-            <p class="text-gray-400 mt-3 text-sm">No email required. Click to download directly!</p>
+            <p class="text-gray-300 mb-4">Get our essential heavy guitar cabinet impulse response pack for free! Just enter your email below.</p>
+            <!-- Email Form for Download -->
+            <!-- IMPORTANT: Replace YOUR_FORM_ID with your actual Formspree form ID -->
+            <form action="https://formspree.io/f/mblogkvo" method="POST">
+              <input type="hidden" name="_subject" value="Free IR Pack Download Request">
+              <!-- Redirect to Google Drive link after submission -->
+              <input type="hidden" name="_autoresponse" value="Thank you for your interest in Dark House Audio's IR Pack! Here's your download link: https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link">
+              <input type="hidden" name="form-name" value="free-ir-download">
+
+              <div class="flex flex-col sm:flex-row items-stretch space-y-2 sm:space-y-0 sm:space-x-2">
+                  <input type="email" name="email" placeholder="Your email address" required class="flex-grow px-4 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-skyblue mb-2 sm:mb-0" />
+                  <button type="submit" class="bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Get Download Link</button>
+              </div>
+            </form>
           </div>
         </div>
 
@@ -161,27 +166,5 @@
       <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
     </div>
   </footer>
-
-  <!-- Add this new function after the `sendDownloadEmail` function -->
-  <script>
-    // Function to record purchase via Formspree (for seller's records only)
-    function recordPurchase(email, name, orderId) {
-      // Prepare form data
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('name', name || 'Customer');
-      formData.append('_subject', '[RECORD ONLY] BleedShift 2 Purchase');
-      formData.append('message', `Customer purchased BleedShift 2.\n\nCustomer: ${name} (${email})\nOrder number: ${orderId}\n\nUser was redirected to download page.`);
-      
-      // Send the form to Formspree (just for your records)
-      fetch('https://formspree.io/f/mblogkvo', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).catch(error => console.error('Error recording purchase:', error));
-    }
-  </script>
 </body>
 </html> 

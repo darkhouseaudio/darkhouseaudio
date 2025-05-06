@@ -79,21 +79,6 @@
       to {opacity: 1; transform: translateY(0);}
     }
   </style>
-  <script>
-    // Check for unauthorized access attempts
-    document.addEventListener('DOMContentLoaded', function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      
-      // Handle various error conditions
-      if (urlParams.has('unauthorized')) {
-        alert('Please complete the purchase process to access download links.');
-      } else if (urlParams.has('expired')) {
-        alert('Your download session has expired. Please complete the purchase again.');
-      } else if (urlParams.has('invalid')) {
-        alert('Invalid download credentials. Please contact customer support if you\'ve already made a purchase.');
-      }
-    });
-  </script>
 </head>
 <body class="bg-gray-900 text-white">
   <!-- Navigation -->
@@ -386,23 +371,6 @@
         <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Drum Recordings?</h2>
         <p class="text-xl text-gray-300 mb-6">Limited time 50% OFF introductory price!</p>
         <a href="#" onclick="openCheckoutModal()" class="inline-block bg-skyblue text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">BUY NOW - $49.99</a>
-      
-        <!-- Purchase Recovery Section -->
-        <div class="mt-16 border-t border-gray-700 pt-12 max-w-2xl mx-auto">
-          <h3 class="text-2xl font-bold mb-4">Already Purchased?</h3>
-          <p class="text-gray-300 mb-6">If you've already purchased BleedShift 2 but need access to your download links, enter your email below.</p>
-          
-          <form id="purchase-recovery-form" action="verify-purchase.html" method="GET" class="max-w-lg mx-auto">
-            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-              <input type="email" name="email" placeholder="Your purchase email" required 
-                     class="flex-grow px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-skyblue">
-              <button type="submit" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition">
-                Recover Download
-              </button>
-            </div>
-            <p class="text-sm text-gray-400 mt-3">We'll verify your purchase and provide download links.</p>
-          </form>
-        </div>
       </div>
     </div>
   </section>
@@ -514,19 +482,11 @@
           const customerName = details.payer.name.given_name;
           const orderId = data.orderID;
           
-          // Record the purchase in Formspree (just for your records)
-          recordPurchase(customerEmail, customerName, orderId);
+          // Show thank you message with email information
+          showThankYouModal(customerEmail, orderId);
           
-          // Create secure timestamp token (valid for 1 hour)
-          const timestamp = Date.now();
-          const token = btoa(`${timestamp}:${orderId}`); // Simple encoding for demo
-          
-          // Store token in localStorage as backup authentication
-          localStorage.setItem('bs2_download_token', token);
-          localStorage.setItem('bs2_order_id', orderId);
-          
-          // Redirect to download page with secure token
-          window.location.href = `bs2-download.html?token=${token}&order=${orderId}`;
+          // Send the download email via Formspree
+          sendDownloadEmail(customerEmail, customerName, orderId);
         });
       }
     }).render('#paypal-button-container');
@@ -550,9 +510,9 @@
             </div>
             <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
             <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
-            <p class="text-gray-300 mb-6">Your download links will appear on the next screen.</p>
+            <p class="text-gray-300 mb-6">We've sent a download link to <span class="text-skyblue font-medium">${email}</span>. Please check your inbox (and spam folder) for instructions.</p>
             <p class="text-gray-400 text-sm mb-6">Order #: ${orderId}</p>
-            <button onclick="document.getElementById('thankYouModal').style.display = 'none'; sendDownloadEmail('${email}', '', '${orderId}');" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Continue to Downloads</button>
+            <button onclick="document.getElementById('thankYouModal').style.display = 'none';" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
           </div>
         </div>
       `;
@@ -571,8 +531,6 @@
       // Prepare form data
       const formData = new FormData();
       formData.append('email', email);
-      formData.append('_replyto', email);
-      formData.append('_cc', 'darkhouseaudio@gmail.com');
       formData.append('name', name || 'Customer');
       formData.append('_subject', 'Your BleedShift 2 Download Link');
       formData.append('message', `Thank you for purchasing BleedShift 2!\n\nYour order number: ${orderId}\n\nDownload Links:\n- Windows: ${windowsDownloadLink}\n- macOS: ${macosDownloadLink}\n\nInstallation Instructions:\n1. Download the correct installer package for your OS using the links above.\n2. Run the installer and follow the on-screen instructions.\n3. Choose your preferred installation location.\n4. After installation, launch the application.\n\nIf you have any questions or need support, please contact us at darkhouseaudio@gmail.com`);
@@ -585,46 +543,6 @@
           'Accept': 'application/json'
         }
       }).catch(error => console.error('Error sending download email:', error));
-    }
-    
-    // Function to record purchase via Formspree (for seller's records only)
-    function recordPurchase(email, name, orderId) {
-      // Current date in YYYY-MM-DD format for the JSON record
-      const today = new Date();
-      const date = today.toISOString().split('T')[0];
-      
-      // JSON entry text for easy copy-paste to purchases.json
-      const jsonEntry = JSON.stringify(
-        {"email": email, "orderId": orderId, "date": date, "name": name || ""}
-      );
-      
-      // Prepare form data
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('name', name || 'Customer');
-      formData.append('order_id', orderId);
-      formData.append('purchase_date', date);
-      formData.append('_subject', '[RECORD ONLY] BleedShift 2 Purchase');
-      formData.append('message', 
-        `Customer purchased BleedShift 2.\n\n` +
-        `Customer: ${name} (${email})\n` +
-        `Order number: ${orderId}\n` +
-        `Date: ${date}\n\n` +
-        `User was redirected to download page.\n\n` +
-        `----------------------------------------\n` +
-        `JSON ENTRY FOR PURCHASES DATABASE:\n` +
-        `${jsonEntry}\n` +
-        `----------------------------------------\n`
-      );
-      
-      // Send the form to Formspree (just for your records)
-      fetch('https://formspree.io/f/mblogkvo', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).catch(error => console.error('Error recording purchase:', error));
     }
   </script>
 
