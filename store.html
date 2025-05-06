@@ -17,13 +17,6 @@
   <link rel="apple-touch-icon" href="icons/icon_128x128.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      emailjs.init("XP1EYPZ8iB01i2XmQ"); // Replace with your actual EmailJS user ID
-    })();
-  </script>
   <script>
     tailwind.config = {
       theme: {
@@ -132,7 +125,7 @@
             <h3 class="text-2xl font-semibold mb-2">Free IR Pack</h3>
             <p class="text-gray-300 mb-4">Get our essential heavy guitar cabinet impulse response pack for free! Just enter your email below.</p>
             <!-- Email Form for Download using EmailJS -->
-            <form id="emailjs-form">
+            <form id="ir-download-form">
               <div class="flex flex-col sm:flex-row items-stretch space-y-2 sm:space-y-0 sm:space-x-2">
                   <input type="email" name="email" id="ir-email" placeholder="Your email address" required class="flex-grow px-4 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-skyblue mb-2 sm:mb-0" />
                   <button type="submit" class="bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Get Download Link</button>
@@ -141,7 +134,7 @@
             
             <!-- Success message (hidden by default) -->
             <div id="success-message" class="hidden mt-4 bg-green-800 p-3 rounded text-sm">
-              Email sent! Check your inbox for the download link. If you don't receive it, <a href="https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link" class="text-skyblue hover:underline">click here</a> to download directly.
+              Thank you for your interest! <a href="https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link" class="text-skyblue hover:underline">Click here</a> to download the IR Pack.
             </div>
           </div>
         </div>
@@ -175,35 +168,16 @@
 
   <!-- EmailJS Form Submit Handler -->
   <script>
-    document.getElementById('emailjs-form').addEventListener('submit', function(event) {
+    document.getElementById('ir-download-form').addEventListener('submit', function(event) {
       event.preventDefault();
       
-      const email = document.getElementById('ir-email').value;
+      // Show success message
+      document.getElementById('success-message').classList.remove('hidden');
       
-      // Prepare email template parameters
-      const templateParams = {
-        to_email: email,
-        to_name: 'Customer',
-        download_link: 'https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link',
-        message: 'Thank you for your interest in Dark House Audio\'s IR Pack! Here\'s your download link.'
-      };
-      
-      // Send email using EmailJS
-      emailjs.send('default_service', 'irpack_download', templateParams)
-        .then(function() {
-          // Show success message
-          document.getElementById('success-message').classList.remove('hidden');
-          
-          // Redirect to download after 3 seconds
-          setTimeout(function() {
-            window.location.href = 'https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link';
-          }, 3000);
-        })
-        .catch(function(error) {
-          console.error('Email send failed:', error);
-          // Redirect to download anyway in case of failure
-          window.location.href = 'https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link';
-        });
+      // Redirect to download after 1 second
+      setTimeout(function() {
+        window.location.href = 'https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link';
+      }, 1000);
     });
   </script>
 </body>

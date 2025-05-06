@@ -488,13 +488,13 @@
       }
     }).render('#paypal-button-container');
     
-    // Function to show download links directly to the customer
+    // Function to handle download delivery
     function sendDownloadEmail(email, name, orderId) {
-      // Simply show the download modal with links
+      // Simply show the download modal immediately
       showDownloadModal(email, orderId);
     }
     
-    // New function to show download links directly in a modal
+    // Function to show download links directly in a modal
     function showDownloadModal(email, orderId) {
       // Hide checkout modal
       closeCheckoutModal();
@@ -513,12 +513,7 @@
             </div>
             <h3 class="text-2xl font-bold mb-4">Thank You for Your Purchase!</h3>
             <p class="text-gray-300 mb-4">Your order has been confirmed.</p>
-            
-            <div class="bg-yellow-800 p-4 rounded-lg mb-6 text-left">
-              <p class="text-yellow-200 font-bold mb-2">⚠️ IMPORTANT</p>
-              <p class="text-gray-300 mb-2">Please bookmark or save the download links below.</p>
-              <p class="text-gray-300">These are your permanent download links for BleedShift 2.</p>
-            </div>
+            <p class="text-gray-300 mb-4">Please download your purchase using these links:</p>
             
             <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
               <h4 class="font-bold mb-3">Download Links:</h4>
@@ -527,20 +522,13 @@
             </div>
             
             <div class="bg-gray-700 p-4 rounded-lg mb-6 text-left">
-              <h4 class="font-bold mb-3">Installation Instructions:</h4>
-              <ol class="list-decimal ml-5 space-y-1">
-                <li>Download the correct installer package for your OS using the links above</li>
-                <li>Run the installer and follow the on-screen instructions</li>
-                <li>Choose your preferred installation location</li>
-                <li>After installation, launch the application</li>
-              </ol>
+              <h4 class="font-bold mb-3">For Your Records:</h4>
+              <p class="mb-2"><strong>Order #:</strong> ${orderId}</p>
+              <p class="mb-2"><strong>Email:</strong> ${email}</p>
+              <p class="mb-2"><strong>Note:</strong> We recommend bookmarking or saving these links for future reference.</p>
             </div>
             
-            <p class="text-gray-400 text-sm mb-6">Order #: ${orderId}</p>
-            <div class="flex space-x-4 justify-center">
-              <button onclick="saveLinks()" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-500 transition">Email Me These Links</button>
-              <button onclick="closeModal()" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
-            </div>
+            <button onclick="document.getElementById('downloadModal').style.display = 'none';" class="bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Close</button>
           </div>
         </div>
       `;
@@ -548,19 +536,6 @@
       // Add to DOM and display
       document.body.appendChild(downloadModal);
       downloadModal.style.display = 'block';
-    }
-    
-    function closeModal() {
-      document.getElementById('downloadModal').style.display = 'none';
-    }
-    
-    function saveLinks() {
-      // Get the customer's email
-      const email = prompt("Enter your email to receive the download links:", "");
-      
-      if (email && email.includes('@')) {
-        alert("We've noted your request. Please also bookmark this page or save the links directly to ensure you have access to your purchase.");
-      }
     }
   </script>
 
