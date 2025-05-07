@@ -68,24 +68,87 @@
       return true;
     }
     
-    function processCheckout(event) {
+    function collectCustomerInfo(event) {
       event.preventDefault();
       
       if (!validateCheckoutEmail('checkout-form')) {
         return false;
       }
       
+      // Get customer info
       const email = document.getElementById('email').value;
       const name = document.getElementById('name').value || 'Customer';
       
-      // Show processing state to user
-      const submitButton = document.querySelector('#checkout-form button[type="submit"]');
-      const originalButtonText = submitButton.innerHTML;
-      submitButton.innerHTML = 'Processing...';
-      submitButton.disabled = true;
+      // Hide customer info form, show payment
+      document.getElementById('customer-info-container').style.display = 'none';
+      document.getElementById('payment-container').style.display = 'block';
       
-      // Generate an order ID
+      // Generate an order ID and store it for later
       const orderId = 'BS2-' + Date.now().toString(36).toUpperCase();
+      document.getElementById('order-id').value = orderId;
+      
+      // Save customer info for EmailJS
+      document.getElementById('customer-email').value = email;
+      document.getElementById('customer-name').value = name;
+      
+      // Render PayPal buttons
+      renderPayPalButtons();
+      
+      return false;
+    }
+    
+    function renderPayPalButtons() {
+      // Clear previous buttons if any
+      document.getElementById('paypal-button-container').innerHTML = '';
+      
+      paypal.Buttons({
+        // Configure the PayPal button
+        style: {
+          color: 'blue',
+          shape: 'rect',
+          label: 'pay',
+          height: 40
+        },
+        
+        createOrder: function(data, actions) {
+          // Set up the transaction details
+          return actions.order.create({
+            purchase_units: [{
+              description: 'BleedShift 2 - Drum Bleed Control Application',
+              amount: {
+                value: '49.99'
+              }
+            }]
+          });
+        },
+        
+        onApprove: function(data, actions) {
+          // Transaction was approved, capture the funds
+          return actions.order.capture().then(function(details) {
+            console.log('Payment successful', details);
+            
+            // Now that payment is confirmed, send the download links via EmailJS
+            sendDownloadEmail();
+          });
+        },
+        
+        onError: function(err) {
+          console.error('PayPal Error:', err);
+          alert('There was an error processing your payment. Please try again or contact support.');
+        }
+        
+      }).render('#paypal-button-container');
+    }
+    
+    function sendDownloadEmail() {
+      // Get the saved customer info 
+      const email = document.getElementById('customer-email').value;
+      const name = document.getElementById('customer-name').value;
+      const orderId = document.getElementById('order-id').value;
+      
+      // Show processing state
+      document.getElementById('payment-processing').style.display = 'block';
+      document.getElementById('paypal-button-container').style.display = 'none';
       
       // Prepare email template parameters
       const templateParams = {
@@ -126,12 +189,8 @@
           window.location.href = "thank-you.html";
         }, function(error) {
           console.error('Email send failed:', error);
-          submitButton.innerHTML = originalButtonText;
-          submitButton.disabled = false;
-          alert('There was an error processing your order. Please try again or contact support.');
+          alert('Payment successful, but there was an error sending your download links. Please contact support.');
         });
-      
-      return false;
     }
   </script>
   <style>
@@ -495,23 +554,45 @@
         </div>
       </div>
       
-      <form id="checkout-form" onsubmit="return processCheckout(event)">
-        <div class="mb-4">
-          <label for="name" class="block mb-2">Full Name</label>
-          <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
-        </div>
-        
-        <div class="mb-4">
-          <label for="email" class="block mb-2">Email Address</label>
-          <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
-        </div>
-        
-        <button type="submit" class="w-full bg-skyblue text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Complete Purchase</button>
-      </form>
+      <!-- Customer Info Container -->
+      <div id="customer-info-container">
+        <form id="checkout-form" onsubmit="return collectCustomerInfo(event)">
+          <div class="mb-4">
+            <label for="name" class="block mb-2">Full Name</label>
+            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
+          </div>
+          
+          <div class="mb-4">
+            <label for="email" class="block mb-2">Email Address</label>
+            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
+          </div>
+          
+          <button type="submit" class="w-full bg-skyblue text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Continue to Payment</button>
+        </form>
+      </div>
       
-      <p class="mt-4 text-sm text-gray-400 text-center">
-        After completing your purchase, download links will be sent to your email immediately. If you don't receive your download links, please use our contact form.
-      </p>
+      <!-- Payment Container (Hidden initially) -->
+      <div id="payment-container" style="display: none;">
+        <!-- Hidden fields to store customer info -->
+        <input type="hidden" id="customer-email">
+        <input type="hidden" id="customer-name">
+        <input type="hidden" id="order-id">
+        
+        <p class="mb-4 text-center">Please complete payment to receive your download links.</p>
+        
+        <!-- PayPal Button Container -->
+        <div id="paypal-button-container" class="mb-4"></div>
+        
+        <!-- Processing indicator (hidden initially) -->
+        <div id="payment-processing" class="text-center py-4" style="display: none;">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-skyblue mb-2"></div>
+          <p>Processing your payment and preparing your download links...</p>
+        </div>
+        
+        <p class="text-xs text-gray-500 mb-4 text-center">
+          By completing this purchase, you agree to our terms of service.
+        </p>
+      </div>
     </div>
   </div>
   
