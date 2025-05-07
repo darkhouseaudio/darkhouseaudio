@@ -75,6 +75,11 @@
       This page will send a test email using the same EmailJS template that's used for BleedShift 2 purchases.
     </p>
     
+    <div class="bg-red-900 p-3 mb-6 rounded-lg">
+      <p class="text-white text-sm font-semibold">⚠️ Development/Testing Only</p>
+      <p class="text-white text-xs">This page should not be linked from your main website.</p>
+    </div>
+    
     <form onsubmit="return sendTestEmail(); return false;">
       <div class="mb-4">
         <label for="name" class="block mb-2">Your Name (optional)</label>
@@ -92,10 +97,6 @@
     </form>
     
     <p id="status" class="mt-4 text-gray-400"></p>
-    
-    <div class="mt-8 text-sm text-gray-400">
-      <p>Note: This is a test page and should not be linked from your main website.</p>
-    </div>
   </div>
 </body>
 </html> 

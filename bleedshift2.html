@@ -76,7 +76,13 @@
       }
       
       const email = document.getElementById('email').value;
-      const name = document.getElementById('name').value;
+      const name = document.getElementById('name').value || 'Customer';
+      
+      // Show processing state to user
+      const submitButton = document.querySelector('#checkout-form button[type="submit"]');
+      const originalButtonText = submitButton.innerHTML;
+      submitButton.innerHTML = 'Processing...';
+      submitButton.disabled = true;
       
       // Generate an order ID
       const orderId = 'BS2-' + Date.now().toString(36).toUpperCase();
@@ -107,10 +113,21 @@
       emailjs.send('service_461omtq', 'template_guhyqja', templateParams)
         .then(function(response) {
           console.log('Email successfully sent!', response);
+          
+          // Save customer information to localStorage if possible
+          try {
+            localStorage.setItem('dhAudioCustomerName', name);
+            localStorage.setItem('dhAudioCustomerEmail', email);
+          } catch (e) {
+            console.log('Could not save customer info to localStorage');
+          }
+          
           // Redirect to thank you page
           window.location.href = "thank-you.html";
         }, function(error) {
           console.error('Email send failed:', error);
+          submitButton.innerHTML = originalButtonText;
+          submitButton.disabled = false;
           alert('There was an error processing your order. Please try again or contact support.');
         });
       
