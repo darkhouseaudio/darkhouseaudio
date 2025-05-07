@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark House Audio - Order Confirmation</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Inter', Arial, sans-serif; background-color: #212529; color: #e9ecef;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #343a40; padding: 20px;">
+    
+    <!-- Header with logo -->
+    <div style="text-align: center; border-bottom: 1px solid #495057; padding-bottom: 20px; margin-bottom: 20px;">
+      <img src="https://www.darkhouseaudio.com/darkhouseaudiologo.png" alt="Dark House Audio" style="max-width: 200px; height: auto;">
+    </div>
+    
+    <!-- Thank you message -->
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h1 style="color: #00bfff; font-size: 24px; margin-bottom: 10px;">Thank You for Your Purchase!</h1>
+      <p style="color: #e9ecef; font-size: 16px;">Your BleedShift 2 download links are ready below.</p>
+    </div>
+    
+    <!-- Order details -->
+    <div style="background-color: #212529; padding: 20px; border-radius: 5px; margin-bottom: 30px;">
+      <h2 style="color: #00bfff; font-size: 18px; margin-top: 0;">Order Details</h2>
+      <p style="margin: 5px 0;"><strong>Order ID:</strong> {{order_id}}</p>
+      
+      <!-- Product info -->
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #495057;">
+        {{#orders}}
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+          <tr>
+            <td style="width: 80px; vertical-align: top;">
+              <img src="https://www.darkhouseaudio.com/screenshot.png" alt="{{name}}" style="width: 70px; height: auto; border-radius: 3px;">
+            </td>
+            <td style="vertical-align: top; padding-left: 10px;">
+              <h3 style="margin: 0 0 5px 0; color: #ffffff;">{{name}}</h3>
+              <p style="margin: 0; color: #adb5bd;">Quantity: {{units}}</p>
+            </td>
+            <td style="width: 80px; text-align: right; vertical-align: top;">
+              <p style="margin: 0; color: #00bfff; font-weight: bold;">${{price}}</p>
+            </td>
+          </tr>
+        </table>
+        {{/orders}}
+      </div>
+      
+      <!-- Order summary -->
+      <div style="margin-top: 20px; border-top: 1px solid #495057; padding-top: 20px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 5px 0;">Subtotal:</td>
+            <td style="text-align: right; padding: 5px 0;">${{cost.total}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px 0;">Shipping:</td>
+            <td style="text-align: right; padding: 5px 0;">${{cost.shipping}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px 0;">Tax:</td>
+            <td style="text-align: right; padding: 5px 0;">${{cost.tax}}</td>
+          </tr>
+          <tr style="border-top: 1px solid #495057;">
+            <td style="padding: 10px 0; font-weight: bold; font-size: 18px;">Total:</td>
+            <td style="text-align: right; padding: 10px 0; font-weight: bold; font-size: 18px; color: #00bfff;">
+              ${{cost.total}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Download section -->
+    <div style="background-color: #212529; padding: 20px; border-radius: 5px; margin-bottom: 30px;">
+      <h2 style="color: #00bfff; font-size: 18px; margin-top: 0;">Download BleedShift 2</h2>
+      <p style="margin-bottom: 20px;">Click the links below to download BleedShift 2 for your operating system:</p>
+      
+      <a href="{{windows_link}}" style="display: block; background-color: #00bfff; color: #212529; text-align: center; padding: 12px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-bottom: 15px;">
+        Download Windows Installer
+      </a>
+      
+      <a href="{{macos_link}}" style="display: block; background-color: #00bfff; color: #212529; text-align: center; padding: 12px 20px; text-decoration: none; font-weight: bold; border-radius: 5px;">
+        Download macOS Installer
+      </a>
+      
+      <p style="margin-top: 20px; font-size: 14px; color: #adb5bd;">
+        Note: These download links are associated with your purchase. Please save these links for future installations.
+      </p>
+    </div>
+    
+    <!-- Support section -->
+    <div style="background-color: #212529; padding: 20px; border-radius: 5px; margin-bottom: 30px;">
+      <h2 style="color: #00bfff; font-size: 18px; margin-top: 0;">Need Help?</h2>
+      <p style="margin-bottom: 15px;">
+        If you have any issues with your download or installation, please visit our 
+        <a href="https://www.darkhouseaudio.com/contact.html" style="color: #00bfff; text-decoration: none;">contact page</a>.
+      </p>
+    </div>
+    
+    <!-- Footer -->
+    <div style="text-align: center; padding-top: 20px; border-top: 1px solid #495057; font-size: 14px; color: #adb5bd;">
+      <p>This email was sent to {{email}}</p>
+      <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
+    </div>
+    
+  </div>
+</body>
+</html> 

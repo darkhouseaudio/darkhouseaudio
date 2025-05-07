@@ -28,9 +28,19 @@
         email: email,
         name: name,
         order_id: orderId,
-        message: 'This is a test email using the BleedShift 2 purchase template. If you received this, the EmailJS integration is working correctly.',
-        product: 'BleedShift 2',
-        price: '$49.99',
+        orders: [
+          {
+            name: 'BleedShift 2',
+            price: '49.99',
+            units: '1',
+            image_url: 'https://www.darkhouseaudio.com/screenshot.png'
+          }
+        ],
+        cost: {
+          shipping: '0.00',
+          tax: '0.00',
+          total: '49.99'
+        },
         windows_link: 'https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link',
         macos_link: 'https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link'
       };
