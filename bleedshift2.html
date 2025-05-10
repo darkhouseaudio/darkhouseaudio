@@ -17,6 +17,8 @@
   <link rel="apple-touch-icon" href="icons/icon_128x128.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- WaveSurfer.js CDN -->
+  <script src="https://unpkg.com/wavesurfer.js@7"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -240,6 +242,32 @@
       from {opacity: 0; transform: translateY(-20px);}
       to {opacity: 1; transform: translateY(0);}
     }
+
+    /* WaveSurfer Player Styles */
+    .waveform-container {
+      position: relative;
+      cursor: pointer;
+    }
+    .play-pause-icon {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background-color: rgba(0, 0, 0, 0.75);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .play-pause-icon svg {
+        display: block;
+        width: 50px;
+        height: 50px;
+        fill: white;
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -433,14 +461,18 @@
               <!-- Unprocessed -->
               <div class="bg-gray-800 p-4 rounded-lg">
                 <h3 class="text-xl font-semibold mb-3">Unprocessed</h3>
-                <audio controls class="w-full mb-2" src="audio/kick_unprocessed.mp3"></audio>
+                <div id="waveform-bs2-kick-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
+                  <div id="icon-bs2-kick-unprocessed" class="play-pause-icon"></div>
+                </div>
                 <p class="text-sm text-gray-400">Original kick drum with bleed from other drums</p>
               </div>
               
               <!-- Processed -->
               <div class="bg-gray-800 p-4 rounded-lg">
                 <h3 class="text-xl font-semibold mb-3">Processed</h3>
-                <audio controls class="w-full mb-2" src="audio/kick_processed.mp3"></audio>
+                <div id="waveform-bs2-kick-processed" class="mb-2 waveform-container" style="height: 60px;">
+                  <div id="icon-bs2-kick-processed" class="play-pause-icon"></div>
+                </div>
                 <p class="text-sm text-gray-400">Kick with reduced bleed from BleedShift 2</p>
               </div>
             </div>
@@ -452,14 +484,18 @@
               <!-- Unprocessed -->
               <div class="bg-gray-800 p-4 rounded-lg">
                 <h3 class="text-xl font-semibold mb-3">Unprocessed</h3>
-                <audio controls class="w-full mb-2" src="audio/snare_unprocessed.mp3"></audio>
+                <div id="waveform-bs2-snare-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
+                  <div id="icon-bs2-snare-unprocessed" class="play-pause-icon"></div>
+                </div>
                 <p class="text-sm text-gray-400">Original snare with bleed from other drums</p>
               </div>
               
               <!-- Processed -->
               <div class="bg-gray-800 p-4 rounded-lg">
                 <h3 class="text-xl font-semibold mb-3">Processed</h3>
-                <audio controls class="w-full mb-2" src="audio/snare_processed.mp3"></audio>
+                <div id="waveform-bs2-snare-processed" class="mb-2 waveform-container" style="height: 60px;">
+                  <div id="icon-bs2-snare-processed" class="play-pause-icon"></div>
+                </div>
                 <p class="text-sm text-gray-400">Snare with reduced bleed from BleedShift 2</p>
               </div>
             </div>
@@ -473,11 +509,15 @@
                 <h3 class="text-xl font-semibold mb-3">Floor Tom</h3>
                 <div class="mb-3">
                   <p class="text-sm text-gray-400 mb-1">Unprocessed</p>
-                  <audio controls class="w-full mb-2" src="audio/ft_unprocessed.mp3"></audio>
+                  <div id="waveform-bs2-ft-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
+                    <div id="icon-bs2-ft-unprocessed" class="play-pause-icon"></div>
+                  </div>
                 </div>
                 <div>
                   <p class="text-sm text-gray-400 mb-1">Processed</p>
-                  <audio controls class="w-full mb-2" src="audio/ft_processed.mp3"></audio>
+                  <div id="waveform-bs2-ft-processed" class="mb-2 waveform-container" style="height: 60px;">
+                    <div id="icon-bs2-ft-processed" class="play-pause-icon"></div>
+                  </div>
                 </div>
               </div>
               
@@ -486,11 +526,15 @@
                 <h3 class="text-xl font-semibold mb-3">Rack Tom</h3>
                 <div class="mb-3">
                   <p class="text-sm text-gray-400 mb-1">Unprocessed</p>
-                  <audio controls class="w-full mb-2" src="audio/rt_unprocessed.mp3"></audio>
+                  <div id="waveform-bs2-rt-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
+                    <div id="icon-bs2-rt-unprocessed" class="play-pause-icon"></div>
+                  </div>
                 </div>
                 <div>
                   <p class="text-sm text-gray-400 mb-1">Processed</p>
-                  <audio controls class="w-full mb-2" src="audio/rt_processed.mp3"></audio>
+                  <div id="waveform-bs2-rt-processed" class="mb-2 waveform-container" style="height: 60px;">
+                    <div id="icon-bs2-rt-processed" class="play-pause-icon"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -500,7 +544,9 @@
           <div id="overheads-tab" class="tab-content hidden">
             <div class="mb-4">
               <h3 class="text-xl font-semibold mb-3">Unprocessed Overheads</h3>
-              <audio controls class="w-full mb-2" src="audio/oh_unprocessed.mp3"></audio>
+              <div id="waveform-bs2-oh-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
+                <div id="icon-bs2-oh-unprocessed" class="play-pause-icon"></div>
+              </div>
               <p class="text-sm text-gray-400">Original overheads with all elements</p>
             </div>
             
@@ -508,19 +554,25 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="bg-gray-800 p-4 rounded-lg">
                 <h4 class="font-medium mb-2">No Cymbals</h4>
-                <audio controls class="w-full mb-2" src="audio/oh_processed_nocymbals.mp3"></audio>
+                <div id="waveform-bs2-oh-nocymbals" class="mb-2 waveform-container" style="height: 60px;">
+                  <div id="icon-bs2-oh-nocymbals" class="play-pause-icon"></div>
+                </div>
                 <p class="text-sm text-gray-400">Overheads with cymbals removed</p>
               </div>
               
               <div class="bg-gray-800 p-4 rounded-lg">
                 <h4 class="font-medium mb-2">No Kick</h4>
-                <audio controls class="w-full mb-2" src="audio/oh_processed_nokick.mp3"></audio>
+                <div id="waveform-bs2-oh-nokick" class="mb-2 waveform-container" style="height: 60px;">
+                  <div id="icon-bs2-oh-nokick" class="play-pause-icon"></div>
+                </div>
                 <p class="text-sm text-gray-400">Overheads with kick removed</p>
               </div>
               
               <div class="bg-gray-800 p-4 rounded-lg">
                 <h4 class="font-medium mb-2">Low Snare</h4>
-                <audio controls class="w-full mb-2" src="audio/oh_processed_lowsnare.mp3"></audio>
+                <div id="waveform-bs2-oh-lowsnare" class="mb-2 waveform-container" style="height: 60px;">
+                  <div id="icon-bs2-oh-lowsnare" class="play-pause-icon"></div>
+                </div>
                 <p class="text-sm text-gray-400">Overheads with reduced snare</p>
               </div>
             </div>
@@ -616,6 +668,100 @@
       event.target.classList.remove('text-gray-400');
       event.target.classList.add('text-skyblue', 'border-b-2', 'border-skyblue');
     }
+
+    // WaveSurfer Initialization Script
+    document.addEventListener('DOMContentLoaded', function () {
+      const playIconSVG = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+      const pauseIconSVG = '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+      const errorIconSVG = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
+      let allWaveSurfers = []; // Array to keep track of all players
+
+      function setupWaveSurferPlayer(waveformContainerId, iconContainerId, audioUrl) {
+        try {
+          const waveformContainer = document.getElementById(waveformContainerId);
+          const iconContainer = document.getElementById(iconContainerId);
+
+          if (!waveformContainer || !iconContainer) {
+            console.error(`Elements not found for player: ${waveformContainerId} in bleedshift2.html`);
+            return;
+          }
+
+          const wavesurfer = WaveSurfer.create({
+            container: waveformContainer,
+            waveColor: '#A0AEC0',
+            progressColor: '#00bfff',
+            url: audioUrl,
+            barWidth: 2,
+            barGap: 1,
+            height: 60,
+            responsive: true
+          });
+          console.log(`WaveSurfer instance created for ${waveformContainerId} in bleedshift2.html`);
+
+          // Add the new player to our list
+          allWaveSurfers.push({ instance: wavesurfer, icon: iconContainer, id: waveformContainerId });
+
+          iconContainer.addEventListener('click', () => {
+            wavesurfer.playPause();
+          });
+
+          wavesurfer.on('ready', () => {
+            console.log(`WaveSurfer ${waveformContainerId} is ready!`);
+            iconContainer.innerHTML = playIconSVG;
+          });
+
+          wavesurfer.on('play', () => {
+            console.log(`WaveSurfer ${waveformContainerId} is playing.`);
+            iconContainer.innerHTML = pauseIconSVG;
+
+            // Pause all other instances
+            allWaveSurfers.forEach(player => {
+              if (player.instance !== wavesurfer && player.instance.isPlaying()) {
+                player.instance.pause();
+                // The 'pause' event on player.instance will handle its icon update
+              }
+            });
+          });
+
+          wavesurfer.on('pause', () => {
+            console.log(`WaveSurfer ${waveformContainerId} is paused.`);
+            iconContainer.innerHTML = playIconSVG;
+          });
+
+          wavesurfer.on('finish', () => {
+            console.log(`WaveSurfer ${waveformContainerId} finished.`);
+            iconContainer.innerHTML = playIconSVG;
+            wavesurfer.seekTo(0);
+          });
+
+          wavesurfer.on('error', (err) => {
+            console.error(`WaveSurfer ${waveformContainerId} error:`, err);
+            iconContainer.innerHTML = errorIconSVG;
+          });
+
+        } catch (e) {
+          console.error(`Failed to initialize WaveSurfer for ${waveformContainerId}:`, e);
+          const iconContainer = document.getElementById(iconContainerId);
+          if (iconContainer) {
+            iconContainer.innerHTML = errorIconSVG;
+          }
+        }
+      }
+
+      // Initialize all players for bleedshift2.html
+      setupWaveSurferPlayer('waveform-bs2-kick-unprocessed', 'icon-bs2-kick-unprocessed', 'audio/kick_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-kick-processed', 'icon-bs2-kick-processed', 'audio/kick_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-snare-unprocessed', 'icon-bs2-snare-unprocessed', 'audio/snare_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-snare-processed', 'icon-bs2-snare-processed', 'audio/snare_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-ft-unprocessed', 'icon-bs2-ft-unprocessed', 'audio/ft_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-ft-processed', 'icon-bs2-ft-processed', 'audio/ft_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-rt-unprocessed', 'icon-bs2-rt-unprocessed', 'audio/rt_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-rt-processed', 'icon-bs2-rt-processed', 'audio/rt_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-unprocessed', 'icon-bs2-oh-unprocessed', 'audio/oh_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-nocymbals', 'icon-bs2-oh-nocymbals', 'audio/oh_processed_nocymbals.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-nokick', 'icon-bs2-oh-nokick', 'audio/oh_processed_nokick.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-lowsnare', 'icon-bs2-oh-lowsnare', 'audio/oh_processed_lowsnare.mp3');
+    });
   </script>
 
   <!-- Footer -->
