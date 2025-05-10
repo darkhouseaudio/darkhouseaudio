@@ -155,6 +155,7 @@
           <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('snare')">Snare</button>
           <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('toms')">Toms</button>
           <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('overheads')">Overheads</button>
+          <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('room')">Room</button>
         </div>
         
         <!-- Tab Content -->
@@ -283,6 +284,30 @@
         </div>
         </div>
       </div>
+
+      <!-- Room Tab (Hidden by default) -->
+      <div id="room-tab" class="tab-content hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Unprocessed -->
+          <div class="bg-gray-800 p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-3">Unprocessed Room</h3>
+            <div id="waveform-room-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
+              <div id="icon-room-unprocessed" class="play-pause-icon"></div>
+            </div>
+            <p class="text-sm text-gray-400">Original room recording</p>
+          </div>
+          
+          <!-- Processed -->
+          <div class="bg-gray-800 p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-3">Processed Room</h3>
+            <div id="waveform-room-processed" class="mb-2 waveform-container" style="height: 60px;">
+              <div id="icon-room-processed" class="play-pause-icon"></div>
+            </div>
+            <p class="text-sm text-gray-400">Room with reduced cymbals and boosted shells</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
   
@@ -402,6 +427,8 @@
       setupWaveSurferPlayer('waveform-oh-nocymbals', 'icon-oh-nocymbals', 'audio/oh_processed_nocymbals.mp3');
       setupWaveSurferPlayer('waveform-oh-nokick', 'icon-oh-nokick', 'audio/oh_processed_nokick.mp3');
       setupWaveSurferPlayer('waveform-oh-lowsnare', 'icon-oh-lowsnare', 'audio/oh_processed_lowsnare.mp3');
+      setupWaveSurferPlayer('waveform-room-unprocessed', 'icon-room-unprocessed', 'audio/rm_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-room-processed', 'icon-room-processed', 'audio/rm_processed.mp3');
     });
   </script>
 
