@@ -1,0 +1,63 @@
+RIDER
+
+BACKLINE
+-Kick 22"
+-Rack Tom 10"
+-Rack Tom 12"
+-Rack Tom 14"
+-Rack Tom 16"
+-5 Atriles reforzados con boom
+-Mesa o Stand reforzado para consola y electrónicos
+-2 Boom stand para overheads
+-2 Boom stand para micrófono de voces
+
+INPUT LIST
+
+Todo entra a nuestro rack y sale procesado a través de nuestra snake de 16 canales
+Llevamos triggers en la batería, entregamos líneas procesadas.
+Llevamos nuestros propios micros de overheads, micros de voz y todos los cables.
+Traemos nuestra monitorización en nuestro rack.
+SMPTE para iluminación y visualizadores sincronizados con la música via HDMI
+
+#	INPUT	MIC		STAND
+	
+1	KICK	TRIGGER		
+2	SNARE	SM57	BOOM	
+3	TOMS L	TRIGGERS	
+4	TOMS R	TRIGGERS	
+5	OH L	C-2		BOOM
+6	OH R	C-2		BOOM
+7	BASS				
+8	GTR 1			
+9	KEYS L				
+10	KEYS R				
+11	VOX 1	JZ		BOOM
+12	VOX 2	SM57	BOOM
+13	FX L				
+14	FX R				
+15	TIMECODE			
+16	GTR 2				
+
+CAMERINOS
+-1 cuarto (músicos y crew)
+-Internet
+-2 sillones u 8 sillas
+-1 mesa 
+-Conexiones de electricidad
+-1 extensión con multicontacto
+-1 hielera o refrigerador
+-1 paquete de pañuelos desechables
+-1 paquete de toallas húmedas
+-4 toallas faciales blancas o negras
+
+CATERING CAMERINO
+-24 botellas de agua de 250 ml a temperatura ambiente
+-6 Cocas sin azúcar
+-3 Monsters regular
+-24 Cerveza Ultra 
+-Café soluble, tetera eléctrica, vasos para café
+-Frutas variadas (manzana, mandarina, plátano, etc)
+-01 bolsa grande de cacahuates japoneses
+-01 bolsa grande de sabritas amarillas 
+-Vasos y platos desechables
+-Servilletas 

@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif; /* Updated font */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #111827; /* Tailwind gray-900 */
+    color: #FFFFFF; /* White text */
+}
+
+.page-top-content {
+    background-color: #1F2937; /* Tailwind gray-800, like old header */
+    color: #FFFFFF;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Similar shadow to old header */
+    border-bottom: 3px solid #374151; /* Similar border to old header */
+    margin-bottom: 25px; /* Space before main content starts */
+}
+
+#logo {
+    max-height: 60px;
+    margin-right: 15px;
+}
+
+.page-top-content .header-text-container h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    margin: 0;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+.header-text-container {
+    text-align: center;
+}
+
+.header-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #D1D5DB; /* Tailwind gray-300, like other p tags */
+    margin-top: -0.35rem; /* Adjust to reduce space below h1 */
+    margin-bottom: 0;
+    letter-spacing: 0.5px; /* Optional: for a bit more spacing */
+    font-weight: 400; /* Regular weight for Inter */
+}
+
+main {
+    padding: 15px;
+    max-width: 900px;
+    margin: 25px auto;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #1F2937; /* Tailwind gray-800 */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 6px 20px rgba(0,0,0,0.19);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25), 0 8px 25px rgba(0,0,0,0.22);
+}
+
+section h2 {
+    font-family: 'Bebas Neue', sans-serif; /* Updated font */
+    color: #FFFFFF; /* White text, was teal */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.9rem; /* Adjusted for Bebas Neue */
+    letter-spacing: 0.8px; /* Adjusted for Bebas Neue */
+    border-bottom: 1px solid #374151; /* Darker gray border, was electric blue */
+    padding-bottom: 10px;
+    font-weight: normal; /* Bebas Neue is often bold by default */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #374151; /* Tailwind gray-700 */
+    color: #FFFFFF; /* White text */
+    margin-bottom: 10px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+ul li:hover {
+    background-color: #4b5563; /* Tailwind gray-600 for hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+thead {
+    background-color: #374151; /* Tailwind gray-700 */
+    color: #FFFFFF; /* White text */
+}
+
+thead th:first-child {
+    border-top-left-radius: 8px;
+}
+
+thead th:last-child {
+    border-top-right-radius: 8px;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #4b5563; /* Tailwind gray-600 for row lines */
+}
+
+tbody tr {
+    background-color: #1F2937; /* Tailwind gray-800 */
+    color: #D1D5DB; /* Tailwind gray-300 for body text in table */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #273140; /* Slightly different dark shade for even rows */
+}
+
+tbody tr:hover {
+    background-color: #374151; /* Tailwind gray-700 for hover */
+}
+
+td:first-child, th:first-child {
+    padding-left: 18px;
+}
+td:last-child, th:last-child {
+    padding-right: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    color: #D1D5DB; /* Tailwind gray-300 */
+    line-height: 1.7;
+}
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1F2937; /* Tailwind gray-800 */
+    color: #9CA3AF; /* Tailwind gray-400 */
+    margin-top: 30px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page-top-content {
+        flex-direction: column;
+        padding: 0.8rem 1rem;
+    }
+    #logo {
+        margin-right: 0;
+        margin-bottom: 8px;
+        max-height: 50px;
+    }
+    .page-top-content .header-text-container h1 {
+        font-size: 1.8rem;
+    }
+    main {
+        margin: 15px 10px;
+        padding: 10px;
+    }
+    section {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    section h2 {
+        font-size: 1.6rem; /* Adjusted for Bebas Neue */
+    }
+    th, td {
+        padding: 10px;
+    }
+    ul li {
+        padding: 10px 15px;
+    }
+}
+
+/* Print specific styles */
+@media print {
+    body {
+        background-color: #111827 !important; /* Match new screen background */
+        font-size: 11pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        font-family: 'Inter', sans-serif !important; /* Ensure print uses new font */
+        margin: 0 !important; /* Ensure cover page can fill */
+        padding: 0 !important; /* Ensure cover page can fill */
+    }
+
+    #cover-page {
+        height: 100vh; /* Full viewport height for the page */
+        width: 100%;
+        background-image: url('IMG_8999.png');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        page-break-after: always !important; /* Ensures content after starts on a new page */
+        overflow: hidden !important; /* Prevent scrollbars on the cover page itself */
+    }
+
+    /* Styles for .page-top-content when it is PART OF THE COVER PAGE in print */
+    #cover-page .page-top-content {
+        background-color: transparent !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        margin-bottom: 0 !important; /* No margin below it on the cover */
+        padding: 1rem !important; /* Some padding for the content on the cover */
+        /* Ensure flex properties for centering are maintained if overridden by general .page-top-content */
+        display: flex !important; 
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: row !important; /* As it was originally for logo and text side-by-side */
+    }
+
+    #cover-page .page-top-content #logo {
+        /* Potentially add filter for better visibility if needed, e.g., drop-shadow */
+        /* filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.7)); */
+    }
+
+    #cover-page .page-top-content .header-text-container h1,
+    #cover-page .page-top-content .header-text-container .header-subtitle {
+        color: #FFFFFF !important; /* Ensure text is white */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Add shadow for better readability on image */
+    }
+
+    /* Styles for .page-top-content that was previously the header for the main document content */
+    /* This rule is now OBSOLETE for print after the cover page, as .page-top-content is ONLY on the cover */
+    /* We can remove or comment out the old .page-top-content print rules that are not under #cover-page */
+
+    /* Remove the old standalone .page-top-content print styling if it exists, for example:
+    .page-top-content {
+        border-bottom: none !important; 
+        padding: 10pt 1cm !important; 
+        text-align: center; 
+        background-color: #1F2937 !important; 
+        color: #FFFFFF !important; 
+        display: flex !important; 
+        align-items: center !important;
+        justify-content: center !important;
+        margin-bottom: 15pt !important; 
+    }
+    We are effectively replacing it with #cover-page and its child .page-top-content rules.
+    */
+
+    main { /* Ensure main content starts after the cover */
+        /* page-break-before: always !important; This is handled by page-break-after on #cover-page */
+        max-width: none !important;
+        margin: 0 auto !important; /* Reset margin if any was set for centering full page content */
+        padding: 1cm !important; /* Standard padding for content pages */
+    }
+
+    footer {
+        border-top: none !important;
+        margin-top: 15pt !important;
+        padding: 8pt 0 !important;
+        text-align: center;
+        background-color: #1F2937 !important; /* Match screen */
+        color: #9CA3AF !important; /* Match screen */
+        display: inline-block;
+    }
+
+    /* The h1 inside .page-top-content on the COVER page */
+    #cover-page .page-top-content .header-text-container h1 {
+        font-family: 'Bebas Neue', sans-serif !important;
+        font-size: 3rem !important; /* Make cover title larger */
+        margin: 0;
+        font-weight: normal !important;
+        letter-spacing: 1.5px !important;
+    }
+    
+    /* The subtitle inside .page-top-content on the COVER page */
+    #cover-page .page-top-content .header-text-container .header-subtitle {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 1.5rem !important; /* Make cover subtitle larger */
+        margin-top: 0.25rem !important;
+        font-weight: 400 !important;
+    }
+
+    /* Remove general H1 styling for print that might conflict if it was for the old header */
+    /* For example, if there was a .page-top-content .header-text-container h1 rule NOT under #cover-page */
+
+    section {
+        background-color: #1F2937 !important; /* Match screen */
+        box-shadow: none !important; /* Simpler for print */
+        border-radius: 0 !important; /* Simpler for print */
+        margin-bottom: 15pt !important;
+        padding: 10pt !important;
+        page-break-inside: avoid !important; /* Avoid breaking sections across pages */
+    }
+
+    section h2 {
+        font-family: 'Bebas Neue', sans-serif !important; /* Ensure print uses new font */
+        color: #FFFFFF !important; /* Match screen */
+        border-bottom: 1px solid #374151 !important; /* Match screen */
+        font-size: 14pt !important; /* Adjusted for Bebas Neue */
+        font-weight: normal !important;
+    }
+
+    ul li {
+        background-color: #374151 !important; /* Match screen */
+        color: #FFFFFF !important; /* Match screen */
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 8pt 10pt !important;
+        margin-bottom: 5pt !important;
+    }
+
+    ul { /* Add to prevent breaking lists if possible */
+        page-break-inside: avoid !important;
+    }
+
+    table {
+        border-collapse: collapse !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        page-break-inside: avoid !important; /* Avoid breaking tables across pages */
+    }
+
+    thead {
+        background-color: #374151 !important; /* Match screen */
+        color: #FFFFFF !important; /* Match screen */
+    }
+    
+    th, td {
+        border: 1px solid #4b5563 !important; /* Ensure visibility in print */
+        padding: 6pt 8pt !important;
+        color: #D1D5DB !important; /* Match screen text color */
+    }
+    
+    thead th {
+        color: #FFFFFF !important; /* Ensure header text is white */
+    }
+
+    tbody tr {
+        background-color: #1F2937 !important; /* Match screen */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #273140 !important; /* Match screen */
+    }
+
+    p {
+        color: #D1D5DB !important; /* Match screen */
+    }
+
+    .responsive-image {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-inside: avoid !important; /* Avoid breaking images across pages */
+        /* Images might be better with a light border in print if on dark bg */
+        /* border: 1px solid #555 !important; */ 
+    }
+
+    /* Hide elements not essential for print */
+    section:hover { 
+        transform: none !important; 
+        box-shadow: none !important;
+    }
+}
+
+/* Styles for contact section list items */
+#contacto ul li p {
+    margin: 0.25rem 0; /* Add a little vertical spacing between lines within the contact li */
+    line-height: 1.4; /* Adjust line height if needed */
+}
+
+#contacto ul li p:first-child {
+    margin-top: 0;
+}
+
+#contacto ul li p:last-child {
+    margin-bottom: 0;
+}
+
+.contact-title {
+    font-weight: 600; /* Inter semi-bold */
+    color: #FFFFFF; /* Ensure it's white, can be adjusted */
+}
+
+.contact-info {
+    color: #D1D5DB; /* Consistent with other p tags */
+}
+
+#input-list,
+#camerinos {
+    margin-top: 0.5cm;
+} 
+
+a {
+  outline-color: transparent;
+}
+
+a:link {
+  color: #ffffff;
+}
+
+a:visited {
+  color: #a5c300;
+}
+
+a:focus {
+  text-decoration: none;
+  background: #bae498;
+}
+
+a:hover {
+  text-color: #6900ff;
+}
+
+a:active {
+  background: #6900ff;
+  color: #cdfeaa;
+}

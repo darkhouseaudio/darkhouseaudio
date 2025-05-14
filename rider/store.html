@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop Dark House Audio: Purchase BleedShift 2 for drum bleed control and separation. Lunar Baritone guitar library coming soon. Sign up for updates.">
+  <title>Shop BleedShift 2 & Audio Tools | Dark House Audio</title>
+  <!-- Favicon links -->
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon_16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/icon_64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon_128x128.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="icons/icon_256x256.png">
+  <link rel="icon" href="icons/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
+  <!-- Apple Touch Icon for iOS/macOS -->
+  <link rel="apple-touch-icon" href="icons/icon_128x128.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'skyblue': '#00bfff',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
+    .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x1080?text=Studio+Image'); }
+    
+    /* Ribbon styles */
+    .ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .ribbon-content {
+      position: absolute;
+      top: 30px;
+      right: -35px;
+      transform: rotate(45deg);
+      background: #ff3d00;
+      color: white;
+      font-weight: bold;
+      padding: 8px 50px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+  </style>
+  <script>
+    function validateEmail(formId) {
+      const form = document.getElementById(formId);
+      const emailInput = form.querySelector('input[type="email"]');
+      const email = emailInput.value.toLowerCase();
+      
+      if (email.endsWith('@dont-reply.me')) {
+        alert('Submissions from this email domain are not accepted.');
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Navigation -->
+  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
+      <!-- Logo area (now empty) -->
+      <div></div>
+      <!-- Links: Keep horizontal layout -->
+      <div class="flex space-x-4 mt-2 sm:mt-0">
+        <a href="index.html" class="hover:text-skyblue">Home</a>
+        <a href="store.html" class="text-skyblue">Store</a>
+        <a href="product-landing.html" class="text-purple-500 hover:text-purple-400">BleedShift 2</a>
+        <a href="contact.html" class="hover:text-skyblue">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-gray-800 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-5xl md:text-7xl font-bold mb-4">Our Products</h1>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="py-16 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Product 1 -->
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition relative">
+          <!-- Discount Ribbon -->
+          <div class="ribbon">
+            <div class="ribbon-content">50% OFF</div>
+          </div>
+          
+          <img src="screenshot.png" alt="BleedShift 2 drum bleed removal application screenshot" class="w-full">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-2">BleedShift 2</h3>
+            <p class="text-gray-300 mb-4">Standalone drum bleed removal application. Separates bleed from kick, snare, toms, and overheads into distinct audio stems.</p>
+            <div class="flex justify-between items-center">
+              <div>
+                <span class="text-lg line-through text-gray-400 mr-2">$99.99</span>
+                <span class="text-2xl font-bold text-skyblue">$49.99</span>
+              </div>
+              <a href="bleedshift2.html" class="inline-block bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">View Details</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+          <img src="solar_th.png" alt="Lunar Baritone sample library thumbnail - Coming Soon" class="w-full">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-2">Lunar Baritone (Coming Soon)</h3>
+            <p class="text-gray-300 mb-4">Heavy metal guitar sample library featuring a Solar 1.6D27 LTD baritone guitar with Evertune bridge.</p>
+            <div class="flex justify-end items-center">
+              <a href="#" class="inline-block bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition">Coming Soon</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: Free IR Pack -->
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+          <!-- Replace Placeholder with Image -->
+          <img src="freeirpack.png" alt="Free Heavy Guitar Cabinet IR Pack" class="w-full"> <!-- Removed object-cover and h-48 for natural scaling -->
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-2">Free IR Pack</h3>
+            <p class="text-gray-300 mb-4">Get our essential heavy guitar cabinet impulse response pack for free! Just enter your email below.</p>
+            <!-- Email Form for Download using FormSubmit.co -->
+            <form id="ir-form" action="https://formsubmit.co/d4e3de136000eb8a6f67a0e7c76a81a2" method="POST" onsubmit="return validateEmail('ir-form')">
+              <!-- FormSubmit.co configuration -->
+              <input type="hidden" name="_subject" value="IR Pack Download Request">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link">
+              <input type="hidden" name="_autoresponse" value="Thank you for your interest in Dark House Audio's IR Pack! Here's your download link: https://drive.google.com/file/d/1hBmOsnNQr48mSuExAgitUOde46Xs_O6m/view?usp=drive_link">
+
+              <div class="flex flex-col sm:flex-row items-stretch space-y-2 sm:space-y-0 sm:space-x-2">
+                  <input type="email" name="email" placeholder="Your email address" required class="flex-grow px-4 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-skyblue mb-2 sm:mb-0" />
+                  <button type="submit" class="bg-skyblue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Get Download Link</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-16 bg-gray-800">
+    <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+      <p class="text-gray-300 mb-6">Subscribe to get notified about new products and special offers.</p>
+      <form id="newsletter-form" action="https://formsubmit.co/d4e3de136000eb8a6f67a0e7c76a81a2" method="POST" onsubmit="return validateEmail('newsletter-form')">
+        <!-- FormSubmit.co configuration -->
+        <input type="hidden" name="_subject" value="Newsletter Subscription">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_autoresponse" value="Thank you for subscribing to Dark House Audio's newsletter! We'll keep you updated on new products and special offers.">
+        
+        <!-- Stack input and button vertically on small screens -->
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2">
+          <input type="email" name="email" placeholder="Your email address" required class="w-full sm:w-auto flex-grow px-4 py-2 text-gray-900 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-skyblue" />
+          <button type="submit" class="w-full sm:w-auto bg-skyblue text-white px-6 py-2 rounded-r-lg font-semibold hover:bg-blue-500 transition">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+      <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html> 
