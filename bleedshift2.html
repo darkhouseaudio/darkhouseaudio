@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="Dark House Audio">
-  <meta property="og:description" content="Professional mixing & mastering for modern metal. BleedShift 2 drum bleed control.">
+  <meta property="og:title" content="BleedShift 2 | Drum Bleed Control">
+  <meta property="og:description" content="Standalone drum bleed control for Windows & macOS. Separate kick, snare, toms and overheads into clean stems.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.darkhouseaudio.com/bleedshift2.html">
+  <meta property="og:image" content="https://www.darkhouseaudio.com/og-image.png">
+  <meta name="twitter:image" content="https://www.darkhouseaudio.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="BleedShift 2 by Dark House Audio: Advanced standalone drum bleed control application for Windows & macOS.">
   <title>BleedShift 2 | Dark House Audio</title>
@@ -27,8 +29,29 @@
     .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:100; align-items:center; justify-content:center; padding:1.5rem; }
     .modal.open { display:flex; }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BleedShift 2",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows, macOS",
+    "description": "Standalone drum bleed control application that separates kick, snare, toms and overheads into clean stems.",
+    "image": "https://www.darkhouseaudio.com/screenshot.png",
+    "offers": {
+      "@type": "Offer",
+      "price": "49.99",
+      "priceCurrency": "USD",
+      "url": "https://www.darkhouseaudio.com/bleedshift2.html"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Dark House Audio"
+    }
+  }
+  </script>
 </head>
-<body>
+<body data-sticky="buy">
   <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-brand"><img src="darkhouseaudiologo.png" alt="Dark House Audio">Dark House Audio</a>
@@ -36,9 +59,9 @@
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="store.html">Store</a>
-        <a href="product-landing.html">BleedShift 2</a>
+        <a href="bleedshift2.html">BleedShift 2</a>
         <a href="contact.html">Contact</a>
-        <a href="bleedshift2.html" class="nav-buy">Buy BleedShift 2</a>
+        <a href="contact.html" class="nav-buy">Get a Quote</a>
       </div>
     </div>
   </nav>
@@ -47,18 +70,19 @@
   <section class="section" style="padding-top:5.5rem;">
     <div class="container">
       <div class="grid grid-2" style="align-items:center;gap:3rem;">
-        <div style="position:relative;">
-          <div class="ribbon"><div class="ribbon-content">50% OFF</div></div>
-          <img src="screenshot.png" alt="BleedShift 2 Interface" style="border-radius:var(--radius);box-shadow:var(--shadow);">
+        <div class="shot" style="overflow:hidden;">
+          <div style="position:relative;padding-top:56.25%;">
+            <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/DDQL2WNmTo8" title="BleedShift 2 demo" allowfullscreen loading="lazy"></iframe>
+          </div>
         </div>
         <div>
-          <span class="badge badge-accent">BleedShift 2</span>
+          <span class="badge badge-accent">Standalone &middot; Windows &amp; macOS</span>
           <h1>BleedShift 2</h1>
           <p style="font-size:1.15rem;">Advanced drum bleed control application</p>
           <div style="margin:1.5rem 0;">
             <span style="text-decoration:line-through;color:var(--muted);font-size:1.4rem;margin-right:.75rem;">$99.99</span>
-            <span style="font-size:2.4rem;font-weight:700;color:var(--accent);">$49.99</span>
-            <p style="color:var(--success);margin-top:.5rem;">✓ Limited Time Introductory Offer</p>
+            <span class="price" style="font-size:2.6rem;">$49.99</span>
+            <p style="color:var(--success);margin-top:.5rem;">✓ Introductory price: 50% off</p>
           </div>
           <a href="#" onclick="openCheckoutModal();return false;" class="btn btn-primary btn-lg">Add to Cart</a>
           <div style="margin-top:2rem;">
@@ -87,10 +111,57 @@
         <p>BleedShift 2 solves one of the most common and frustrating problems in drum recording, allowing you to shape your drum mix with surgical precision without the artifacts and phase issues of traditional gates and filters. As a standalone application, it's easy to use and integrate into your workflow.</p>
       </div>
 
+      <img src="screenshot.png" alt="BleedShift 2 interface" class="shot" style="max-width:760px;margin:0 auto 3rem;">
+
       <div class="grid grid-3" style="margin-bottom:3rem;">
         <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 8v8M8 5v14M12 9v6M16 4v16M20 8v8"/></svg></div><h3>Smart Separation</h3><p>BleedShift 2 uses advanced algorithms to identify and separate drum elements with unprecedented clarity.</p></div>
         <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h3>GPU Acceleration</h3><p>Leverage your NVIDIA (CUDA on Windows) or Apple Silicon/AMD (MPS on macOS) graphics card for dramatically faster processing.</p></div>
         <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M5 4v16M12 4v16M19 4v16M3 9h4M10 14h4M17 8h4"/></svg></div><h3>Intuitive Control</h3><p>Streamlined interface for fast workflow.</p></div>
+      </div>
+
+      <!-- Audio Examples -->
+      <div class="text-center mb-4"><h2>Hear the Difference</h2><p>Listen to these before/after examples to experience the power of BleedShift 2 on real drum recordings.</p></div>
+      <div class="card" style="max-width:900px;margin:0 auto 2rem;">
+        <div class="tabs">
+          <button class="btn btn-ghost active" onclick="showTab('kick', this)">Kick</button>
+          <button class="btn btn-ghost" onclick="showTab('snare', this)">Snare</button>
+          <button class="btn btn-ghost" onclick="showTab('toms', this)">Toms</button>
+          <button class="btn btn-ghost" onclick="showTab('overheads', this)">Overheads</button>
+          <button class="btn btn-ghost" onclick="showTab('room', this)">Room</button>
+        </div>
+        <div id="kick-tab" class="tab-content">
+          <div class="grid grid-2">
+            <div><h3>Unprocessed</h3><div id="waveform-bs2-kick-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-kick-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original kick drum with bleed from other drums</p></div>
+            <div><h3>Processed</h3><div id="waveform-bs2-kick-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-kick-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Kick with reduced bleed from BleedShift 2</p></div>
+          </div>
+        </div>
+        <div id="snare-tab" class="tab-content hidden">
+          <div class="grid grid-2">
+            <div><h3>Unprocessed</h3><div id="waveform-bs2-snare-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-snare-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original snare with bleed from other drums</p></div>
+            <div><h3>Processed</h3><div id="waveform-bs2-snare-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-snare-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Snare with reduced bleed from BleedShift 2</p></div>
+          </div>
+        </div>
+        <div id="toms-tab" class="tab-content hidden">
+          <div class="grid grid-2">
+            <div><h3>Floor Tom</h3><p style="font-size:.85rem;margin-bottom:.25rem;">Unprocessed</p><div id="waveform-bs2-ft-unprocessed" class="waveform-container" style="height:60px;margin-bottom:.75rem;"><div id="icon-bs2-ft-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;margin-bottom:.25rem;">Processed</p><div id="waveform-bs2-ft-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-ft-processed" class="play-pause-icon"></div></div></div>
+            <div><h3>Rack Tom</h3><p style="font-size:.85rem;margin-bottom:.25rem;">Unprocessed</p><div id="waveform-bs2-rt-unprocessed" class="waveform-container" style="height:60px;margin-bottom:.75rem;"><div id="icon-bs2-rt-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;margin-bottom:.25rem;">Processed</p><div id="waveform-bs2-rt-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-rt-processed" class="play-pause-icon"></div></div></div>
+          </div>
+        </div>
+        <div id="overheads-tab" class="tab-content hidden">
+          <div style="margin-bottom:1.5rem;"><h3>Unprocessed Overheads</h3><div id="waveform-bs2-oh-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original overheads with all elements</p></div>
+          <h3>Processed Variations</h3>
+          <div class="grid grid-3">
+            <div><h4>No Cymbals</h4><div id="waveform-bs2-oh-nocymbals" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-nocymbals" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with cymbals removed</p></div>
+            <div><h4>No Kick</h4><div id="waveform-bs2-oh-nokick" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-nokick" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with kick removed</p></div>
+            <div><h4>Low Snare</h4><div id="waveform-bs2-oh-lowsnare" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-lowsnare" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with reduced snare</p></div>
+          </div>
+        </div>
+        <div id="room-tab" class="tab-content hidden">
+          <div class="grid grid-2">
+            <div><h3>Unprocessed Room</h3><div id="waveform-bs2-room-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-room-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original room recording</p></div>
+            <div><h3>Processed Room</h3><div id="waveform-bs2-room-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-room-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Room with reduced cymbals and boosted shells</p></div>
+          </div>
+        </div>
       </div>
 
       <!-- System requirements -->
@@ -146,54 +217,9 @@
         </div>
       </div>
 
-      <!-- Audio Examples -->
-      <div class="text-center mb-4"><h2>Hear the Difference</h2><p>Listen to these before/after examples to experience the power of BleedShift 2 on real drum recordings.</p></div>
-      <div class="card" style="max-width:900px;margin:0 auto;">
-        <div class="tabs">
-          <button class="btn btn-ghost active" onclick="showTab('kick', this)">Kick</button>
-          <button class="btn btn-ghost" onclick="showTab('snare', this)">Snare</button>
-          <button class="btn btn-ghost" onclick="showTab('toms', this)">Toms</button>
-          <button class="btn btn-ghost" onclick="showTab('overheads', this)">Overheads</button>
-          <button class="btn btn-ghost" onclick="showTab('room', this)">Room</button>
-        </div>
-        <div id="kick-tab" class="tab-content">
-          <div class="grid grid-2">
-            <div><h3>Unprocessed</h3><div id="waveform-bs2-kick-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-kick-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original kick drum with bleed from other drums</p></div>
-            <div><h3>Processed</h3><div id="waveform-bs2-kick-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-kick-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Kick with reduced bleed from BleedShift 2</p></div>
-          </div>
-        </div>
-        <div id="snare-tab" class="tab-content hidden">
-          <div class="grid grid-2">
-            <div><h3>Unprocessed</h3><div id="waveform-bs2-snare-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-snare-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original snare with bleed from other drums</p></div>
-            <div><h3>Processed</h3><div id="waveform-bs2-snare-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-snare-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Snare with reduced bleed from BleedShift 2</p></div>
-          </div>
-        </div>
-        <div id="toms-tab" class="tab-content hidden">
-          <div class="grid grid-2">
-            <div><h3>Floor Tom</h3><p style="font-size:.85rem;margin-bottom:.25rem;">Unprocessed</p><div id="waveform-bs2-ft-unprocessed" class="waveform-container" style="height:60px;margin-bottom:.75rem;"><div id="icon-bs2-ft-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;margin-bottom:.25rem;">Processed</p><div id="waveform-bs2-ft-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-ft-processed" class="play-pause-icon"></div></div></div>
-            <div><h3>Rack Tom</h3><p style="font-size:.85rem;margin-bottom:.25rem;">Unprocessed</p><div id="waveform-bs2-rt-unprocessed" class="waveform-container" style="height:60px;margin-bottom:.75rem;"><div id="icon-bs2-rt-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;margin-bottom:.25rem;">Processed</p><div id="waveform-bs2-rt-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-rt-processed" class="play-pause-icon"></div></div></div>
-          </div>
-        </div>
-        <div id="overheads-tab" class="tab-content hidden">
-          <div style="margin-bottom:1.5rem;"><h3>Unprocessed Overheads</h3><div id="waveform-bs2-oh-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original overheads with all elements</p></div>
-          <h3>Processed Variations</h3>
-          <div class="grid grid-3">
-            <div><h4>No Cymbals</h4><div id="waveform-bs2-oh-nocymbals" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-nocymbals" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with cymbals removed</p></div>
-            <div><h4>No Kick</h4><div id="waveform-bs2-oh-nokick" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-nokick" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with kick removed</p></div>
-            <div><h4>Low Snare</h4><div id="waveform-bs2-oh-lowsnare" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-lowsnare" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with reduced snare</p></div>
-          </div>
-        </div>
-        <div id="room-tab" class="tab-content hidden">
-          <div class="grid grid-2">
-            <div><h3>Unprocessed Room</h3><div id="waveform-bs2-room-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-room-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original room recording</p></div>
-            <div><h3>Processed Room</h3><div id="waveform-bs2-room-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-room-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Room with reduced cymbals and boosted shells</p></div>
-          </div>
-        </div>
-      </div>
-
       <div class="text-center mt-4">
         <h2>Ready to Transform Your Drum Recordings?</h2>
-        <p>Limited time 50% OFF introductory price!</p>
+        <p>Introductory price: 50% off.</p>
         <a href="#" onclick="openCheckoutModal();return false;" class="btn btn-primary btn-lg mt-2">Buy Now — $49.99</a>
       </div>
     </div>
@@ -238,7 +264,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div><a href="index.html" class="nav-brand" style="margin-bottom:1rem;"><img src="darkhouseaudiologo.png" alt="">Dark House Audio</a><p>Professional mixing &amp; mastering for modern metal.</p></div>
-      <div><h4>Navigate</h4><a href="index.html">Home</a><a href="store.html">Store</a><a href="product-landing.html">BleedShift 2</a><a href="contact.html">Contact</a></div>
+      <div><h4>Navigate</h4><a href="index.html">Home</a><a href="store.html">Store</a><a href="bleedshift2.html">BleedShift 2</a><a href="contact.html">Contact</a></div>
       <div><h4>Legal</h4><a href="tos.html">Terms of Service</a></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Dark House Audio. All rights reserved.</span><span>www.darkhouseaudio.com</span></div>

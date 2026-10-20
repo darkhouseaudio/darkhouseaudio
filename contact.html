@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="Dark House Audio">
+  <meta property="og:title" content="Request a Quote | Dark House Audio">
   <meta property="og:description" content="Professional mixing & mastering for modern metal. BleedShift 2 drum bleed control.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.darkhouseaudio.com/contact.html">
+  <meta property="og:image" content="https://www.darkhouseaudio.com/og-image.png">
+  <meta name="twitter:image" content="https://www.darkhouseaudio.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="description" content="Contact Dark House Audio for mixing, mastering, or BleedShift 2 support.">
-  <title>Contact | Dark House Audio</title>
+  <meta name="description" content="Request a mixing or mastering quote from Dark House Audio. Remote metal production, reply within 24-48 hours.">
+  <title>Request a Quote | Dark House Audio</title>
   <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
   <link rel="icon" href="icons/icon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="icons/icon_128x128.png">
@@ -24,9 +26,9 @@
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="store.html">Store</a>
-        <a href="product-landing.html">BleedShift 2</a>
+        <a href="bleedshift2.html">BleedShift 2</a>
         <a href="contact.html">Contact</a>
-        <a href="bleedshift2.html" class="nav-buy">Buy BleedShift 2</a>
+        <a href="contact.html" class="nav-buy">Get a Quote</a>
       </div>
     </div>
   </nav>
@@ -34,25 +36,59 @@
   <section class="section" style="padding-top:5.5rem;">
     <div class="container">
       <div class="text-center mb-4">
-        <span class="badge badge-accent">Contact</span>
-        <h1>Get in Touch</h1>
+        <span class="badge badge-accent">Quotes &amp; Contact</span>
+        <h1>Start a Project</h1>
         <p>We're a fully remote studio specializing in professional mixing and mastering for metal and rock. Reach out for a project quote, BleedShift 2 support, or general inquiries.</p>
       </div>
 
-      <div class="grid grid-2" style="gap:2.5rem;">
+      <div class="grid grid-2" style="gap:2.5rem;align-items:start;">
         <div class="card">
-          <h2>Send Us a Message</h2>
-          <form action="https://formspree.io/f/mblogkvo" method="POST" style="margin-top:1.5rem;">
-            <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
-            <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
-            <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
-            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          <h2>Request a Quote</h2>
+          <p>The more you tell me, the more useful my first reply will be.</p>
+          <form id="quote-form" action="https://formspree.io/f/mblogkvo" method="POST" style="margin-top:1.5rem;">
+            <input type="hidden" name="_subject" value="New quote request">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+            <div class="form-row">
+              <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required autocomplete="name"></div>
+              <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required autocomplete="email"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label for="service">Service</label>
+                <select id="service" name="service" required>
+                  <option value="" disabled selected>Choose one</option>
+                  <option>Mixing</option>
+                  <option>Mastering</option>
+                  <option>Mixing + Mastering</option>
+                  <option>BleedShift 2 support</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="form-group"><label for="tracks">Songs / tracks</label><input type="text" id="tracks" name="tracks" placeholder="e.g. 1 single, 5-song EP"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label for="genre">Genre / style</label><input type="text" id="genre" name="genre" placeholder="e.g. deathcore, prog metal"></div>
+              <div class="form-group"><label for="deadline">Deadline</label><input type="text" id="deadline" name="deadline" placeholder="e.g. release on Dec 5"></div>
+            </div>
+            <div class="form-group"><label for="reference">Reference song(s) or link to your music</label><input type="text" id="reference" name="reference" placeholder="Spotify, YouTube or Drive link"></div>
+            <div class="form-group"><label for="message">Tell me about the project</label><textarea id="message" name="message" required placeholder="Where are you in the process? What do you want it to sound like?"></textarea></div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Send Quote Request</button>
+            <p id="quote-status" role="status" style="margin:1rem 0 0;font-size:.9rem;"></p>
           </form>
         </div>
-        <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
-          <h2>Contact Details</h2>
-          <p style="margin-top:1rem;"><strong>Email:</strong> <a href="mailto:contact@darkhouseaudio.com">contact@darkhouseaudio.com</a></p>
-          <p>We operate 100% remotely, collaborating with artists and producers worldwide. Expect a response within 24-48 hours.</p>
+        <div>
+          <div class="card" style="margin-bottom:1.5rem;">
+            <h3>What happens next</h3>
+            <ol class="steps-list">
+              <li>I read your details and listen to your reference.</li>
+              <li>I reply within 24&ndash;48 hours with a quote and timeline.</li>
+              <li>You send your files and we get to work.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Prefer email?</h3>
+            <p><a href="mailto:contact@darkhouseaudio.com">contact@darkhouseaudio.com</a></p>
+            <p>100% remote studio, collaborating with artists and producers worldwide. See my <a href="https://muso.ai/profile/1f80bd05-f84e-4593-afe9-02731b46a87a" target="_blank" rel="noopener">credits on Muso</a>.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -61,11 +97,21 @@
   <footer class="footer">
     <div class="footer-inner">
       <div><a href="index.html" class="nav-brand" style="margin-bottom:1rem;"><img src="darkhouseaudiologo.png" alt="">Dark House Audio</a><p>Professional mixing &amp; mastering for modern metal.</p></div>
-      <div><h4>Navigate</h4><a href="index.html">Home</a><a href="store.html">Store</a><a href="product-landing.html">BleedShift 2</a><a href="contact.html">Contact</a></div>
+      <div><h4>Navigate</h4><a href="index.html">Home</a><a href="store.html">Store</a><a href="bleedshift2.html">BleedShift 2</a><a href="contact.html">Contact</a></div>
       <div><h4>Legal</h4><a href="tos.html">Terms of Service</a></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Dark House Audio. All rights reserved.</span><span>www.darkhouseaudio.com</span></div>
   </footer>
+  <script>
+    document.getElementById('quote-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = this, status = document.getElementById('quote-status'), btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; status.textContent = 'Sending...';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(r => { if (!r.ok) throw new Error(r.status); location.href = 'quote-thanks.html'; })
+        .catch(() => { btn.disabled = false; status.style.color = 'var(--danger)'; status.innerHTML = 'Something went wrong. Please try again or email <a href="mailto:contact@darkhouseaudio.com">contact@darkhouseaudio.com</a>.'; });
+    });
+  </script>
   <script src="js/main.js"></script>
 </body>
 </html>
