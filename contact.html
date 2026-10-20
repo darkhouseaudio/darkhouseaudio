@@ -1,141 +1,71 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact Dark House Audio for professional remote mixing, mastering services, or support for BleedShift 2. Get in touch for project quotes and inquiries.">
-  <title>Contact Dark House Audio | Mixing, Mastering & Support</title>
-  <!-- Favicon links -->
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon_16x16.png">
+  <meta property="og:title" content="Dark House Audio">
+  <meta property="og:description" content="Professional mixing & mastering for modern metal. BleedShift 2 drum bleed control.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.darkhouseaudio.com/contact.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="description" content="Contact Dark House Audio for mixing, mastering, or BleedShift 2 support.">
+  <title>Contact | Dark House Audio</title>
   <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="icons/icon_64x64.png">
-  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon_128x128.png">
-  <link rel="icon" type="image/png" sizes="256x256" href="icons/icon_256x256.png">
   <link rel="icon" href="icons/icon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
-  <!-- Apple Touch Icon for iOS/macOS -->
   <link rel="apple-touch-icon" href="icons/icon_128x128.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'skyblue': '#00bfff',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2 { font-family: 'Bebas Neue', sans-serif; }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-white">
-  <!-- Navigation -->
-  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <!-- Empty div for spacing -->
-      <div></div>
-      <div class="space-x-4">
-        <a href="index.html" class="hover:text-skyblue">Home</a>
-        <a href="store.html" class="hover:text-skyblue">Store</a>
-        <a href="product-landing.html" class="hover:text-skyblue">BleedShift 2</a>
-        <a href="contact.html" class="text-skyblue">Contact</a>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><img src="darkhouseaudiologo.png" alt="Dark House Audio">Dark House Audio</a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="store.html">Store</a>
+        <a href="product-landing.html">BleedShift 2</a>
+        <a href="contact.html">Contact</a>
+        <a href="bleedshift2.html" class="nav-buy">Buy BleedShift 2</a>
       </div>
     </div>
   </nav>
 
-  <!-- Contact Section -->
-  <section class="py-16 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-5xl font-bold text-center mb-6">Get in Touch</h1>
-      <p class="text-xl text-gray-300 text-center mb-12">We're a fully remote studio specializing in professional mixing and mastering for metal and rock. Reach out for a project quote, BleedShift 2 support, or general inquiries.</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <!-- Contact Form -->
-        <div>
-          <h2 class="text-3xl font-bold mb-6">Send Us a Message</h2>
-          <form action="https://formspree.io/f/mblogkvo" method="POST" class="space-y-6">
-            <div>
-              <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
-              <input type="text" id="name" name="name" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-skyblue">
-            </div>
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-              <input type="email" id="email" name="email" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-skyblue">
-            </div>
-            <div>
-              <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
-              <textarea id="message" name="message" rows="5" required class="w-full mt-1 p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-skyblue"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Send Message</button>
+  <section class="section" style="padding-top:5.5rem;">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge badge-accent">Contact</span>
+        <h1>Get in Touch</h1>
+        <p>We're a fully remote studio specializing in professional mixing and mastering for metal and rock. Reach out for a project quote, BleedShift 2 support, or general inquiries.</p>
+      </div>
+
+      <div class="grid grid-2" style="gap:2.5rem;">
+        <div class="card">
+          <h2>Send Us a Message</h2>
+          <form action="https://formspree.io/f/mblogkvo" method="POST" style="margin-top:1.5rem;">
+            <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
+            <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
+            <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
           </form>
         </div>
-
-        <!-- Contact Info -->
-        <div class="flex flex-col justify-center">
-          <h2 class="text-3xl font-bold mb-6">Contact Details</h2>
-          <div class="space-y-4">
-            <p class="text-gray-300">
-              <span class="font-semibold">Email:</span>
-              <a href="mailto:contact@darkhouseaudio.com" class="text-skyblue hover:text-blue-300">contact@darkhouseaudio.com</a>
-            </p>
-            <p class="text-gray-300">We operate 100% remotely, collaborating with artists and producers worldwide. Expect a response within 24-48 hours.</p>
-            <div class="flex space-x-4 mt-6">
-            </div>
-          </div>
+        <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
+          <h2>Contact Details</h2>
+          <p style="margin-top:1rem;"><strong>Email:</strong> <a href="mailto:contact@darkhouseaudio.com">contact@darkhouseaudio.com</a></p>
+          <p>We operate 100% remotely, collaborating with artists and producers worldwide. Expect a response within 24-48 hours.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-      <p>© 2025 Dark House Audio. All rights reserved.</p>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="index.html" class="nav-brand" style="margin-bottom:1rem;"><img src="darkhouseaudiologo.png" alt="">Dark House Audio</a><p>Professional mixing &amp; mastering for modern metal.</p></div>
+      <div><h4>Navigate</h4><a href="index.html">Home</a><a href="store.html">Store</a><a href="product-landing.html">BleedShift 2</a><a href="contact.html">Contact</a></div>
+      <div><h4>Legal</h4><a href="tos.html">Terms of Service</a></div>
     </div>
+    <div class="footer-bottom"><span>© 2026 Dark House Audio. All rights reserved.</span><span>www.darkhouseaudio.com</span></div>
   </footer>
+  <script src="js/main.js"></script>
 </body>
 </html>

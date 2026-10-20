@@ -1,325 +1,69 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="BleedShift 2 by Dark House Audio: Advanced standalone drum bleed control application for Windows & macOS. Reduce bleed, separate stems. Buy now!">
-  <title>BleedShift 2 | Drum Bleed Removal App - Dark House Audio</title>
-  <!-- Favicon links -->
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon_16x16.png">
+  <meta property="og:title" content="Dark House Audio">
+  <meta property="og:description" content="Professional mixing & mastering for modern metal. BleedShift 2 drum bleed control.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.darkhouseaudio.com/bleedshift2.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="description" content="BleedShift 2 by Dark House Audio: Advanced standalone drum bleed control application for Windows & macOS.">
+  <title>BleedShift 2 | Dark House Audio</title>
   <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="icons/icon_64x64.png">
-  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon_128x128.png">
-  <link rel="icon" type="image/png" sizes="256x256" href="icons/icon_256x256.png">
   <link rel="icon" href="icons/icon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
-  <!-- Apple Touch Icon for iOS/macOS -->
   <link rel="apple-touch-icon" href="icons/icon_128x128.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <!-- WaveSurfer.js CDN -->
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/wavesurfer.js@7"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'skyblue': '#00bfff',
-          }
-        }
-      }
-    }
-  </script>
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=Acpf2ow5pym9wfEbBBQLhU7LgfYjV8BMzw4nhuLobXtckSk37wgDMgFuD1kPbW-DlVFmsdNFs6W0yaMl&currency=USD&components=buttons&intent=capture&disable-funding=credit,card"></script>
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
-    (function(){
-      emailjs.init({
-        publicKey: "5m6l7y6xyjxFib6TJ"
-      });
-    })();
-  </script>
-  <script>
-    function openCheckoutModal() {
-      document.getElementById('checkout-modal').style.display = 'block';
-    }
-    
-    function closeModal() {
-      document.getElementById('checkout-modal').style.display = 'none';
-    }
-    
-    // Close modal if clicking outside content
-    window.onclick = function(event) {
-      const modal = document.getElementById('checkout-modal');
-      if (event.target == modal) {
-        closeModal();
-      }
-    }
-    
-    function validateCheckoutEmail(formId) {
-      const form = document.getElementById(formId);
-      const emailInput = form.querySelector('input[type="email"]');
-      const email = emailInput.value.toLowerCase();
-      
-      if (email.endsWith('@dont-reply.me')) {
-        alert('Submissions from this email domain are not accepted.');
-        return false;
-      }
-      return true;
-    }
-    
-    function collectCustomerInfo(event) {
-      event.preventDefault();
-      
-      if (!validateCheckoutEmail('checkout-form')) {
-        return false;
-      }
-      
-      // Get customer info
-      const email = document.getElementById('email').value;
-      const name = document.getElementById('name').value || 'Customer';
-      
-      // Hide customer info form, show payment
-      document.getElementById('customer-info-container').style.display = 'none';
-      document.getElementById('payment-container').style.display = 'block';
-      
-      // Generate an order ID and store it for later
-      const orderId = 'BS2-' + Date.now().toString(36).toUpperCase();
-      document.getElementById('order-id').value = orderId;
-      
-      // Save customer info for EmailJS
-      document.getElementById('customer-email').value = email;
-      document.getElementById('customer-name').value = name;
-      
-      // Render PayPal buttons
-      renderPayPalButtons();
-      
-      return false;
-    }
-    
-    function renderPayPalButtons() {
-      // Clear previous buttons if any
-      document.getElementById('paypal-button-container').innerHTML = '';
-      
-      paypal.Buttons({
-        // Configure the PayPal button
-        style: {
-          color: 'blue',
-          shape: 'rect',
-          label: 'pay',
-          height: 40
-        },
-        
-        createOrder: function(data, actions) {
-          // Set up the transaction details
-          return actions.order.create({
-            purchase_units: [{
-              description: 'BleedShift 2 - Drum Bleed Control Application',
-              amount: {
-                value: '49.99'
-              }
-            }]
-          });
-        },
-        
-        onApprove: function(data, actions) {
-          // Transaction was approved, capture the funds
-          return actions.order.capture().then(function(details) {
-            console.log('Payment successful', details);
-            
-            // Now that payment is confirmed, send the download links via EmailJS
-            sendDownloadEmail();
-          });
-        },
-        
-        onError: function(err) {
-          console.error('PayPal Error:', err);
-          alert('There was an error processing your payment. Please try again or contact support.');
-        }
-        
-      }).render('#paypal-button-container');
-    }
-    
-    function sendDownloadEmail() {
-      // Get the saved customer info 
-      const email = document.getElementById('customer-email').value;
-      const name = document.getElementById('customer-name').value;
-      const orderId = document.getElementById('order-id').value;
-      
-      // Show processing state
-      document.getElementById('payment-processing').style.display = 'block';
-      document.getElementById('paypal-button-container').style.display = 'none';
-      
-      // Prepare email template parameters
-      const templateParams = {
-        email: email,
-        name: name,
-        order_id: orderId,
-        orders: [
-          {
-            name: 'BleedShift 2',
-            price: '49.99',
-            units: '1',
-            image_url: 'https://www.darkhouseaudio.com/screenshot.png'
-          }
-        ],
-        cost: {
-          shipping: '0.00',
-          tax: '0.00',
-          total: '49.99'
-        },
-        purchase_date: new Date().toISOString().split('T')[0]
-      };
-      
-      // Send email using EmailJS
-      emailjs.send('service_461omtq', 'template_guhyqja', templateParams)
-        .then(function(response) {
-          console.log('Email successfully sent!', response);
-          
-          // Save customer information to localStorage if possible
-          try {
-            localStorage.setItem('dhAudioCustomerName', name);
-            localStorage.setItem('dhAudioCustomerEmail', email);
-          } catch (e) {
-            console.log('Could not save customer info to localStorage');
-          }
-          
-          // Redirect to thank you page
-          window.location.href = "thank-you.html";
-        }, function(error) {
-          console.error('Email send failed:', error);
-          alert('Payment successful, but there was an error sending your download links. Please contact support.');
-        });
-    }
+    (function(){ emailjs.init({ publicKey: "5m6l7y6xyjxFib6TJ" }); })();
   </script>
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2 { font-family: 'Bebas Neue', sans-serif; }
-    h3.audio-player-title { font-family: 'Inter', sans-serif; }
-    
-    /* Ribbon styles */
-    .ribbon {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 150px;
-      height: 150px;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .ribbon-content {
-      position: absolute;
-      top: 30px;
-      right: -35px;
-      transform: rotate(45deg);
-      background: #ff3d00;
-      color: white;
-      font-weight: bold;
-      padding: 8px 50px;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-    }
-    
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.7);
-    }
-    .modal-content {
-      position: relative;
-      margin: 10% auto;
-      max-width: 500px;
-      animation: modalOpen 0.3s;
-    }
-    @keyframes modalOpen {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* WaveSurfer Player Styles */
-    .waveform-container {
-      position: relative;
-      cursor: pointer;
-    }
-    .play-pause-icon {
-      position: absolute;
-      top: 50%;
-      left: 15px;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      background-color: rgba(0, 0, 0, 0.75);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
-    .play-pause-icon svg {
-        display: block;
-        width: 50px;
-        height: 50px;
-        fill: white;
-    }
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:100; align-items:center; justify-content:center; padding:1.5rem; }
+    .modal.open { display:flex; }
   </style>
 </head>
-<body class="bg-gray-900 text-white">
-  <!-- Navigation -->
-  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <!-- Empty div for spacing -->
-      <div></div>
-      <div class="space-x-4">
-        <a href="index.html" class="hover:text-skyblue">Home</a>
-        <a href="store.html" class="hover:text-skyblue">Store</a>
-        <a href="product-landing.html" class="hover:text-skyblue">BleedShift 2</a>
-        <a href="contact.html" class="hover:text-skyblue">Contact</a>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><img src="darkhouseaudiologo.png" alt="Dark House Audio">Dark House Audio</a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="store.html">Store</a>
+        <a href="product-landing.html">BleedShift 2</a>
+        <a href="contact.html">Contact</a>
+        <a href="bleedshift2.html" class="nav-buy">Buy BleedShift 2</a>
       </div>
     </div>
   </nav>
 
-  <!-- Product Hero Section -->
-  <section class="py-16 bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center">
-        <!-- Product Image with Ribbon -->
-        <div class="md:w-1/2 mb-8 md:mb-0 relative">
-          <div class="ribbon">
-            <div class="ribbon-content">50% OFF</div>
-          </div>
-          <img src="screenshot.png" alt="BleedShift 2 Interface" class="rounded-lg shadow-xl">
+  <!-- Product Hero -->
+  <section class="section" style="padding-top:5.5rem;">
+    <div class="container">
+      <div class="grid grid-2" style="align-items:center;gap:3rem;">
+        <div style="position:relative;">
+          <div class="ribbon"><div class="ribbon-content">50% OFF</div></div>
+          <img src="screenshot.png" alt="BleedShift 2 Interface" style="border-radius:var(--radius);box-shadow:var(--shadow);">
         </div>
-        
-        <!-- Product Info -->
-        <div class="md:w-1/2 md:pl-12">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4">BleedShift 2</h1>
-          <p class="text-xl text-gray-300 mb-6">Advanced drum bleed control application</p>
-          
-          <!-- Pricing -->
-          <div class="mb-8">
-            <div class="flex items-center mb-2">
-              <span class="text-2xl line-through text-gray-400 mr-4">$99.99</span>
-              <span class="text-4xl font-bold text-skyblue">$49.99</span>
-            </div>
-            <p class="text-green-400">✓ Limited Time Introductory Offer</p>
+        <div>
+          <span class="badge badge-accent">BleedShift 2</span>
+          <h1>BleedShift 2</h1>
+          <p style="font-size:1.15rem;">Advanced drum bleed control application</p>
+          <div style="margin:1.5rem 0;">
+            <span style="text-decoration:line-through;color:var(--muted);font-size:1.4rem;margin-right:.75rem;">$99.99</span>
+            <span style="font-size:2.4rem;font-weight:700;color:var(--accent);">$49.99</span>
+            <p style="color:var(--success);margin-top:.5rem;">✓ Limited Time Introductory Offer</p>
           </div>
-          
-          <!-- Buy Button -->
-          <a href="#" onclick="openCheckoutModal()" class="inline-block bg-skyblue text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition w-full md:w-auto text-center mb-4">ADD TO CART</a>
-          
-          <!-- Features List -->
-          <div class="mt-6">
-            <h3 class="text-xl font-semibold mb-3">Key Features:</h3>
-            <ul class="list-disc pl-5 text-gray-300 space-y-2">
+          <a href="#" onclick="openCheckoutModal();return false;" class="btn btn-primary btn-lg">Add to Cart</a>
+          <div style="margin-top:2rem;">
+            <h3>Key Features:</h3>
+            <ul style="list-style:disc;padding-left:1.5rem;color:var(--muted);">
               <li>Precision drum bleed control</li>
               <li>Advanced separation algorithm trained on real recordings</li>
               <li>Outputs Kick, Snare, Toms, and Overheads as stems for each microphone</li>
@@ -332,473 +76,298 @@
     </div>
   </section>
 
-  <!-- Product Details Section -->
-  <section class="py-16 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-12">Complete Control Over Your Drum Mics</h2>
-      
-      <!-- Product Description -->
-      <div class="mb-16 max-w-4xl mx-auto">
-        <p class="text-lg text-gray-300 mb-6">
-          BleedShift 2 gives engineers and producers unprecedented control over microphone bleed in multi-miked drum recordings. 
-          With our separation algorithm, you can now selectively reduce cymbal bleed in your tom mics, snare in your kick, 
-          or any other combination - all while maintaining the natural tone and character of your drums.
-        </p>
-        <p class="text-lg text-gray-300">
-          BleedShift 2 solves one of the most common and frustrating problems in drum recording, 
-          allowing you to shape your drum mix with surgical precision without the artifacts and phase issues of traditional gates and filters.
-          As a standalone application, it's easy to use and integrate into your workflow.
-        </p>
+  <!-- Details -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2>Complete Control Over Your Drum Mics</h2>
       </div>
-      
-      <!-- Features Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        <!-- Feature 1 -->
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="text-skyblue text-4xl mb-4">🔊</div>
-          <h3 class="text-2xl font-semibold mb-2">Smart Separation</h3>
-          <p class="text-gray-300">BleedShift 2 uses advanced algorithms to identify and separate drum elements with unprecedented clarity.</p>
-        </div>
-        
-        <!-- Feature 2 -->
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="text-skyblue text-4xl mb-4">⚡</div>
-          <h3 class="text-2xl font-semibold mb-2">GPU Acceleration</h3>
-          <p class="text-gray-300">Leverage your NVIDIA (CUDA on Windows) or Apple Silicon/AMD (MPS on macOS) graphics card for dramatically faster processing.</p>
-        </div>
-        
-        <!-- Feature 3 -->
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="text-skyblue text-4xl mb-4">🎛️</div>
-          <h3 class="text-2xl font-semibold mb-2">Intuitive Control</h3>
-          <p class="text-gray-300">Streamlined interface with for fast workflow.</p>
-        </div>
+      <div style="max-width:820px;margin:0 auto 3rem;">
+        <p>BleedShift 2 gives engineers and producers unprecedented control over microphone bleed in multi-miked drum recordings. With our separation algorithm, you can now selectively reduce cymbal bleed in your tom mics, snare in your kick, or any other combination — all while maintaining the natural tone and character of your drums.</p>
+        <p>BleedShift 2 solves one of the most common and frustrating problems in drum recording, allowing you to shape your drum mix with surgical precision without the artifacts and phase issues of traditional gates and filters. As a standalone application, it's easy to use and integrate into your workflow.</p>
       </div>
-      
-      <!-- System Requirements -->
-      <div class="bg-gray-800 p-8 rounded-lg max-w-5xl mx-auto">
-        <h3 class="text-2xl font-semibold mb-6 text-center">System Requirements</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          <!-- Windows Requirements -->
+
+      <div class="grid grid-3" style="margin-bottom:3rem;">
+        <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 8v8M8 5v14M12 9v6M16 4v16M20 8v8"/></svg></div><h3>Smart Separation</h3><p>BleedShift 2 uses advanced algorithms to identify and separate drum elements with unprecedented clarity.</p></div>
+        <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h3>GPU Acceleration</h3><p>Leverage your NVIDIA (CUDA on Windows) or Apple Silicon/AMD (MPS on macOS) graphics card for dramatically faster processing.</p></div>
+        <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M5 4v16M12 4v16M19 4v16M3 9h4M10 14h4M17 8h4"/></svg></div><h3>Intuitive Control</h3><p>Streamlined interface for fast workflow.</p></div>
+      </div>
+
+      <!-- System requirements -->
+      <div class="card" style="max-width:900px;margin:0 auto 2rem;">
+        <h2 style="text-align:center;margin-bottom:1.5rem;">System Requirements</h2>
+        <div class="grid grid-2">
           <div>
-            <h4 class="text-xl font-semibold mb-4 text-center text-skyblue">Windows</h4>
-            <div class="bg-gray-700 p-4 rounded-lg mb-6">
-                <h5 class="font-semibold mb-3 text-center">Minimum Requirements</h5>
-                <ul class="list-disc pl-5 text-gray-300 space-y-2">
-                    <li><span class="font-medium">OS:</span> Windows 10 or 11 (64-bit)</li>
-                    <li><span class="font-medium">RAM:</span> 8GB</li>
-                    <li><span class="font-medium">Storage:</span> 5.2GB free space for installation</li>
-                    <li><span class="font-medium">Processor:</span> CPU operation is available but slower</li>
-                </ul>
+            <h3 style="color:var(--accent);text-align:center;">Windows</h3>
+            <div style="background:var(--surface-2);padding:1rem;border-radius:var(--radius-sm);margin-bottom:1rem;">
+              <h4 style="font-family:var(--font-body);font-size:.9rem;">Minimum Requirements</h4>
+              <ul style="list-style:disc;padding-left:1.25rem;color:var(--muted);font-size:.9rem;">
+                <li>OS: Windows 10 or 11 (64-bit)</li>
+                <li>RAM: 8GB</li>
+                <li>Storage: 5.2GB free space</li>
+                <li>Processor: CPU operation available but slower</li>
+              </ul>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h5 class="font-semibold mb-3 text-center">Recommended for Best Performance</h5>
-                <ul class="list-disc pl-5 text-gray-300 space-y-2">
-                    <li><span class="font-medium">OS:</span> Windows 10 or 11 (64-bit)</li>
-                    <li><span class="font-medium">RAM:</span> 16GB</li>
-                    <li><span class="font-medium">Storage:</span> 5.2GB free space for installation</li>
-                    <li><span class="font-medium">Graphics:</span> NVIDIA GPU with CUDA support</li>
-                </ul>
+            <div style="background:var(--surface-2);padding:1rem;border-radius:var(--radius-sm);">
+              <h4 style="font-family:var(--font-body);font-size:.9rem;">Recommended</h4>
+              <ul style="list-style:disc;padding-left:1.25rem;color:var(--muted);font-size:.9rem;">
+                <li>OS: Windows 10 or 11 (64-bit)</li>
+                <li>RAM: 16GB</li>
+                <li>Storage: 5.2GB free space</li>
+                <li>Graphics: NVIDIA GPU with CUDA support</li>
+              </ul>
             </div>
           </div>
-          
-          <!-- macOS Requirements -->
           <div>
-            <h4 class="text-xl font-semibold mb-4 text-center text-skyblue">macOS</h4>
-            <div class="bg-gray-700 p-4 rounded-lg mb-6">
-                <h5 class="font-semibold mb-3 text-center">Minimum Requirements (CPU Only)</h5>
-                <ul class="list-disc pl-5 text-gray-300 space-y-2">
-                    <li><span class="font-medium">OS:</span> macOS 12.3 or later</li>
-                    <li><span class="font-medium">Processor:</span> Any Apple Silicon or Intel</li>
-                    <li><span class="font-medium">RAM:</span> 8GB</li>
-                    <li><span class="font-medium">Storage:</span> 750MB free space</li>
-                </ul>
+            <h3 style="color:var(--accent);text-align:center;">macOS</h3>
+            <div style="background:var(--surface-2);padding:1rem;border-radius:var(--radius-sm);margin-bottom:1rem;">
+              <h4 style="font-family:var(--font-body);font-size:.9rem;">Minimum Requirements (CPU Only)</h4>
+              <ul style="list-style:disc;padding-left:1.25rem;color:var(--muted);font-size:.9rem;">
+                <li>OS: macOS 12.3 or later</li>
+                <li>Processor: Any Apple Silicon or Intel</li>
+                <li>RAM: 8GB</li>
+                <li>Storage: 750MB free space</li>
+              </ul>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h5 class="font-semibold mb-3 text-center">Recommended for Best Performance (GPU)</h5>
-                <ul class="list-disc pl-5 text-gray-300 space-y-2">
-                    <li><span class="font-medium">OS:</span> macOS 14.3 or later</li>
-                    <li><span class="font-medium">Processor/GPU:</span> Apple Silicon (M2+) or Intel + AMD GPU</li>
-                    <li><span class="font-medium">RAM:</span> 16GB+</li>
-                    <li><span class="font-medium">Storage:</span> 750MB free space</li>
-                </ul>
+            <div style="background:var(--surface-2);padding:1rem;border-radius:var(--radius-sm);">
+              <h4 style="font-family:var(--font-body);font-size:.9rem;">Recommended (GPU)</h4>
+              <ul style="list-style:disc;padding-left:1.25rem;color:var(--muted);font-size:.9rem;">
+                <li>OS: macOS 14.3 or later</li>
+                <li>Processor/GPU: Apple Silicon (M2+) or Intel + AMD GPU</li>
+                <li>RAM: 16GB+</li>
+                <li>Storage: 750MB free space</li>
+              </ul>
             </div>
           </div>
         </div>
-        
-        <!-- Mac Version Now Available -->
-        <div class="mt-8 bg-green-800 p-6 rounded-lg border border-green-500 text-center">
-          <h4 class="font-semibold text-xl mb-2 text-white">Now Available for macOS!</h4>
-          <p class="text-green-200">BleedShift 2 is now fully compatible with macOS 12.3+ on both Apple Silicon and Intel Macs.</p> 
+        <div style="margin-top:1.5rem;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:1rem;border-radius:var(--radius-sm);text-align:center;">
+          <h4 style="color:var(--success);">Now Available for macOS!</h4>
+          <p style="margin:0;">BleedShift 2 is now fully compatible with macOS 12.3+ on both Apple Silicon and Intel Macs.</p>
         </div>
+      </div>
+
+      <!-- Audio Examples -->
+      <div class="text-center mb-4"><h2>Hear the Difference</h2><p>Listen to these before/after examples to experience the power of BleedShift 2 on real drum recordings.</p></div>
+      <div class="card" style="max-width:900px;margin:0 auto;">
+        <div class="tabs">
+          <button class="btn btn-ghost active" onclick="showTab('kick', this)">Kick</button>
+          <button class="btn btn-ghost" onclick="showTab('snare', this)">Snare</button>
+          <button class="btn btn-ghost" onclick="showTab('toms', this)">Toms</button>
+          <button class="btn btn-ghost" onclick="showTab('overheads', this)">Overheads</button>
+          <button class="btn btn-ghost" onclick="showTab('room', this)">Room</button>
+        </div>
+        <div id="kick-tab" class="tab-content">
+          <div class="grid grid-2">
+            <div><h3>Unprocessed</h3><div id="waveform-bs2-kick-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-kick-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original kick drum with bleed from other drums</p></div>
+            <div><h3>Processed</h3><div id="waveform-bs2-kick-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-kick-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Kick with reduced bleed from BleedShift 2</p></div>
+          </div>
+        </div>
+        <div id="snare-tab" class="tab-content hidden">
+          <div class="grid grid-2">
+            <div><h3>Unprocessed</h3><div id="waveform-bs2-snare-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-snare-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original snare with bleed from other drums</p></div>
+            <div><h3>Processed</h3><div id="waveform-bs2-snare-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-snare-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Snare with reduced bleed from BleedShift 2</p></div>
+          </div>
+        </div>
+        <div id="toms-tab" class="tab-content hidden">
+          <div class="grid grid-2">
+            <div><h3>Floor Tom</h3><p style="font-size:.85rem;margin-bottom:.25rem;">Unprocessed</p><div id="waveform-bs2-ft-unprocessed" class="waveform-container" style="height:60px;margin-bottom:.75rem;"><div id="icon-bs2-ft-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;margin-bottom:.25rem;">Processed</p><div id="waveform-bs2-ft-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-ft-processed" class="play-pause-icon"></div></div></div>
+            <div><h3>Rack Tom</h3><p style="font-size:.85rem;margin-bottom:.25rem;">Unprocessed</p><div id="waveform-bs2-rt-unprocessed" class="waveform-container" style="height:60px;margin-bottom:.75rem;"><div id="icon-bs2-rt-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;margin-bottom:.25rem;">Processed</p><div id="waveform-bs2-rt-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-rt-processed" class="play-pause-icon"></div></div></div>
+          </div>
+        </div>
+        <div id="overheads-tab" class="tab-content hidden">
+          <div style="margin-bottom:1.5rem;"><h3>Unprocessed Overheads</h3><div id="waveform-bs2-oh-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original overheads with all elements</p></div>
+          <h3>Processed Variations</h3>
+          <div class="grid grid-3">
+            <div><h4>No Cymbals</h4><div id="waveform-bs2-oh-nocymbals" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-nocymbals" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with cymbals removed</p></div>
+            <div><h4>No Kick</h4><div id="waveform-bs2-oh-nokick" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-nokick" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with kick removed</p></div>
+            <div><h4>Low Snare</h4><div id="waveform-bs2-oh-lowsnare" class="waveform-container" style="height:60px;"><div id="icon-bs2-oh-lowsnare" class="play-pause-icon"></div></div><p style="font-size:.8rem;">Overheads with reduced snare</p></div>
+          </div>
+        </div>
+        <div id="room-tab" class="tab-content hidden">
+          <div class="grid grid-2">
+            <div><h3>Unprocessed Room</h3><div id="waveform-bs2-room-unprocessed" class="waveform-container" style="height:60px;"><div id="icon-bs2-room-unprocessed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Original room recording</p></div>
+            <div><h3>Processed Room</h3><div id="waveform-bs2-room-processed" class="waveform-container" style="height:60px;"><div id="icon-bs2-room-processed" class="play-pause-icon"></div></div><p style="font-size:.85rem;">Room with reduced cymbals and boosted shells</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <h2>Ready to Transform Your Drum Recordings?</h2>
+        <p>Limited time 50% OFF introductory price!</p>
+        <a href="#" onclick="openCheckoutModal();return false;" class="btn btn-primary btn-lg mt-2">Buy Now — $49.99</a>
       </div>
     </div>
   </section>
 
-  <!-- Audio Examples Section -->
-  <section class="py-16 bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-center mb-8">Hear the Difference</h2>
-      
-      <div class="mb-12 text-center">
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">Listen to these before/after examples to experience the power of BleedShift 2 on real drum recordings.</p>
-      </div>
-      
-      <!-- Audio Player -->
-      <div class="max-w-4xl mx-auto bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
-        <!-- Tab Navigation -->
-        <div class="flex md:justify-center border-b border-gray-700 bg-gray-800 overflow-x-auto">
-          <button class="px-3 md:px-6 py-3 text-skyblue border-b-2 border-skyblue font-medium whitespace-nowrap" onclick="showTab('kick')">Kick</button>
-          <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('snare')">Snare</button>
-          <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('toms')">Toms</button>
-          <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('overheads')">Overheads</button>
-          <button class="px-3 md:px-6 py-3 text-gray-400 hover:text-skyblue font-medium whitespace-nowrap" onclick="showTab('room')">Room</button>
-        </div>
-        
-        <!-- Tab Content -->
-        <div class="p-6">
-          <!-- Kick Tab -->
-          <div id="kick-tab" class="tab-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Unprocessed -->
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-3">Unprocessed</h3>
-                <div id="waveform-bs2-kick-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
-                  <div id="icon-bs2-kick-unprocessed" class="play-pause-icon"></div>
-                </div>
-                <p class="text-sm text-gray-400">Original kick drum with bleed from other drums</p>
-              </div>
-              
-              <!-- Processed -->
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-3">Processed</h3>
-                <div id="waveform-bs2-kick-processed" class="mb-2 waveform-container" style="height: 60px;">
-                  <div id="icon-bs2-kick-processed" class="play-pause-icon"></div>
-                </div>
-                <p class="text-sm text-gray-400">Kick with reduced bleed from BleedShift 2</p>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Snare Tab (Hidden by default) -->
-          <div id="snare-tab" class="tab-content hidden">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Unprocessed -->
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-3">Unprocessed</h3>
-                <div id="waveform-bs2-snare-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
-                  <div id="icon-bs2-snare-unprocessed" class="play-pause-icon"></div>
-                </div>
-                <p class="text-sm text-gray-400">Original snare with bleed from other drums</p>
-              </div>
-              
-              <!-- Processed -->
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-3">Processed</h3>
-                <div id="waveform-bs2-snare-processed" class="mb-2 waveform-container" style="height: 60px;">
-                  <div id="icon-bs2-snare-processed" class="play-pause-icon"></div>
-                </div>
-                <p class="text-sm text-gray-400">Snare with reduced bleed from BleedShift 2</p>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Toms Tab (Hidden by default) -->
-          <div id="toms-tab" class="tab-content hidden">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Floor Tom -->
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-3">Floor Tom</h3>
-                <div class="mb-3">
-                  <p class="text-sm text-gray-400 mb-1">Unprocessed</p>
-                  <div id="waveform-bs2-ft-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
-                    <div id="icon-bs2-ft-unprocessed" class="play-pause-icon"></div>
-                  </div>
-                </div>
-                <div>
-                  <p class="text-sm text-gray-400 mb-1">Processed</p>
-                  <div id="waveform-bs2-ft-processed" class="mb-2 waveform-container" style="height: 60px;">
-                    <div id="icon-bs2-ft-processed" class="play-pause-icon"></div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Rack Tom -->
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-3">Rack Tom</h3>
-                <div class="mb-3">
-                  <p class="text-sm text-gray-400 mb-1">Unprocessed</p>
-                  <div id="waveform-bs2-rt-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
-                    <div id="icon-bs2-rt-unprocessed" class="play-pause-icon"></div>
-                  </div>
-                </div>
-                <div>
-                  <p class="text-sm text-gray-400 mb-1">Processed</p>
-                  <div id="waveform-bs2-rt-processed" class="mb-2 waveform-container" style="height: 60px;">
-                    <div id="icon-bs2-rt-processed" class="play-pause-icon"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Overheads Tab (Hidden by default) -->
-          <div id="overheads-tab" class="tab-content hidden">
-            <div class="mb-4">
-              <h3 class="text-xl font-semibold mb-3">Unprocessed Overheads</h3>
-              <div id="waveform-bs2-oh-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
-                <div id="icon-bs2-oh-unprocessed" class="play-pause-icon"></div>
-              </div>
-              <p class="text-sm text-gray-400">Original overheads with all elements</p>
-            </div>
-            
-            <h3 class="text-xl font-semibold mb-3">Processed Variations</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h4 class="font-medium mb-2">No Cymbals</h4>
-                <div id="waveform-bs2-oh-nocymbals" class="mb-2 waveform-container" style="height: 60px;">
-                  <div id="icon-bs2-oh-nocymbals" class="play-pause-icon"></div>
-                </div>
-                <p class="text-sm text-gray-400">Overheads with cymbals removed</p>
-              </div>
-              
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h4 class="font-medium mb-2">No Kick</h4>
-                <div id="waveform-bs2-oh-nokick" class="mb-2 waveform-container" style="height: 60px;">
-                  <div id="icon-bs2-oh-nokick" class="play-pause-icon"></div>
-                </div>
-                <p class="text-sm text-gray-400">Overheads with kick removed</p>
-              </div>
-              
-              <div class="bg-gray-800 p-4 rounded-lg">
-                <h4 class="font-medium mb-2">Low Snare</h4>
-                <div id="waveform-bs2-oh-lowsnare" class="mb-2 waveform-container" style="height: 60px;">
-                  <div id="icon-bs2-oh-lowsnare" class="play-pause-icon"></div>
-                </div>
-                <p class="text-sm text-gray-400">Overheads with reduced snare</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Room Tab (Hidden by default) -->
-          <div id="room-tab" class="tab-content hidden">
-            <div class="p-6">
-              <div class="grid grid-cols-1 gap-6">
-                <!-- Unprocessed -->
-                <div class="bg-gray-800 p-4 rounded-lg">
-                  <h3 class="text-xl font-semibold mb-3">Unprocessed Room</h3>
-                  <div id="waveform-bs2-room-unprocessed" class="mb-2 waveform-container" style="height: 60px;">
-                    <div id="icon-bs2-room-unprocessed" class="play-pause-icon"></div>
-                  </div>
-                  <p class="text-sm text-gray-400">Original room recording</p>
-                </div>
-                
-                <!-- Processed -->
-                <div class="bg-gray-800 p-4 rounded-lg">
-                  <h3 class="text-xl font-semibold mb-3">Processed Room</h3>
-                  <div id="waveform-bs2-room-processed" class="mb-2 waveform-container" style="height: 60px;">
-                    <div id="icon-bs2-room-processed" class="play-pause-icon"></div>
-                  </div>
-                  <p class="text-sm text-gray-400">Room with reduced cymbals and boosted shells</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Buy Now CTA -->
-      <div class="text-center mt-12">
-        <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Drum Recordings?</h2>
-        <p class="text-xl text-gray-300 mb-6">Limited time 50% OFF introductory price!</p>
-        <a href="#" onclick="openCheckoutModal()" class="inline-block bg-skyblue text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">BUY NOW - $49.99</a>
-      </div>
-    </div>
-  </section>
-  
   <!-- Checkout Modal -->
   <div id="checkout-modal" class="modal">
-    <div class="modal-content bg-gray-800 p-6 rounded-lg">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-semibold">Complete Your Purchase</h3>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+    <div class="modal-content">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h3>Complete Your Purchase</h3>
+        <button onclick="closeModal()" style="background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;">&times;</button>
       </div>
-      
-      <div class="mb-6">
-        <h4 class="text-lg font-semibold mb-2">BleedShift 2</h4>
-        <div class="flex justify-between items-center">
-          <span>Price:</span>
-          <span class="text-skyblue font-semibold">$49.99</span>
-        </div>
+      <div style="margin-bottom:1.5rem;padding:1rem;background:var(--surface-2);border-radius:var(--radius-sm);">
+        <h4>BleedShift 2</h4>
+        <div style="display:flex;justify-content:space-between;"><span>Price:</span><span style="color:var(--accent);font-weight:600;">$49.99</span></div>
       </div>
-      
-      <!-- Customer Info Container -->
       <div id="customer-info-container">
         <form id="checkout-form" onsubmit="return collectCustomerInfo(event)">
-          <div class="mb-4">
-            <label for="name" class="block mb-2">Full Name</label>
-            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
-          </div>
-          
-          <div class="mb-4">
-            <label for="email" class="block mb-2">Email Address</label>
-            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-skyblue">
-          </div>
-          
-          <button type="submit" class="w-full bg-skyblue text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Continue to Payment</button>
+          <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" required></div>
+          <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required></div>
+          <button type="submit" class="btn btn-primary btn-block">Continue to Payment</button>
         </form>
       </div>
-      
-      <!-- Payment Container (Hidden initially) -->
-      <div id="payment-container" style="display: none;">
-        <!-- Hidden fields to store customer info -->
+      <div id="payment-container" style="display:none;">
         <input type="hidden" id="customer-email">
         <input type="hidden" id="customer-name">
         <input type="hidden" id="order-id">
-        
-        <p class="mb-4 text-center">Please complete payment to receive your download links.</p>
-        
-        <!-- PayPal Button Container -->
-        <div id="paypal-button-container" class="mb-4"></div>
-        
-        <!-- Processing indicator (hidden initially) -->
-        <div id="payment-processing" class="text-center py-4" style="display: none;">
-          <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-skyblue mb-2"></div>
+        <p style="text-align:center;margin-bottom:1rem;">Please complete payment to receive your download links.</p>
+        <div id="paypal-button-container" style="margin-bottom:1rem;"></div>
+        <div id="payment-processing" style="display:none;text-align:center;padding:1rem;">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;"></div>
           <p>Processing your payment and preparing your download links...</p>
         </div>
-        
-        <p class="text-xs text-gray-500 mb-4 text-center">
-          By completing this purchase, you agree to our terms of service.
-        </p>
+        <p style="font-size:.75rem;color:var(--muted);text-align:center;">By completing this purchase, you agree to our terms of service.</p>
+        <div style="display:flex;justify-content:center;gap:1rem;margin-top:1rem;flex-wrap:wrap;opacity:.7;font-size:.75rem;color:var(--muted);">
+          <span>🔒 SSL Secured</span><span>💳 PayPal Protected</span><span>⚡ Instant Download</span><span>🖥️ Mac + Windows</span>
+        </div>
       </div>
     </div>
   </div>
-  
-  <!-- JavaScript for Tab Switching -->
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="index.html" class="nav-brand" style="margin-bottom:1rem;"><img src="darkhouseaudiologo.png" alt="">Dark House Audio</a><p>Professional mixing &amp; mastering for modern metal.</p></div>
+      <div><h4>Navigate</h4><a href="index.html">Home</a><a href="store.html">Store</a><a href="product-landing.html">BleedShift 2</a><a href="contact.html">Contact</a></div>
+      <div><h4>Legal</h4><a href="tos.html">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Dark House Audio. All rights reserved.</span><span>www.darkhouseaudio.com</span></div>
+  </footer>
+
+  <style>@keyframes spin{to{transform:rotate(360deg);}}</style>
+
+  <!-- Scripts -->
+  <script>
+    function openCheckoutModal() { document.getElementById('checkout-modal').classList.add('open'); }
+    function closeModal() { document.getElementById('checkout-modal').classList.remove('open'); }
+    window.onclick = function(event) { const modal = document.getElementById('checkout-modal'); if (event.target == modal) closeModal(); }
+    function validateCheckoutEmail(formId) {
+      const form = document.getElementById(formId);
+      const emailInput = form.querySelector('input[type="email"]');
+      const email = emailInput.value.toLowerCase();
+      if (email.endsWith('@dont-reply.me')) { alert('Submissions from this email domain are not accepted.'); return false; }
+      return true;
+    }
+    function collectCustomerInfo(event) {
+      event.preventDefault();
+      if (!validateCheckoutEmail('checkout-form')) return false;
+      const email = document.getElementById('email').value;
+      const name = document.getElementById('name').value || 'Customer';
+      document.getElementById('customer-info-container').style.display = 'none';
+      document.getElementById('payment-container').style.display = 'block';
+      const orderId = 'BS2-' + Date.now().toString(36).toUpperCase();
+      document.getElementById('order-id').value = orderId;
+      document.getElementById('customer-email').value = email;
+      document.getElementById('customer-name').value = name;
+      renderPayPalButtons();
+      return false;
+    }
+    function renderPayPalButtons() {
+      document.getElementById('paypal-button-container').innerHTML = '';
+      paypal.Buttons({
+        style: { color: 'blue', shape: 'rect', label: 'pay', height: 40 },
+        createOrder: function(data, actions) {
+          return actions.order.create({ purchase_units: [{ description: 'BleedShift 2 - Drum Bleed Control Application', amount: { value: '49.99' } }] });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) { console.log('Payment successful', details); sendDownloadEmail(); });
+        },
+        onError: function(err) { console.error('PayPal Error:', err); alert('There was an error processing your payment. Please try again or contact support.'); }
+      }).render('#paypal-button-container');
+    }
+    function sendDownloadEmail() {
+      const email = document.getElementById('customer-email').value;
+      const name = document.getElementById('customer-name').value;
+      const orderId = document.getElementById('order-id').value;
+      document.getElementById('payment-processing').style.display = 'block';
+      document.getElementById('paypal-button-container').style.display = 'none';
+      const templateParams = {
+        email: email, name: name, order_id: orderId,
+        orders: [{ name: 'BleedShift 2', price: '49.99', units: '1', image_url: 'https://www.darkhouseaudio.com/screenshot.png' }],
+        cost: { shipping: '0.00', tax: '0.00', total: '49.99' },
+        windows_link: 'https://drive.google.com/file/d/1bLQNA3yyczL1XRXyPI-cDuuJEWwAKRuL/view?usp=drive_link',
+        macos_link: 'https://drive.google.com/file/d/1a8p2bEJ3ReSo_rPli8ngyI8A9LpWhmw1/view?usp=drive_link',
+        purchase_date: new Date().toISOString().split('T')[0]
+      };
+      emailjs.send('service_461omtq', 'template_guhyqja', templateParams)
+        .then(function(response) {
+          console.log('Email successfully sent!', response);
+          try { localStorage.setItem('dhAudioCustomerName', name); localStorage.setItem('dhAudioCustomerEmail', email); } catch (e) {}
+          window.location.href = "thank-you.html";
+        }, function(error) {
+          console.error('Email send failed:', error);
+          alert('Payment successful, but there was an error sending your download links. Please contact support.');
+        });
+    }
+  </script>
   <script>
     function showTab(tabName) {
-      // Hide all tab contents
-      document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.add('hidden');
-      });
-      
-      // Show the selected tab
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
       document.getElementById(tabName + '-tab').classList.remove('hidden');
-      
-      // Update active tab button
-      document.querySelectorAll('button').forEach(button => {
-        button.classList.remove('text-skyblue', 'border-b-2', 'border-skyblue');
-        button.classList.add('text-gray-400');
-      });
-      
-      // Set active tab button
-      event.target.classList.remove('text-gray-400');
-      event.target.classList.add('text-skyblue', 'border-b-2', 'border-skyblue');
     }
-
-    // WaveSurfer Initialization Script
+  </script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
       const playIconSVG = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
       const pauseIconSVG = '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
       const errorIconSVG = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
-      let allWaveSurfers = []; // Array to keep track of all players
-
-      function setupWaveSurferPlayer(waveformContainerId, iconContainerId, audioUrl) {
+      let allWaveSurfers = [];
+      function createPlayer(waveformContainerId, iconContainerId, audioUrl) {
         try {
           const waveformContainer = document.getElementById(waveformContainerId);
           const iconContainer = document.getElementById(iconContainerId);
-
-          if (!waveformContainer || !iconContainer) {
-            console.error(`Elements not found for player: ${waveformContainerId} in bleedshift2.html`);
-            return;
-          }
-
-          const wavesurfer = WaveSurfer.create({
-            container: waveformContainer,
-            waveColor: '#A0AEC0',
-            progressColor: '#00bfff',
-            url: audioUrl,
-            barWidth: 2,
-            barGap: 1,
-            height: 60,
-            responsive: true
-          });
-          console.log(`WaveSurfer instance created for ${waveformContainerId} in bleedshift2.html`);
-
-          // Add the new player to our list
+          if (!waveformContainer || !iconContainer) return;
+          const wavesurfer = WaveSurfer.create({ container: waveformContainer, waveColor: '#5f5794', progressColor: '#b5a6ff', url: audioUrl, barWidth: 2, barGap: 1, height: 60, responsive: true });
           allWaveSurfers.push({ instance: wavesurfer, icon: iconContainer, id: waveformContainerId });
-
-          iconContainer.addEventListener('click', () => {
-            wavesurfer.playPause();
-          });
-
-          wavesurfer.on('ready', () => {
-            console.log(`WaveSurfer ${waveformContainerId} is ready!`);
-            iconContainer.innerHTML = playIconSVG;
-          });
-
-          wavesurfer.on('play', () => {
-            console.log(`WaveSurfer ${waveformContainerId} is playing.`);
-            iconContainer.innerHTML = pauseIconSVG;
-
-            // Pause all other instances
-            allWaveSurfers.forEach(player => {
-              if (player.instance !== wavesurfer && player.instance.isPlaying()) {
-                player.instance.pause();
-                // The 'pause' event on player.instance will handle its icon update
-              }
-            });
-          });
-
-          wavesurfer.on('pause', () => {
-            console.log(`WaveSurfer ${waveformContainerId} is paused.`);
-            iconContainer.innerHTML = playIconSVG;
-          });
-
-          wavesurfer.on('finish', () => {
-            console.log(`WaveSurfer ${waveformContainerId} finished.`);
-            iconContainer.innerHTML = playIconSVG;
-            wavesurfer.seekTo(0);
-          });
-
-          wavesurfer.on('error', (err) => {
-            console.error(`WaveSurfer ${waveformContainerId} error:`, err);
-            iconContainer.innerHTML = errorIconSVG;
-          });
-
-        } catch (e) {
-          console.error(`Failed to initialize WaveSurfer for ${waveformContainerId}:`, e);
-          const iconContainer = document.getElementById(iconContainerId);
-          if (iconContainer) {
-            iconContainer.innerHTML = errorIconSVG;
-          }
-        }
+          iconContainer.addEventListener('click', () => wavesurfer.playPause());
+          wavesurfer.on('ready', () => { iconContainer.innerHTML = playIconSVG; });
+          wavesurfer.on('play', () => { iconContainer.innerHTML = pauseIconSVG; allWaveSurfers.forEach(p => { if (p.instance !== wavesurfer && p.instance.isPlaying()) p.instance.pause(); }); });
+          wavesurfer.on('pause', () => { iconContainer.innerHTML = playIconSVG; });
+          wavesurfer.on('finish', () => { iconContainer.innerHTML = playIconSVG; wavesurfer.seekTo(0); });
+          wavesurfer.on('error', () => { iconContainer.innerHTML = errorIconSVG; });
+        } catch (e) { console.error(e); }
       }
-
-      // Initialize all players for bleedshift2.html
-      setupWaveSurferPlayer('waveform-bs2-kick-unprocessed', 'icon-bs2-kick-unprocessed', 'audio/kick_unprocessed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-kick-processed', 'icon-bs2-kick-processed', 'audio/kick_processed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-snare-unprocessed', 'icon-bs2-snare-unprocessed', 'audio/snare_unprocessed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-snare-processed', 'icon-bs2-snare-processed', 'audio/snare_processed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-ft-unprocessed', 'icon-bs2-ft-unprocessed', 'audio/ft_unprocessed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-ft-processed', 'icon-bs2-ft-processed', 'audio/ft_processed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-rt-unprocessed', 'icon-bs2-rt-unprocessed', 'audio/rt_unprocessed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-rt-processed', 'icon-bs2-rt-processed', 'audio/rt_processed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-oh-unprocessed', 'icon-bs2-oh-unprocessed', 'audio/oh_unprocessed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-oh-nocymbals', 'icon-bs2-oh-nocymbals', 'audio/oh_processed_nocymbals.mp3');
-      setupWaveSurferPlayer('waveform-bs2-oh-nokick', 'icon-bs2-oh-nokick', 'audio/oh_processed_nokick.mp3');
-      setupWaveSurferPlayer('waveform-bs2-oh-lowsnare', 'icon-bs2-oh-lowsnare', 'audio/oh_processed_lowsnare.mp3');
-      setupWaveSurferPlayer('waveform-bs2-room-unprocessed', 'icon-bs2-room-unprocessed', 'audio/rm_unprocessed.mp3');
-      setupWaveSurferPlayer('waveform-bs2-room-processed', 'icon-bs2-room-processed', 'audio/rm_processed.mp3');
+      const pending = {};
+      function setupWaveSurferPlayer(w, i, u) {
+        const tab = document.getElementById(w) && document.getElementById(w).closest('.tab-content');
+        if (tab && tab.classList.contains('hidden')) (pending[tab.id] = pending[tab.id] || []).push([w, i, u]);
+        else createPlayer(w, i, u);
+      }
+      window.showTab = function (name, btn) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+        document.querySelectorAll('.tabs .btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        const tab = document.getElementById(name + '-tab');
+        tab.classList.remove('hidden');
+        (pending[tab.id] || []).forEach(a => createPlayer(...a));
+        delete pending[tab.id];
+      };
+      setupWaveSurferPlayer('waveform-bs2-kick-unprocessed','icon-bs2-kick-unprocessed','audio/kick_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-kick-processed','icon-bs2-kick-processed','audio/kick_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-snare-unprocessed','icon-bs2-snare-unprocessed','audio/snare_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-snare-processed','icon-bs2-snare-processed','audio/snare_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-ft-unprocessed','icon-bs2-ft-unprocessed','audio/ft_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-ft-processed','icon-bs2-ft-processed','audio/ft_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-rt-unprocessed','icon-bs2-rt-unprocessed','audio/rt_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-rt-processed','icon-bs2-rt-processed','audio/rt_processed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-unprocessed','icon-bs2-oh-unprocessed','audio/oh_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-nocymbals','icon-bs2-oh-nocymbals','audio/oh_processed_nocymbals.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-nokick','icon-bs2-oh-nokick','audio/oh_processed_nokick.mp3');
+      setupWaveSurferPlayer('waveform-bs2-oh-lowsnare','icon-bs2-oh-lowsnare','audio/oh_processed_lowsnare.mp3');
+      setupWaveSurferPlayer('waveform-bs2-room-unprocessed','icon-bs2-room-unprocessed','audio/rm_unprocessed.mp3');
+      setupWaveSurferPlayer('waveform-bs2-room-processed','icon-bs2-room-processed','audio/rm_processed.mp3');
     });
   </script>
-
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-      <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
-    </div>
-  </footer>
+  <script src="js/main.js"></script>
 </body>
-</html> 
+</html>

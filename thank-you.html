@@ -3,95 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Thank you for your purchase from Dark House Audio">
+  <meta property="og:title" content="Dark House Audio">
+  <meta property="og:description" content="Professional mixing & mastering for modern metal. BleedShift 2 drum bleed control.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.darkhouseaudio.com/thank-you.html">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Thank You | Dark House Audio</title>
-  <!-- Favicon links -->
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon_16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="icons/icon_64x64.png">
-  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon_128x128.png">
-  <link rel="icon" type="image/png" sizes="256x256" href="icons/icon_256x256.png">
   <link rel="icon" href="icons/icon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
-  <!-- Apple Touch Icon for iOS/macOS -->
   <link rel="apple-touch-icon" href="icons/icon_128x128.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'skyblue': '#00bfff',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-white">
-  <!-- Navigation -->
-  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
-      <!-- Logo area (now empty) -->
-      <div></div>
-      <!-- Links: Keep horizontal layout -->
-      <div class="flex space-x-4 mt-2 sm:mt-0">
-        <a href="index.html" class="hover:text-skyblue">Home</a>
-        <a href="store.html" class="hover:text-skyblue">Store</a>
-        <a href="product-landing.html" class="text-purple-500 hover:text-purple-400">BleedShift 2</a>
-        <a href="contact.html" class="hover:text-skyblue">Contact</a>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><img src="darkhouseaudiologo.png" alt="Dark House Audio">Dark House Audio</a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="store.html">Store</a>
+        <a href="product-landing.html">BleedShift 2</a>
+        <a href="contact.html">Contact</a>
+        <a href="bleedshift2.html" class="nav-buy">Buy BleedShift 2</a>
       </div>
     </div>
   </nav>
 
-  <!-- Thank You Section -->
-  <section class="py-20 bg-gray-800">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="bg-gray-900 p-8 rounded-lg shadow-xl">
-        <div class="inline-block p-4 rounded-full bg-green-100 text-green-500 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
+  <section class="section" style="padding-top:5.5rem;">
+    <div class="container">
+      <div class="card" style="max-width:720px;margin:0 auto;text-align:center;">
+        <div style="width:72px;height:72px;border-radius:50%;background:rgba(34,197,94,0.15);color:var(--success);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;">✓</div>
+        <h1>Thank You for Your Purchase!</h1>
+        <p>Your order details have been received and your download links have been emailed to your address.</p>
+        <div class="card" style="text-align:left;margin-top:2rem;">
+          <h3>What Happens Next?</h3>
+          <p>1. <strong>Check your email inbox</strong> for a message containing your BleedShift 2 download links for both Windows and macOS.</p>
+          <p>2. If the email isn't in your inbox, please check your <strong>spam/junk folder</strong>.</p>
+          <p>3. Your purchase includes <strong>both the Windows and macOS versions</strong> of BleedShift 2.</p>
+          <p>4. If you still can't find your download links, please <a href="contact.html">contact us</a>.</p>
         </div>
-        
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Thank You for Your Purchase!</h1>
-        <p class="text-xl text-gray-300 mb-6">
-          Your order details have been received and your download links have been emailed to your address.
-        </p>
-        
-        <div class="mb-8 bg-gray-800 p-6 rounded-lg text-left">
-          <h2 class="text-2xl font-semibold mb-4 text-center">What Happens Next?</h2>
-          <p class="mb-4">
-            1. <strong>Check your email inbox</strong> for a message containing your BleedShift 2 download links for both Windows and macOS.
-          </p>
-          <p class="mb-4">
-            2. If the email isn't in your inbox, please check your <strong>spam/junk folder</strong>.
-          </p>
-          <p class="mb-4">
-            3. For your convenience, your purchase includes <strong>both the Windows and macOS versions</strong> of BleedShift 2.
-          </p>
-          <p>
-            4. If you still can't find your download links, please <a href="contact.html" class="text-skyblue hover:underline">contact us</a> through our contact form.
-          </p>
-        </div>
-        
-        <a href="index.html" class="inline-block bg-skyblue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
-          Return to Homepage
-        </a>
+        <a href="index.html" class="btn btn-primary mt-3">Return to Homepage</a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-8 mt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-      <p>&copy; 2025 Dark House Audio. All rights reserved.</p>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="index.html" class="nav-brand" style="margin-bottom:1rem;"><img src="darkhouseaudiologo.png" alt="">Dark House Audio</a></div>
+      <div><h4>Navigate</h4><a href="index.html">Home</a><a href="store.html">Store</a><a href="product-landing.html">BleedShift 2</a><a href="contact.html">Contact</a></div>
+      <div><h4>Legal</h4><a href="tos.html">Terms of Service</a></div>
     </div>
+    <div class="footer-bottom"><span>© 2026 Dark House Audio. All rights reserved.</span><span>www.darkhouseaudio.com</span></div>
   </footer>
+  <script src="js/main.js"></script>
 </body>
-</html> 
+</html>

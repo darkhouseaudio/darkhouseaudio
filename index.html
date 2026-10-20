@@ -1,356 +1,201 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dark House Audio: Expert mixing & mastering for metal bands by Erik Monsonis. Discover our innovative BleedShift 2 drum bleed control application.">
-  <title>Dark House Audio | Mixing, Mastering & BleedShift 2 Plugin</title>
-  <!-- Favicon links -->
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon_16x16.png">
+  <meta property="og:title" content="Dark House Audio">
+  <meta property="og:description" content="Professional mixing & mastering for modern metal. BleedShift 2 drum bleed control.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.darkhouseaudio.com/index.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="description" content="Dark House Audio: Expert mixing & mastering for metal bands by Erik Monsonis. Discover BleedShift 2 drum bleed control.">
+  <title>Dark House Audio | Mixing, Mastering & BleedShift 2</title>
   <link rel="icon" type="image/png" sizes="32x32" href="icons/icon_32x32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="icons/icon_64x64.png">
-  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon_128x128.png">
-  <link rel="icon" type="image/png" sizes="256x256" href="icons/icon_256x256.png">
   <link rel="icon" href="icons/icon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
-  <!-- Apple Touch Icon for iOS/macOS -->
   <link rel="apple-touch-icon" href="icons/icon_128x128.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'skyblue': '#00bfff',
-          }
-        }
-      },
-      plugins: [
-        // require('tailwind-scrollbar-hide') // Remove this line if using CDN without build step
-      ]
-    }
-  </script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
-    .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x1080?text=Studio+Image'); }
-
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .scrollbar-hide {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
-
-    /* Add smooth scrolling behavior to the container */
-    #video-scroll-container {
-      scroll-behavior: smooth;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-white">
-  <!-- Navigation -->
-  <nav class="sticky top-0 bg-gray-800 shadow-lg z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
-      <!-- Logo area (now empty) -->
-      <div></div>
-      <!-- Links: Keep horizontal layout -->
-      <div class="flex space-x-4 mt-2 sm:mt-0">
-        <a href="index.html" class="text-skyblue">Home</a>
-        <a href="store.html" class="hover:text-skyblue">Store</a>
-        <a href="product-landing.html" class="hover:text-purple-400">BleedShift 2</a>
-        <a href="contact.html" class="hover:text-skyblue">Contact</a>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><img src="darkhouseaudiologo.png" alt="">Dark House Audio</a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="store.html">Store</a>
+        <a href="product-landing.html">BleedShift 2</a>
+        <a href="contact.html">Contact</a>
+        <a href="bleedshift2.html" class="nav-buy">Buy BleedShift 2</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-bg bg-cover bg-center flex items-center text-center" style="height: 60vh;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style="margin-top: -2rem;">
-      <!-- Logo placed prominently and opaque -->
-      <div class="w-full flex justify-center mb-1">
-        <img src="darkhouseaudiologo.png" alt="Dark House Audio Logo" class="w-full md:w-3/4 lg:w-1/2 max-w-md">
+  <main>
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Mixing &amp; Mastering</span>
+      <h1>Heavy, but clear.</h1>
+      <p class="lead">Modern metal production by Erik Monsonis. Mixes and masters that hit hard and stay articulate &mdash; plus BleedShift 2, the drum bleed control tool built in the same studio.</p>
+      <div class="hero-actions">
+        <a href="contact.html" class="btn btn-primary btn-lg">Get a Quote</a>
+        <a href="#work" class="btn btn-ghost btn-lg">Hear the Work</a>
       </div>
-      <h1 class="text-4xl md:text-6xl font-bold mb-1 relative z-10">Dark House Audio</h1>
-      <p class="text-lg md:text-xl text-gray-300 mb-3 relative z-10">Professional Mixing & Mastering for Metal</p>
-      <!-- Buttons: Stack vertically on small screens, horizontally on larger screens -->
-      <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 relative z-10">
-        <a href="contact.html" class="w-full sm:w-auto inline-block bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Get in Touch</a>
-        <a href="product-landing.html" class="w-full sm:w-auto inline-block bg-purple-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-purple-600 transition">Discover BleedShift 2</a>
+      <div class="hero-stats">
+        <div><strong>16+</strong><span>Years mixing</span></div>
+        <div><strong>100s</strong><span>Metal bands</span></div>
+        <div><strong>100%</strong><span>Remote, worldwide</span></div>
       </div>
     </div>
   </section>
 
-  <!-- About Us Section -->
-  <section class="py-16 bg-gray-900">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
-      <div class="flex flex-col md:flex-row items-center gap-8">
-        <!-- Profile Image -->
-        <div class="md:w-1/3 flex justify-center">
-          <div class="w-64 h-64 rounded-full overflow-hidden shadow-xl border-4 border-skyblue">
-            <img src="erik.png" alt="Erik Monsonis" class="w-full h-full object-cover">
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="badge badge-accent">What I Do</span>
+        <h2>Built for modern metal</h2>
+        <p>Send your tracks from anywhere. Get back a record that sounds finished.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card card-lift reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 8v8M8 5v14M12 9v6M16 4v16M20 8v8"/></svg></div>
+          <h3>Mixing</h3>
+          <p>Tight low end, controlled drums, guitars with weight and definition, and vocals that sit where they should.</p>
+        </div>
+        <div class="card card-lift reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3>Mastering</h3>
+          <p>Final polish and loudness that translates from headphones to festival stacks, ready for streaming and release.</p>
+        </div>
+        <div class="card card-lift reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div>
+          <h3>BleedShift 2</h3>
+          <p>Standalone drum bleed control software. Separate kick, snare, toms and overheads into clean stems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="credits">
+    <div class="container">
+      <div class="grid grid-2 grid-center">
+        <div class="reveal">
+          <span class="badge badge-accent">Credits</span>
+          <h2>Documented on Muso</h2>
+          <p>Every project I work on is credited on <a href="https://muso.ai/profile/1f80bd05-f84e-4593-afe9-02731b46a87a" target="_blank" rel="noopener">Muso.ai</a>, the industry database for music credits. Check the record yourself.</p>
+          <div class="credit-stats">
+            <div><strong>607</strong><span>Credits</span></div>
+            <div><strong>590</strong><span>Mastering</span></div>
+            <div><strong>540</strong><span>Mixing</span></div>
+            <div><strong>431</strong><span>Collaborators</span></div>
+          </div>
+          <div class="credit-badges">
+            <div class="credit-badge"><strong>Top 1% of Mastering Engineers</strong><span>Muso &middot; Week of Oct 8&ndash;15, 2026</span></div>
+            <div class="credit-badge"><strong>Top 1% of Mixing Engineers</strong><span>Muso &middot; Week of Oct 8&ndash;15, 2026</span></div>
+          </div>
+          <a href="https://muso.ai/profile/1f80bd05-f84e-4593-afe9-02731b46a87a" target="_blank" rel="noopener" class="btn btn-primary">View Full Credits on Muso &#8599;</a>
+        </div>
+        <div class="card reveal">
+          <h3>Recent credits</h3>
+          <ul class="credit-list">
+            <li><div><strong>A.Q.D.P</strong><span>Pressive</span></div><em>Producer · Engineer · Mastering · 2025</em></li>
+            <li><div><strong>Save the fire</strong><span>Strike Master</span></div><em>Mixing · Mastering · 2024</em></li>
+            <li><div><strong>Outsider God Creation (O.G.C)</strong><span>Tulkas</span></div><em>Engineer · Mixing · Mastering · 2020</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="badge badge-accent">Portfolio</span>
+        <h2>Past Work</h2>
+        <p>Selected mixes and masters from recent metal productions.</p>
+      </div>
+      <div class="video-grid">
+        <div class="card video-card reveal"><iframe src="https://www.youtube.com/embed/ga8xH8otNRE" title="Dark House Audio mix 1" allowfullscreen loading="lazy"></iframe></div>
+        <div class="card video-card reveal"><iframe src="https://www.youtube.com/embed/vt1Ytjdel2s" title="Dark House Audio mix 2" allowfullscreen loading="lazy"></iframe></div>
+        <div class="card video-card reveal"><iframe src="https://www.youtube.com/embed/qrkD5AMlTIY" title="Dark House Audio mix 3" allowfullscreen loading="lazy"></iframe></div>
+        <div class="card video-card reveal"><iframe src="https://www.youtube.com/embed/xjAHssIl3ds" title="Dark House Audio mix 4" allowfullscreen loading="lazy"></iframe></div>
+        <div class="card video-card reveal"><iframe src="https://www.youtube.com/embed/Ubd6wpelZXk" title="Dark House Audio mix 5" allowfullscreen loading="lazy"></iframe></div>
+        <div class="card video-card reveal"><iframe src="https://www.youtube.com/embed/iebmJBX8-Z0" title="Dark House Audio mix 6" allowfullscreen loading="lazy"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid-2 grid-center">
+        <div class="reveal">
+          <span class="badge badge-accent">About</span>
+          <h2>Hi, I'm Erik Monsonis</h2>
+          <p>I'm a mixing and mastering engineer with a passion for modern metal. I also play guitar in <a href="https://open.spotify.com/artist/1HzcKPVciRAscPssWBFgGA?si=7bLXn4vdR-qfK4wnzp_5iA" target="_blank" rel="noopener">Afterglow</a>, so I know what a band needs from its record.</p>
+          <p>With over 16 years of dedicated work, I've collaborated with hundreds of metal bands, delivering production that brings their music to life.</p>
+          <a href="contact.html" class="btn btn-secondary mt-2">Work With Me</a>
+        </div>
+        <div class="reveal" style="display:flex;justify-content:center;">
+          <img src="erik.png" alt="Erik Monsonis" style="width:min(320px,80%);aspect-ratio:1;object-fit:cover;border-radius:50%;border:1px solid var(--border);box-shadow:var(--shadow),var(--glow);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2 grid-center reveal">
+        <img src="screenshot.png" alt="BleedShift 2 interface" class="shot">
+        <div>
+          <span class="badge badge-accent">Software</span>
+          <h2>BleedShift 2</h2>
+          <p>Control drum bleed in your recordings with an advanced standalone separation application. Pull kick, snare, toms and overheads apart into clean stems &mdash; without the phase issues of gates.</p>
+          <div class="price-row"><span class="price">$49.99</span><span class="price-old">$99.99</span><span class="badge badge-accent" style="margin:0 0 0 .25rem;">50% off intro</span></div>
+          <div class="hero-actions">
+            <a href="product-landing.html" class="btn btn-primary">Hear It In Action</a>
+            <a href="store.html" class="btn btn-ghost">Visit the Store</a>
           </div>
         </div>
-        
-        <!-- Bio Text -->
-        <div class="md:w-2/3 text-center md:text-left">
-          <p class="text-lg text-gray-300 mb-4">
-            Hi! I'm Erik Monsonis. I am a mixing and mastering engineer with a passion for modern metal. I also play guitar in 
-            <a href="https://open.spotify.com/artist/1HzcKPVciRAscPssWBFgGA?si=7bLXn4vdR-qfK4wnzp_5iA" target="_blank" class="text-skyblue hover:text-blue-300 underline">Afterglow</a>.
-          </p>
-          <p class="text-lg text-gray-300">
-            With over 16 years of dedicated work in the industry, I have had the privilege of collaborating with hundreds of metal bands, 
-            delivering top-notch production quality that brings their music to life.
-          </p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- Videos Section -->
-  <section class="py-16 bg-gray-800 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-6">Past Works</h2>
-      <!-- Container for scrollable area and buttons -->
-      <div class="relative group">
-        <!-- Horizontal scrollable container -->
-        <div id="video-scroll-container" class="flex overflow-x-auto space-x-4 py-4 scrollbar-hide">
-          <!-- Video 1 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/ga8xH8otNRE"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-          <!-- Video 2 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/vt1Ytjdel2s"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-          <!-- Video 3 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/qrkD5AMlTIY"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-          <!-- Video 4 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/xjAHssIl3ds"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-          <!-- Video 5 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/Ubd6wpelZXk"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-          <!-- Video 6 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/iebmJBX8-Z0"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-          <!-- Video 7 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/za1qOILdiOQ"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-          <!-- Video 8 -->
-          <div class="flex-none w-72 sm:w-[508px] rounded overflow-hidden shadow-lg video-item">
-            <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-              <iframe class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/VPiMcYzENV8"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-      </div>
-        <!-- Scroll Buttons (Always visible) -->
-        <button id="scroll-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 ml-2 hover:bg-opacity-75">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button id="scroll-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 mr-2 hover:bg-opacity-75">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
+  <section class="section text-center">
+    <div class="container reveal">
+      <h2>Ready to elevate your sound?</h2>
+      <p class="lead" style="margin-left:auto;margin-right:auto;">Tell me about your project and get a quote.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg mt-2">Start a Project</a>
     </div>
   </section>
+  </main>
 
-  <!-- CTA Section -->
-  <section class="py-8 bg-gray-900 text-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold mb-2">Ready to Elevate Your Sound?</h2>
-      <p class="text-lg text-gray-300 mb-3">Get a quote for your next project.</p>
-      <a href="contact.html" class="w-full sm:w-auto inline-block bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Get Started</a>
-    </div>
-  </section>
-
-  <!-- Plugin Spotlight -->
-  <section class="py-16 bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-      <div class="md:w-1/2 mb-4 md:mb-0">
-        <img src="screenshot.png" alt="BleedShift 2 Plugin" class="rounded-lg shadow-lg">
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a href="index.html" class="nav-brand" style="margin-bottom:1rem;"><img src="darkhouseaudiologo.png" alt="">Dark House Audio</a>
+        <p>Professional mixing &amp; mastering for modern metal. Remote studio collaborating with artists worldwide.</p>
       </div>
-      <div class="md:w-1/2 md:pl-8 text-center md:text-left">
-        <h2 class="text-3xl font-bold mb-2">Introducing BleedShift 2</h2>
-        <p class="text-lg text-gray-300 mb-3">Control drum bleed in your recordings with BleedShift 2, our advanced standalone bleed separation application.</p>
-        <a href="product-landing.html" class="inline-block bg-skyblue text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Learn More</a>
+      <div>
+        <h4>Navigate</h4>
+        <a href="index.html">Home</a>
+        <a href="store.html">Store</a>
+        <a href="product-landing.html">BleedShift 2</a>
+        <a href="contact.html">Contact</a>
+        <a href="bleedshift2.html" class="nav-buy">Buy BleedShift 2</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="tos.html">Terms of Service</a>
+        <a href="contact.html">Support</a>
+        <a href="https://muso.ai/profile/1f80bd05-f84e-4593-afe9-02731b46a87a" target="_blank" rel="noopener">Credits on Muso</a>
       </div>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-      <p>© 2025 Dark House Audio. All rights reserved.</p>
+    <div class="footer-bottom">
+      <span>© 2026 Dark House Audio. All rights reserved.</span>
+      <span>www.darkhouseaudio.com</span>
     </div>
   </footer>
 
-  <script>
-    // Video Scroller Logic
-    const container = document.getElementById('video-scroll-container');
-    const scrollLeftBtn = document.getElementById('scroll-left');
-    const scrollRightBtn = document.getElementById('scroll-right');
-
-    if (container && scrollLeftBtn && scrollRightBtn) {
-      const getScrollAmount = () => {
-        const firstItem = container.querySelector('.video-item');
-        if (!firstItem) return 300; // Default fallback
-
-        const style = window.getComputedStyle(firstItem);
-        const marginLeft = parseFloat(style.marginLeft) || 0;
-        const marginRight = parseFloat(style.marginRight) || 0;
-
-        // Get gap from parent container (space-x-4 = 1rem = 16px by default in Tailwind)
-        const containerStyle = window.getComputedStyle(container);
-        // Note: 'gap' might not be directly available if using margins/space-x utilities
-        // Let's estimate based on space-x-4 utility = 1rem
-        const gap = parseFloat(containerStyle.getPropertyValue('--tw-space-x-reverse')) ? 0 : parseFloat(containerStyle.gap || '1rem') * 16; // Convert rem to px, default to 16px if gap not readable
-
-        // Scroll by the width of one item plus the gap between items
-        // offsetWidth includes padding and border, clientWidth is just content+padding
-        // Using offsetWidth is usually safer for layout calculations
-        return firstItem.offsetWidth + (gap || 16); // Use calculated gap or fallback to 16px
-      };
-
-      scrollLeftBtn.addEventListener('click', () => {
-        const amount = getScrollAmount();
-        container.scrollBy({ left: -amount });
-      });
-
-      scrollRightBtn.addEventListener('click', () => {
-        const amount = getScrollAmount();
-        container.scrollBy({ left: amount });
-      });
-
-      // Optional: Hide buttons if no scrolling is needed or at scroll ends
-      const updateButtonVisibility = () => {
-        const maxScrollLeft = container.scrollWidth - container.clientWidth;
-        scrollLeftBtn.style.display = container.scrollLeft <= 0 ? 'none' : 'block';
-        scrollRightBtn.style.display = container.scrollLeft >= maxScrollLeft -1 ? 'none' : 'block'; // -1 for tolerance
-      };
-
-      container.addEventListener('scroll', updateButtonVisibility);
-      // Initial check in case content doesn't overflow
-       // Use setTimeout to ensure layout is calculated
-      setTimeout(updateButtonVisibility, 100);
-      window.addEventListener('resize', () => setTimeout(updateButtonVisibility, 100)); // Re-check on resize
-    }
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
